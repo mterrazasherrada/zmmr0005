@@ -1,0 +1,139 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="application/xhtml+xml; charset=ISO-8859-1" />
+<title>ZMMR0005</title>
+<style type="text/css">
+.code{ font-family:"Courier New", Courier, monospace; color:#000; font-size:14px; background-color:#F2F4F7 }
+  .codeComment {font-family:"Courier New", Courier, monospace; color:#0000F0; font-size:14px; background-color:#F2F4F7 }
+  .normalBold{ font-family:Arial, Helvetica, sans-serif; color:#000; font-size:12px; font-weight:800 }
+  .normalBoldLarge{ font-family:Arial, Helvetica, sans-serif; color:#000; font-size:16px; font-weight:800 }
+</style>
+<style type="text/css">
+  .normal{ font-family:Arial, Helvetica, sans-serif; color:#000; font-size:12px }
+  .footer{ font-family:Arial, Helvetica, sans-serif; color:#000; font-size:12px; text-align: center }
+  h2{ font-family:Arial, Helvetica, sans-serif; color:#000; font-size:16px; font-weight:800 }
+  h3{ font-family:Arial, Helvetica, sans-serif; color:#000; font-size:14px; font-weight:800 }
+  .outerTable{
+   background-color:#E0E7ED;
+   width:100%;
+   border-top-width: thin;
+   border-right-width: thin;
+   border-right-width: thin;
+   border-left-width: thin;
+   border-top-style: solid;
+   border-right-style: solid;
+   border-bottom-style: solid;
+   border-left-style: solid;
+  }
+  .innerTable{
+   background-color:#F2F4F7;
+   width:100%;
+   border-top-width: thin;
+   border-right-width: thin;
+   border-bottom-width: thin;
+   border-left-width: thin;
+   border-top-style: solid;
+   border-right-style: solid;
+   border-bottom-style: solid;
+   border-left-style: solid;
+  }
+</style>
+</head>
+<body>
+<table class="outerTable">
+  <tr class="normalBoldLarge">
+     <td><h2>Code listing for: ZMMR0005</h2>
+<h3> Description: Carga masiva de facturas de proveedor</h3></td>
+   </tr>
+  <tr>
+     <td>
+     <table class="innerTable">
+       <tr>
+          <td>
+   <div class="codeComment">
+************************************************************************<br />
+*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;YPFB&nbsp;ANDINA&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br />
+************************************************************************<br />
+*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;I&nbsp;N&nbsp;F&nbsp;O&nbsp;R&nbsp;M&nbsp;A&nbsp;C&nbsp;I&nbsp;Ó&nbsp;N&nbsp;&nbsp;&nbsp;G&nbsp;E&nbsp;N&nbsp;E&nbsp;R&nbsp;A&nbsp;L&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br />
+************************************************************************<br />
+*^&nbsp;IDesarrollo.....:<br />
+*^&nbsp;Módulo..........:&nbsp;MM-FI<br />
+*^&nbsp;Funcional.......:&nbsp;Patricia&nbsp;Aguilar<br />
+*^&nbsp;Autor...........:&nbsp;Milton&nbsp;Terrazas<br />
+*^&nbsp;Programa........:&nbsp;ZMMR0005<br />
+*^&nbsp;Fecha...........:&nbsp;06.09.2024<br />
+*^&nbsp;Descripción.....:&nbsp;Interfaz&nbsp;de&nbsp;carga&nbsp;facturas&nbsp;de&nbsp;proveedor<br />
+************************************************************************<br />
+*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;H&nbsp;I&nbsp;S&nbsp;T&nbsp;O&nbsp;R&nbsp;I&nbsp;A&nbsp;L&nbsp;&nbsp;&nbsp;&nbsp;D&nbsp;E&nbsp;&nbsp;&nbsp;&nbsp;M&nbsp;O&nbsp;D&nbsp;I&nbsp;F&nbsp;I&nbsp;C&nbsp;A&nbsp;C&nbsp;I&nbsp;O&nbsp;N&nbsp;E&nbsp;S&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br />
+************************************************************************<br />
+*^&nbsp;Marca....:&nbsp;@0001<br />
+*^&nbsp;Autor....:<br />
+*^&nbsp;Funcional:<br />
+*^&nbsp;Fecha....:<br />
+*^&nbsp;Motivo...:<br />
+************************************************************************<br />
+<br />
+   </div>
+   <div class="code">
+REPORT zmmr0005 MESSAGE-ID zbo.<br />
+<br />
+INCLUDE &lt;icon&gt;. "Includes o librerías globales<br />
+include <a href ="zmmr0005_top.html">zmmr0005_top</a>. "Global data<br />
+include <a href ="zmmr0005_sel.html">zmmr0005_sel</a>. "Selection Screen<br />
+include <a href ="zmmr0005_cla.html">zmmr0005_cla</a>. "Implementación de todos los métodos de una clase<br />
+include <a href ="zmmr0005_mai.html">zmmr0005_mai</a>. "Main Program<br />
+include <a href ="zmmr0005_pbo.html">zmmr0005_pbo</a>.<br />
+include <a href ="zmmr0005_pai.html">zmmr0005_pai</a>.<br />
+   </div>
+   <div class="codeComment">
+*INCLUDE&nbsp;zmmr0005_f01.&nbsp;"Subroutines<br />
+<br />
+*GUI&nbsp;Texts<br />
+*----------------------------------------------------------<br />
+*&nbsp;GT_0100&nbsp;--&gt;&nbsp;Monitor&nbsp;recepción&nbsp;facturas&nbsp;proveedores<br />
+*&nbsp;GT_0200&nbsp;--&gt;&nbsp;Confirmación&nbsp;de&nbsp;facturas&nbsp;proveedores<br />
+*&nbsp;GT_0300&nbsp;--&gt;&nbsp;Reporte&nbsp;de&nbsp;estado&nbsp;de&nbsp;facturas&nbsp;proveedores<br />
+<br />
+*Text&nbsp;elements<br />
+*----------------------------------------------------------<br />
+*&nbsp;001&nbsp;Parámetros&nbsp;de&nbsp;selección<br />
+*&nbsp;002&nbsp;Opciones&nbsp;de&nbsp;selección<br />
+*&nbsp;003&nbsp;Datos&nbsp;adicionales<br />
+*&nbsp;V01&nbsp;0709<br />
+<br />
+<br />
+*Selection&nbsp;texts<br />
+*----------------------------------------------------------<br />
+*&nbsp;P_CON&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Confirmar&nbsp;carga&nbsp;de&nbsp;facturas<br />
+*&nbsp;P_FECHAB&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fecha&nbsp;de&nbsp;recepción&nbsp;fact.<br />
+*&nbsp;P_GENXML&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ruta&nbsp;de&nbsp;generación&nbsp;XML&nbsp;mass<br />
+*&nbsp;P_REP&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Reporte&nbsp;de&nbsp;estado&nbsp;de&nbsp;facturas<br />
+*&nbsp;P_SEL&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Seleccion&nbsp;y&nbsp;carga&nbsp;de&nbsp;facturas<br />
+*&nbsp;S_AUFNR&nbsp;D&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.<br />
+*&nbsp;S_BEDAT&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fecha&nbsp;de&nbsp;creación&nbsp;OC/OS<br />
+*&nbsp;S_BUKRS&nbsp;D&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.<br />
+*&nbsp;S_EBELN&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ord.&nbsp;de&nbsp;compra&nbsp;u&nbsp;ord.&nbsp;servicio<br />
+*&nbsp;S_EKGRP&nbsp;D&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.<br />
+*&nbsp;S_GSBER&nbsp;D&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.<br />
+*&nbsp;S_KDATB&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fecha&nbsp;de&nbsp;Inicio/Fin&nbsp;servicio<br />
+*&nbsp;S_KONNR&nbsp;D&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.<br />
+*&nbsp;S_KOSTL&nbsp;D&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.<br />
+*&nbsp;S_LIFNR&nbsp;D&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.<br />
+*&nbsp;S_PEP&nbsp;D&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.<br />
+*&nbsp;S_PRCTR&nbsp;D&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.<br />
+*&nbsp;S_SAKTO&nbsp;D&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.<br />
+*&nbsp;S_STATUS&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Estado&nbsp;de&nbsp;facturas<br />
+*&nbsp;S_USER&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Usuarios&nbsp;de&nbsp;carga<br />
+            </div>
+          </td>
+        </tr>
+      </table>
+      </td>
+      </tr>
+   <tr>
+<td class="footer">Extracted by Mass Download version 1.5.5 - E.G.Mellodew. 1998-2025. Sap Release 701</td>
+   </tr>
+</table>
+</body>
+</html>

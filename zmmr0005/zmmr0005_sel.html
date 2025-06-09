@@ -1,0 +1,254 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="application/xhtml+xml; charset=ISO-8859-1" />
+<title>ZMMR0005_SEL</title>
+<style type="text/css">
+.code{ font-family:"Courier New", Courier, monospace; color:#000; font-size:14px; background-color:#F2F4F7 }
+  .codeComment {font-family:"Courier New", Courier, monospace; color:#0000F0; font-size:14px; background-color:#F2F4F7 }
+  .normalBold{ font-family:Arial, Helvetica, sans-serif; color:#000; font-size:12px; font-weight:800 }
+  .normalBoldLarge{ font-family:Arial, Helvetica, sans-serif; color:#000; font-size:16px; font-weight:800 }
+</style>
+<style type="text/css">
+  .normal{ font-family:Arial, Helvetica, sans-serif; color:#000; font-size:12px }
+  .footer{ font-family:Arial, Helvetica, sans-serif; color:#000; font-size:12px; text-align: center }
+  h2{ font-family:Arial, Helvetica, sans-serif; color:#000; font-size:16px; font-weight:800 }
+  h3{ font-family:Arial, Helvetica, sans-serif; color:#000; font-size:14px; font-weight:800 }
+  .outerTable{
+   background-color:#E0E7ED;
+   width:100%;
+   border-top-width: thin;
+   border-right-width: thin;
+   border-right-width: thin;
+   border-left-width: thin;
+   border-top-style: solid;
+   border-right-style: solid;
+   border-bottom-style: solid;
+   border-left-style: solid;
+  }
+  .innerTable{
+   background-color:#F2F4F7;
+   width:100%;
+   border-top-width: thin;
+   border-right-width: thin;
+   border-bottom-width: thin;
+   border-left-width: thin;
+   border-top-style: solid;
+   border-right-style: solid;
+   border-bottom-style: solid;
+   border-left-style: solid;
+  }
+</style>
+</head>
+<body>
+<table class="outerTable">
+  <tr class="normalBoldLarge">
+     <td><h2>Code listing for: ZMMR0005_SEL</h2>
+<h3> Description: Include ZMMR0005_SEL</h3></td>
+   </tr>
+  <tr>
+     <td>
+     <table class="innerTable">
+       <tr>
+          <td>
+   <div class="code">
+SELECTION-SCREEN: BEGIN OF BLOCK qb0 WITH FRAME TITLE text-001.<br />
+SELECT-OPTIONS: s_bukrs    FOR ekko-bukrs OBLIGATORY DEFAULT text-v01. "Sociedad<br />
+SELECT-OPTIONS: s_ekgrp    FOR ekko-ekgrp. "Grupo compras<br />
+SELECT-OPTIONS: s_gsber    FOR rbkp-gsber MATCHCODE OBJECT h_tgsb. "División<br />
+SELECT-OPTIONS: s_konnr    FOR ekab-konnr. "Contrato<br />
+SELECT-OPTIONS: s_ebeln    FOR ekko-ebeln. "OC<br />
+SELECT-OPTIONS: s_lifnr    FOR ekko-lifnr. "Proveedor<br />
+SELECT-OPTIONS: s_bedat    FOR ekko-bedat. "Fecha ped<br />
+SELECT-OPTIONS: s_kdatb    FOR ekko-kdatb. "Fecha de inicio/fin servicio<br />
+SELECT-OPTIONS: s_prctr    FOR ekkn-prctr. "Cebe<br />
+SELECT-OPTIONS: s_pep      FOR ekkn-ps_psp_pnr. "PEP<br />
+SELECT-OPTIONS: s_kostl    FOR rbco-kostl. "Ceco<br />
+SELECT-OPTIONS: s_aufnr    FOR rbco-aufnr. "Orden<br />
+SELECT-OPTIONS: s_sakto    FOR eskn-sakto. "Cuenta<br />
+SELECTION-SCREEN: END OF BLOCK qb0.<br />
+<br />
+SELECTION-SCREEN BEGIN OF BLOCK qb1 WITH FRAME TITLE text-002.<br />
+PARAMETERS: p_sel RADIOBUTTON GROUP g1 USER-COMMAND radiobtn DEFAULT 'X',<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;p_con&nbsp;RADIOBUTTON&nbsp;GROUP&nbsp;g1,<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;p_rep&nbsp;RADIOBUTTON&nbsp;GROUP&nbsp;g1.<br />
+SELECTION-SCREEN END OF BLOCK qb1.<br />
+<br />
+SELECTION-SCREEN BEGIN OF BLOCK qb2 WITH FRAME TITLE text-003.<br />
+PARAMETERS: p_fechab    TYPE datum DEFAULT sy-datum OBLIGATORY MODIF ID gr1."Fecha base de contabilización<br />
+SELECT-OPTIONS: s_status FOR gv_status MODIF ID gr2 NO INTERVALS.<br />
+SELECT-OPTIONS: s_user   FOR gv_usuario MODIF ID gr3 NO INTERVALS.<br />
+SELECTION-SCREEN END OF BLOCK qb2.<br />
+<br />
+"/ Adicionales<br />
+PARAMETERS: p_genxml    TYPE rlgrap-filename.<br />
+<br />
+"/ Inicializar con los valores de la tabla Z<br />
+INITIALIZATION.<br />
+&nbsp;&nbsp;CLEAR&nbsp;s_status.<br />
+&nbsp;&nbsp;s_status-sign&nbsp;=&nbsp;'I'.<br />
+&nbsp;&nbsp;s_status-option&nbsp;=&nbsp;'CP'.<br />
+&nbsp;&nbsp;s_status-low&nbsp;=&nbsp;'*'.<br />
+&nbsp;&nbsp;APPEND&nbsp;s_status.<br />
+<br />
+   </div>
+   <div class="codeComment">
+*/&nbsp;Controlar&nbsp;la&nbsp;visibilidad&nbsp;del&nbsp;campo&nbsp;basado&nbsp;en&nbsp;la&nbsp;selección&nbsp;de&nbsp;radiobutton<br />
+   </div>
+   <div class="code">
+AT SELECTION-SCREEN OUTPUT.<br />
+<br />
+&nbsp;&nbsp;PERFORM&nbsp;get_parametros_screen.<br />
+<br />
+&nbsp;&nbsp;LOOP&nbsp;AT&nbsp;SCREEN.<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;READ&nbsp;TABLE&nbsp;gt_zmmt_factura_usr&nbsp;INTO&nbsp;gs_zmmt_factura_usr&nbsp;WITH&nbsp;KEY&nbsp;campo&nbsp;=&nbsp;screen-name.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;IF&nbsp;sy-subrc&nbsp;=&nbsp;0.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;screen-active&nbsp;=&nbsp;0.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;READ&nbsp;TABLE&nbsp;gt_zmmt_factura_usr&nbsp;INTO&nbsp;gs_zmmt_factura_usr&nbsp;WITH&nbsp;KEY&nbsp;campo&nbsp;=&nbsp;screen-name<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;bname&nbsp;=&nbsp;sy-uname<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;activo&nbsp;=&nbsp;'X'.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IF&nbsp;sy-subrc&nbsp;=&nbsp;0.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;screen-active&nbsp;=&nbsp;1.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ENDIF.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MODIFY&nbsp;SCREEN.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;ENDIF.<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;IF&nbsp;screen-group1&nbsp;=&nbsp;'GR1'.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IF&nbsp;p_con&nbsp;=&nbsp;'X'.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;screen-active&nbsp;=&nbsp;1.&nbsp;"Mostrar&nbsp;p_fechab<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ELSE.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;screen-active&nbsp;=&nbsp;0.&nbsp;"Ocultar&nbsp;p_fechab<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ENDIF.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MODIFY&nbsp;SCREEN.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;ENDIF.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;IF&nbsp;screen-group1&nbsp;=&nbsp;'GR2'.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IF&nbsp;p_rep&nbsp;=&nbsp;'X'.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;screen-active&nbsp;=&nbsp;1.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ELSE.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;screen-active&nbsp;=&nbsp;0.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ENDIF.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MODIFY&nbsp;SCREEN.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;ENDIF.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;IF&nbsp;screen-group1&nbsp;=&nbsp;'GR3'.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IF&nbsp;p_con&nbsp;=&nbsp;'X'&nbsp;OR&nbsp;p_rep&nbsp;=&nbsp;'X'.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;screen-active&nbsp;=&nbsp;1.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ELSE.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;screen-active&nbsp;=&nbsp;0.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ENDIF.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MODIFY&nbsp;SCREEN.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;ENDIF.<br />
+&nbsp;&nbsp;ENDLOOP.<br />
+<br />
+<br />
+   </div>
+   <div class="codeComment">
+*/SEARCH&nbsp;HELP<br />
+   </div>
+   <div class="code">
+&nbsp;&nbsp;"&nbsp;Declaramos&nbsp;una&nbsp;tabla&nbsp;interna&nbsp;para&nbsp;guardar&nbsp;los&nbsp;usuarios&nbsp;válidos<br />
+<br />
+<br />
+&nbsp;&nbsp;"&nbsp;Evento&nbsp;para&nbsp;proporcionar&nbsp;la&nbsp;ayuda&nbsp;de&nbsp;búsqueda&nbsp;para&nbsp;el&nbsp;campo&nbsp;s_user<br />
+<br />
+AT SELECTION-SCREEN ON VALUE-REQUEST FOR p_genxml.<br />
+&nbsp;&nbsp;PERFORM&nbsp;p_genxml.<br />
+<br />
+AT SELECTION-SCREEN ON VALUE-REQUEST FOR s_user-low.<br />
+&nbsp;&nbsp;PERFORM&nbsp;f4_user_help.<br />
+<br />
+&nbsp;&nbsp;"&nbsp;Subrutina&nbsp;para&nbsp;desplegar&nbsp;los&nbsp;usuarios&nbsp;válidos<br />
+   </div>
+   <div class="codeComment">
+*&---------------------------------------------------------------------*<br />
+*&&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Form&nbsp;&nbsp;f4_user_help<br />
+*&---------------------------------------------------------------------*<br />
+*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;text<br />
+*----------------------------------------------------------------------*<br />
+   </div>
+   <div class="code">
+FORM f4_user_help.<br />
+&nbsp;&nbsp;CLEAR:&nbsp;&nbsp;&nbsp;it_match.<br />
+&nbsp;&nbsp;REFRESH:&nbsp;it_match.<br />
+<br />
+&nbsp;&nbsp;FREE&nbsp;it_usuario.<br />
+&nbsp;&nbsp;SELECT&nbsp;DISTINCT&nbsp;usuario<br />
+&nbsp;&nbsp;&nbsp;&nbsp;FROM&nbsp;zmmt_factura_p_c<br />
+&nbsp;&nbsp;&nbsp;&nbsp;INTO&nbsp;TABLE&nbsp;it_usuario.<br />
+<br />
+&nbsp;&nbsp;SORT&nbsp;it_usuario&nbsp;BY&nbsp;usuario&nbsp;ASCENDING.<br />
+<br />
+&nbsp;&nbsp;CALL&nbsp;FUNCTION&nbsp;'F4IF_INT_TABLE_VALUE_REQUEST'<br />
+&nbsp;&nbsp;&nbsp;&nbsp;EXPORTING<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;retfield&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;'USUARIO'<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;window_title&nbsp;=&nbsp;'Lista&nbsp;de&nbsp;usuarios'<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;value_org&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;'S'<br />
+&nbsp;&nbsp;&nbsp;&nbsp;TABLES<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;value_tab&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;it_usuario<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return_tab&nbsp;&nbsp;&nbsp;=&nbsp;it_match.<br />
+&nbsp;&nbsp;IF&nbsp;sy-subrc&nbsp;EQ&nbsp;0.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;READ&nbsp;TABLE&nbsp;it_match&nbsp;INDEX&nbsp;1.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;MOVE&nbsp;it_match-fieldval&nbsp;TO&nbsp;s_user-low.<br />
+&nbsp;&nbsp;ENDIF.<br />
+<br />
+ENDFORM.                    "f4_user_help<br />
+<br />
+   </div>
+   <div class="codeComment">
+*&---------------------------------------------------------------------*<br />
+*&&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Form&nbsp;&nbsp;P_FILE<br />
+*&---------------------------------------------------------------------*<br />
+*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;text<br />
+*----------------------------------------------------------------------*<br />
+   </div>
+   <div class="code">
+FORM p_genxml.<br />
+&nbsp;&nbsp;DATA:&nbsp;lv_route&nbsp;TYPE&nbsp;string.<br />
+&nbsp;&nbsp;CALL&nbsp;METHOD&nbsp;cl_gui_frontend_services=&gt;directory_browse<br />
+&nbsp;&nbsp;&nbsp;&nbsp;EXPORTING<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;window_title&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;'Select&nbsp;Folder'<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;initial_folder&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;'C:\'<br />
+&nbsp;&nbsp;&nbsp;&nbsp;CHANGING<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;selected_folder&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;lv_route<br />
+&nbsp;&nbsp;&nbsp;&nbsp;EXCEPTIONS<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cntl_error&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;1<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;error_no_gui&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;2<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;not_supported_by_gui&nbsp;=&nbsp;3<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;OTHERS&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;4.<br />
+&nbsp;&nbsp;IF&nbsp;sy-subrc&nbsp;=&nbsp;0.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;p_genxml&nbsp;=&nbsp;lv_route.<br />
+&nbsp;&nbsp;ENDIF.<br />
+ENDFORM.                    "P_FILE<br />
+<br />
+   </div>
+   <div class="codeComment">
+*&---------------------------------------------------------------------*<br />
+*&&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Form&nbsp;&nbsp;get_parametros_screen<br />
+*&---------------------------------------------------------------------*<br />
+*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;text<br />
+*----------------------------------------------------------------------*<br />
+   </div>
+   <div class="code">
+FORM get_parametros_screen.<br />
+<br />
+&nbsp;&nbsp;SELECT&nbsp;*&nbsp;FROM&nbsp;zmmt_factura_usr<br />
+&nbsp;&nbsp;&nbsp;&nbsp;INTO&nbsp;TABLE&nbsp;gt_zmmt_factura_usr.<br />
+   </div>
+   <div class="codeComment">
+*&nbsp;&nbsp;&nbsp;&nbsp;WHERE&nbsp;bname&nbsp;=&nbsp;sy-uname.<br />
+<br />
+   </div>
+   <div class="code">
+ENDFORM.                    "get_parametros_screen<br />
+            </div>
+          </td>
+        </tr>
+      </table>
+      </td>
+      </tr>
+   <tr>
+<td class="footer">Extracted by Mass Download version 1.5.5 - E.G.Mellodew. 1998-2025. Sap Release 701</td>
+   </tr>
+</table>
+</body>
+</html>

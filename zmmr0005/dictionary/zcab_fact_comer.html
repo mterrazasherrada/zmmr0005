@@ -1,0 +1,477 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="application/xhtml+xml; charset=ISO-8859-1" />
+<title>Dictionary object- ZCAB_FACT_COMER</title>
+<style type="text/css">
+  th{text-align:left}
+  .cell{
+     font-family:"Courier New", Courier, monospace;
+     color:#000;
+     font-size:12px;
+     background-color:#F2F4F7;
+  }
+  .cell td { border: thin solid #ccc; }
+</style>
+<style type="text/css">
+  .normal{ font-family:Arial, Helvetica, sans-serif; color:#000; font-size:12px }
+  .footer{ font-family:Arial, Helvetica, sans-serif; color:#000; font-size:12px; text-align: center }
+  h2{ font-family:Arial, Helvetica, sans-serif; color:#000; font-size:16px; font-weight:800 }
+  h3{ font-family:Arial, Helvetica, sans-serif; color:#000; font-size:14px; font-weight:800 }
+  .outerTable{
+   background-color:#E0E7ED;
+   width:100%;
+   border-top-width: thin;
+   border-right-width: thin;
+   border-right-width: thin;
+   border-left-width: thin;
+   border-top-style: solid;
+   border-right-style: solid;
+   border-bottom-style: solid;
+   border-left-style: solid;
+  }
+  .innerTable{
+   background-color:#F2F4F7;
+   width:100%;
+   border-top-width: thin;
+   border-right-width: thin;
+   border-bottom-width: thin;
+   border-left-width: thin;
+   border-top-style: solid;
+   border-right-style: solid;
+   border-bottom-style: solid;
+   border-left-style: solid;
+  }
+</style>
+</head>
+<body>
+  <table class="outerTable">
+    <tr>
+      <td><h2>Table: ZCAB_FACT_COMER</h2>
+  <h3>Description: Cabecera de factura comercial</h3></td>
+    </tr>
+    <tr>
+      <td><!--This is where our main table begins  -->
+<table class="innerTable">
+<tr>
+  <th>Row</th>
+  <th>Field name</th>
+  <th>Position</th>
+  <th>Key</th>
+  <th>Data element</th>
+  <th>Domain</th>
+  <th>Datatype</th>
+  <th>Length</th>
+  <th>Lowercase</th>
+  <th>Domain text</th>
+</tr>
+<tr class="cell">
+  <td> 1</td>
+  <td>MANDT</td>
+  <td>1</td>
+  <td>X</td>
+  <td>MANDT</td>
+  <td>MANDT</td>
+  <td>CLNT</td>
+  <td>3</td>
+  <td>&nbsp;</td>
+  <td>Mandante</td>
+</tr>
+<tr class="cell">
+  <td> 2</td>
+  <td>BUKRS</td>
+  <td>2</td>
+  <td>X</td>
+  <td>BUKRS</td>
+  <td>BUKRS</td>
+  <td>CHAR</td>
+  <td>4</td>
+  <td>&nbsp;</td>
+  <td>Sociedad</td>
+</tr>
+<tr class="cell">
+  <td> 3</td>
+  <td>BELNR</td>
+  <td>3</td>
+  <td>X</td>
+  <td>BELNR_D</td>
+  <td>BELNR</td>
+  <td>CHAR</td>
+  <td>10</td>
+  <td>&nbsp;</td>
+  <td>Número de un documento contable</td>
+</tr>
+<tr class="cell">
+  <td> 4</td>
+  <td>GJAHR</td>
+  <td>4</td>
+  <td>X</td>
+  <td>GJAHR</td>
+  <td>GJAHR</td>
+  <td>NUMC</td>
+  <td>4</td>
+  <td>&nbsp;</td>
+  <td>Ejercicio</td>
+</tr>
+<tr class="cell">
+  <td> 5</td>
+  <td>CODIGO</td>
+  <td>5</td>
+  <td>&nbsp;</td>
+  <td>ZPUNTO_FACT</td>
+  <td>ZPUNTO_FACTURA</td>
+  <td>CHAR</td>
+  <td>2</td>
+  <td>&nbsp;</td>
+  <td>Código punto de facturación</td>
+</tr>
+<tr class="cell">
+  <td> 6</td>
+  <td>XBLNR</td>
+  <td>6</td>
+  <td>&nbsp;</td>
+  <td>XBLNR1</td>
+  <td>XBLNR1</td>
+  <td>CHAR</td>
+  <td>16</td>
+  <td>&nbsp;</td>
+  <td>Número de documento de referencia</td>
+</tr>
+<tr class="cell">
+  <td> 7</td>
+  <td>DMBTR</td>
+  <td>7</td>
+  <td>&nbsp;</td>
+  <td>ZMONTO_FACT_BOB</td>
+  <td>WERT7</td>
+  <td>CURR</td>
+  <td>13</td>
+  <td>&nbsp;</td>
+  <td>Importe total factura boliviano</td>
+</tr>
+<tr class="cell">
+  <td> 8</td>
+  <td>DMBE2</td>
+  <td>8</td>
+  <td>&nbsp;</td>
+  <td>ZMONTO_FACT_USD</td>
+  <td>WERT7</td>
+  <td>CURR</td>
+  <td>13</td>
+  <td>&nbsp;</td>
+  <td>Importe total factura dolares</td>
+</tr>
+<tr class="cell">
+  <td> 9</td>
+  <td>WAERS</td>
+  <td>9</td>
+  <td>&nbsp;</td>
+  <td>WAERS</td>
+  <td>WAERS</td>
+  <td>CUKY</td>
+  <td>5</td>
+  <td>&nbsp;</td>
+  <td>Clave de moneda</td>
+</tr>
+<tr class="cell">
+  <td>10</td>
+  <td>NROAUT</td>
+  <td>10</td>
+  <td>&nbsp;</td>
+  <td>ORDNR_V</td>
+  <td>ZUONR</td>
+  <td>CHAR</td>
+  <td>18</td>
+  <td>X</td>
+  <td>Número de asignación</td>
+</tr>
+<tr class="cell">
+  <td>11</td>
+  <td>CODCTRL</td>
+  <td>11</td>
+  <td>&nbsp;</td>
+  <td>CHAR20</td>
+  <td>CHAR20</td>
+  <td>CHAR</td>
+  <td>20</td>
+  <td>&nbsp;</td>
+  <td>20 caract.</td>
+</tr>
+<tr class="cell">
+  <td>12</td>
+  <td>CODQR</td>
+  <td>12</td>
+  <td>&nbsp;</td>
+  <td>CHAR128</td>
+  <td>CHAR128</td>
+  <td>CHAR</td>
+  <td>128</td>
+  <td>&nbsp;</td>
+  <td>128 caracteres</td>
+</tr>
+<tr class="cell">
+  <td>13</td>
+  <td>IMPRES</td>
+  <td>13</td>
+  <td>&nbsp;</td>
+  <td>INT4</td>
+  <td>INT4</td>
+  <td>INT4</td>
+  <td>10</td>
+  <td>&nbsp;</td>
+  <td>Número natural</td>
+</tr>
+<tr class="cell">
+  <td>14</td>
+  <td>USRNAM</td>
+  <td>14</td>
+  <td>&nbsp;</td>
+  <td>USNAM</td>
+  <td>XUBNAME</td>
+  <td>CHAR</td>
+  <td>12</td>
+  <td>&nbsp;</td>
+  <td>Nombre del usuario</td>
+</tr>
+<tr class="cell">
+  <td>15</td>
+  <td>FECIMP</td>
+  <td>15</td>
+  <td>&nbsp;</td>
+  <td>DATE_</td>
+  <td>DATS</td>
+  <td>DATS</td>
+  <td>8</td>
+  <td>&nbsp;</td>
+  <td>Fecha</td>
+</tr>
+<tr class="cell">
+  <td>16</td>
+  <td>BUDAT</td>
+  <td>16</td>
+  <td>&nbsp;</td>
+  <td>BUDAT</td>
+  <td>DATUM</td>
+  <td>DATS</td>
+  <td>8</td>
+  <td>&nbsp;</td>
+  <td>Fecha de contabilización en el documento</td>
+</tr>
+<tr class="cell">
+  <td>17</td>
+  <td>FECCRE</td>
+  <td>17</td>
+  <td>&nbsp;</td>
+  <td>BLDAT</td>
+  <td>DATUM</td>
+  <td>DATS</td>
+  <td>8</td>
+  <td>&nbsp;</td>
+  <td>Fecha de documento en documento</td>
+</tr>
+<tr class="cell">
+  <td>18</td>
+  <td>ESTADO</td>
+  <td>18</td>
+  <td>&nbsp;</td>
+  <td>ZESTADO_FACTURA</td>
+  <td>ZESTADO_FACTURA</td>
+  <td>INT1</td>
+  <td>3</td>
+  <td>&nbsp;</td>
+  <td>Estado de una factura</td>
+</tr>
+<tr class="cell">
+  <td>19</td>
+  <td>REIMPOR</td>
+  <td>19</td>
+  <td>&nbsp;</td>
+  <td>ZREIMP_OR_FACT</td>
+  <td>INT4</td>
+  <td>INT4</td>
+  <td>10</td>
+  <td>&nbsp;</td>
+  <td>Cantidad de Re-impresiones original de facturas</td>
+</tr>
+<tr class="cell">
+  <td>20</td>
+  <td>FREIMP</td>
+  <td>20</td>
+  <td>&nbsp;</td>
+  <td>ZREIMP_OR_FACT_FECHA</td>
+  <td>DATUM</td>
+  <td>DATS</td>
+  <td>8</td>
+  <td>&nbsp;</td>
+  <td>Ultima re-impresión original de factura</td>
+</tr>
+<tr class="cell">
+  <td>21</td>
+  <td>HREIMP</td>
+  <td>21</td>
+  <td>&nbsp;</td>
+  <td>ZREIMP_OR_FACT_HORA</td>
+  <td>UZEIT</td>
+  <td>TIMS</td>
+  <td>6</td>
+  <td>&nbsp;</td>
+  <td>Hora de ultima re-impresión original</td>
+</tr>
+<tr class="cell">
+  <td>22</td>
+  <td>UREIMP</td>
+  <td>22</td>
+  <td>&nbsp;</td>
+  <td>ZREIMP_OR_FACT_USER</td>
+  <td>USNAM</td>
+  <td>CHAR</td>
+  <td>12</td>
+  <td>&nbsp;</td>
+  <td>Usuario de ultima re-impresión original</td>
+</tr>
+<tr class="cell">
+  <td>23</td>
+  <td>ZFBDT</td>
+  <td>23</td>
+  <td>&nbsp;</td>
+  <td>DZFBDT</td>
+  <td>DATUM</td>
+  <td>DATS</td>
+  <td>8</td>
+  <td>&nbsp;</td>
+  <td>Fecha base para cálculo del vencimiento</td>
+</tr>
+<tr class="cell">
+  <td>24</td>
+  <td>ZTERM</td>
+  <td>24</td>
+  <td>&nbsp;</td>
+  <td>DZTERM</td>
+  <td>ZTERM</td>
+  <td>CHAR</td>
+  <td>4</td>
+  <td>&nbsp;</td>
+  <td>Clave de condiciones de pago</td>
+</tr>
+<tr class="cell">
+  <td>25</td>
+  <td>APROB</td>
+  <td>25</td>
+  <td>&nbsp;</td>
+  <td>ZESTADO_APROB_IMP_FACT</td>
+  <td>ZESTADO_APROB_IMP_FACT</td>
+  <td>CHAR</td>
+  <td>1</td>
+  <td>&nbsp;</td>
+  <td>Estado de aprobación de una factura</td>
+</tr>
+<tr class="cell">
+  <td>26</td>
+  <td>FECAPR</td>
+  <td>26</td>
+  <td>&nbsp;</td>
+  <td>ZFECHA_APROB_FACT</td>
+  <td>DATUM</td>
+  <td>DATS</td>
+  <td>8</td>
+  <td>&nbsp;</td>
+  <td>Fecha de aprobación de factura</td>
+</tr>
+<tr class="cell">
+  <td>27</td>
+  <td>HORAPR</td>
+  <td>27</td>
+  <td>&nbsp;</td>
+  <td>ZHORA_APROB_FACT</td>
+  <td>UZEIT</td>
+  <td>TIMS</td>
+  <td>6</td>
+  <td>&nbsp;</td>
+  <td>Hora de aprobación de una factura</td>
+</tr>
+<tr class="cell">
+  <td>28</td>
+  <td>USRAPR</td>
+  <td>28</td>
+  <td>&nbsp;</td>
+  <td>USNAM</td>
+  <td>XUBNAME</td>
+  <td>CHAR</td>
+  <td>12</td>
+  <td>&nbsp;</td>
+  <td>Nombre del usuario</td>
+</tr>
+<tr class="cell">
+  <td>29</td>
+  <td>KUNNR</td>
+  <td>29</td>
+  <td>&nbsp;</td>
+  <td>KUNNR</td>
+  <td>KUNNR</td>
+  <td>CHAR</td>
+  <td>10</td>
+  <td>&nbsp;</td>
+  <td>Número de deudor</td>
+</tr>
+<tr class="cell">
+  <td>30</td>
+  <td>HKONT</td>
+  <td>30</td>
+  <td>&nbsp;</td>
+  <td>HKONT</td>
+  <td>SAKNR</td>
+  <td>CHAR</td>
+  <td>10</td>
+  <td>&nbsp;</td>
+  <td>Cuenta de mayor de la contabilidad principal</td>
+</tr>
+      </table>
+     </td>
+   </tr>
+<br/>
+  <table class="outerTable">
+    <tr>
+      <td><h2>Fixed Domain Values </h2>
+    </tr>
+    <tr>
+      <td><!--This is where our main table begins  -->
+<table class="innerTable">
+<tr>
+  <th>Domain Name</th>
+  <th>Value Low</th>
+  <th>Value High</th>
+  <th>Text</th>
+</tr>
+<tr class="cell">
+  <td>ZESTADO_FACTURA</td>
+  <td>1</td>
+  <td>&nbsp;</td>
+  <td>Activa</td>
+</tr>
+<tr class="cell">
+  <td>ZESTADO_FACTURA</td>
+  <td>9</td>
+  <td>&nbsp;</td>
+  <td>Anulada</td>
+</tr>
+<tr class="cell">
+  <td>ZESTADO_APROB_IMP_FACT</td>
+  <td>&nbsp;</td>
+  <td>&nbsp;</td>
+  <td>No</td>
+</tr>
+<tr class="cell">
+  <td>ZESTADO_APROB_IMP_FACT</td>
+  <td>X</td>
+  <td>&nbsp;</td>
+  <td>Sí</td>
+</tr>
+      </table>
+     </td>
+   </tr>
+   <tr>
+<td class="footer">Extracted by Mass Download version 1.5.5 - E.G.Mellodew. 1998-2025. Sap Release 701</td>
+   </tr>
+</table>
+</body>
+</html>
