@@ -1,0 +1,375 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="application/xhtml+xml; charset=ISO-8859-1" />
+<title>Dictionary object- ZMMT_FACTURA_EST</title>
+<style type="text/css">
+  th{text-align:left}
+  .cell{
+     font-family:"Courier New", Courier, monospace;
+     color:#000;
+     font-size:12px;
+     background-color:#F2F4F7;
+  }
+  .cell td { border: thin solid #ccc; }
+</style>
+<style type="text/css">
+  .normal{ font-family:Arial, Helvetica, sans-serif; color:#000; font-size:12px }
+  .footer{ font-family:Arial, Helvetica, sans-serif; color:#000; font-size:12px; text-align: center }
+  h2{ font-family:Arial, Helvetica, sans-serif; color:#000; font-size:16px; font-weight:800 }
+  h3{ font-family:Arial, Helvetica, sans-serif; color:#000; font-size:14px; font-weight:800 }
+  .outerTable{
+   background-color:#E0E7ED;
+   width:100%;
+   border-top-width: thin;
+   border-right-width: thin;
+   border-right-width: thin;
+   border-left-width: thin;
+   border-top-style: solid;
+   border-right-style: solid;
+   border-bottom-style: solid;
+   border-left-style: solid;
+  }
+  .innerTable{
+   background-color:#F2F4F7;
+   width:100%;
+   border-top-width: thin;
+   border-right-width: thin;
+   border-bottom-width: thin;
+   border-left-width: thin;
+   border-top-style: solid;
+   border-right-style: solid;
+   border-bottom-style: solid;
+   border-left-style: solid;
+  }
+</style>
+</head>
+<body>
+  <table class="outerTable">
+    <tr>
+      <td><h2>Table: ZMMT_FACTURA_EST</h2>
+  <h3>Description: Parametrización reporte y estado de facturas</h3></td>
+    </tr>
+    <tr>
+      <td><!--This is where our main table begins  -->
+<table class="innerTable">
+<tr>
+  <th>Row</th>
+  <th>Field name</th>
+  <th>Position</th>
+  <th>Key</th>
+  <th>Data element</th>
+  <th>Domain</th>
+  <th>Datatype</th>
+  <th>Length</th>
+  <th>Lowercase</th>
+  <th>Domain text</th>
+</tr>
+<tr class="cell">
+  <td> 1</td>
+  <td>MANDT</td>
+  <td>1</td>
+  <td>X</td>
+  <td>MANDT</td>
+  <td>MANDT</td>
+  <td>CLNT</td>
+  <td>3</td>
+  <td>&nbsp;</td>
+  <td>Mandante</td>
+</tr>
+<tr class="cell">
+  <td> 2</td>
+  <td>ETAPA_REPORTE</td>
+  <td>2</td>
+  <td>X</td>
+  <td>ZDE_ETAPA_REPORTE</td>
+  <td>ZDO_ETAPA_REPORTE</td>
+  <td>CHAR</td>
+  <td>2</td>
+  <td>&nbsp;</td>
+  <td>Etapa de interfaz de factura</td>
+</tr>
+<tr class="cell">
+  <td> 3</td>
+  <td>ESTADO_ENRUTAMIENTO</td>
+  <td>3</td>
+  <td>X</td>
+  <td>ZDE_ESTATUS</td>
+  <td>ZDO_ESTATUS_FACTURA</td>
+  <td>CHAR</td>
+  <td>2</td>
+  <td>&nbsp;</td>
+  <td>Estatus de carga factura</td>
+</tr>
+<tr class="cell">
+  <td> 4</td>
+  <td>ESTADO_ICON</td>
+  <td>4</td>
+  <td>&nbsp;</td>
+  <td>ICON_D</td>
+  <td>ICON</td>
+  <td>CHAR</td>
+  <td>4</td>
+  <td>&nbsp;</td>
+  <td>Icono en campos de texto (representación adicional, alias)</td>
+</tr>
+<tr class="cell">
+  <td> 5</td>
+  <td>ESTADO_FACTURA</td>
+  <td>5</td>
+  <td>&nbsp;</td>
+  <td>ZDE_ESTATUS</td>
+  <td>ZDO_ESTATUS_FACTURA</td>
+  <td>CHAR</td>
+  <td>2</td>
+  <td>&nbsp;</td>
+  <td>Estatus de carga factura</td>
+</tr>
+<tr class="cell">
+  <td> 6</td>
+  <td>ESTADO_FACTURA_ICON</td>
+  <td>6</td>
+  <td>&nbsp;</td>
+  <td>ICON_D</td>
+  <td>ICON</td>
+  <td>CHAR</td>
+  <td>4</td>
+  <td>&nbsp;</td>
+  <td>Icono en campos de texto (representación adicional, alias)</td>
+</tr>
+<tr class="cell">
+  <td> 7</td>
+  <td>.INCLUDE</td>
+  <td>7</td>
+  <td>&nbsp;</td>
+  <td>ZABAPS_AUDITOR</td>
+  <td>&nbsp;</td>
+  <td>&nbsp;</td>
+  <td>0</td>
+  <td>&nbsp;</td>
+  <td>Auditor log de tablas</td>
+</tr>
+<tr class="cell">
+  <td> 8</td>
+  <td>UNAME</td>
+  <td>8</td>
+  <td>&nbsp;</td>
+  <td>UNAME</td>
+  <td>UNAME</td>
+  <td>CHAR</td>
+  <td>12</td>
+  <td>&nbsp;</td>
+  <td>Nombre de usuario</td>
+</tr>
+<tr class="cell">
+  <td> 9</td>
+  <td>DATLO</td>
+  <td>9</td>
+  <td>&nbsp;</td>
+  <td>DATUM</td>
+  <td>DATUM</td>
+  <td>DATS</td>
+  <td>8</td>
+  <td>&nbsp;</td>
+  <td>Fecha</td>
+</tr>
+<tr class="cell">
+  <td>10</td>
+  <td>TIMLO</td>
+  <td>10</td>
+  <td>&nbsp;</td>
+  <td>TIME_</td>
+  <td>SYTIME</td>
+  <td>TIMS</td>
+  <td>6</td>
+  <td>&nbsp;</td>
+  <td>Hora</td>
+</tr>
+      </table>
+     </td>
+   </tr>
+<br/>
+  <table class="outerTable">
+    <tr>
+      <td><h2>Fixed Domain Values </h2>
+    </tr>
+    <tr>
+      <td><!--This is where our main table begins  -->
+<table class="innerTable">
+<tr>
+  <th>Domain Name</th>
+  <th>Value Low</th>
+  <th>Value High</th>
+  <th>Text</th>
+</tr>
+<tr class="cell">
+  <td>ZDO_ETAPA_REPORTE</td>
+  <td>01</td>
+  <td>&nbsp;</td>
+  <td>Selección y carga de facturas</td>
+</tr>
+<tr class="cell">
+  <td>ZDO_ETAPA_REPORTE</td>
+  <td>02</td>
+  <td>&nbsp;</td>
+  <td>Confirmar carga de facturas</td>
+</tr>
+<tr class="cell">
+  <td>ZDO_ETAPA_REPORTE</td>
+  <td>03</td>
+  <td>&nbsp;</td>
+  <td>Reporte de estado de facturas</td>
+</tr>
+<tr class="cell">
+  <td>ZDO_ESTATUS_FACTURA</td>
+  <td>00</td>
+  <td>&nbsp;</td>
+  <td>Pendientes de carga</td>
+</tr>
+<tr class="cell">
+  <td>ZDO_ESTATUS_FACTURA</td>
+  <td>01</td>
+  <td>&nbsp;</td>
+  <td>Cargada exitosamente</td>
+</tr>
+<tr class="cell">
+  <td>ZDO_ESTATUS_FACTURA</td>
+  <td>02</td>
+  <td>&nbsp;</td>
+  <td>Cargada con advertencia</td>
+</tr>
+<tr class="cell">
+  <td>ZDO_ESTATUS_FACTURA</td>
+  <td>03</td>
+  <td>&nbsp;</td>
+  <td>Cargada con error</td>
+</tr>
+<tr class="cell">
+  <td>ZDO_ESTATUS_FACTURA</td>
+  <td>04</td>
+  <td>&nbsp;</td>
+  <td>Pendientes a facturar</td>
+</tr>
+<tr class="cell">
+  <td>ZDO_ESTATUS_FACTURA</td>
+  <td>05</td>
+  <td>&nbsp;</td>
+  <td>MIRO exitosamente</td>
+</tr>
+<tr class="cell">
+  <td>ZDO_ESTATUS_FACTURA</td>
+  <td>06</td>
+  <td>&nbsp;</td>
+  <td>MIRO con advertencia</td>
+</tr>
+<tr class="cell">
+  <td>ZDO_ESTATUS_FACTURA</td>
+  <td>07</td>
+  <td>&nbsp;</td>
+  <td>MIRO con error</td>
+</tr>
+<tr class="cell">
+  <td>ZDO_ESTATUS_FACTURA</td>
+  <td>08</td>
+  <td>&nbsp;</td>
+  <td>Fact. anulada con MR8M</td>
+</tr>
+<tr class="cell">
+  <td>ZDO_ESTATUS_FACTURA</td>
+  <td>09</td>
+  <td>&nbsp;</td>
+  <td>Factura rechazada</td>
+</tr>
+<tr class="cell">
+  <td>ZDO_ESTATUS_FACTURA</td>
+  <td>10</td>
+  <td>&nbsp;</td>
+  <td>Factura anulada exitosamente</td>
+</tr>
+<tr class="cell">
+  <td>ZDO_ESTATUS_FACTURA</td>
+  <td>11</td>
+  <td>&nbsp;</td>
+  <td>Factura anulada con error</td>
+</tr>
+<tr class="cell">
+  <td>ZDO_ESTATUS_FACTURA</td>
+  <td>00</td>
+  <td>&nbsp;</td>
+  <td>Pendientes de carga</td>
+</tr>
+<tr class="cell">
+  <td>ZDO_ESTATUS_FACTURA</td>
+  <td>01</td>
+  <td>&nbsp;</td>
+  <td>Cargada exitosamente</td>
+</tr>
+<tr class="cell">
+  <td>ZDO_ESTATUS_FACTURA</td>
+  <td>02</td>
+  <td>&nbsp;</td>
+  <td>Cargada con advertencia</td>
+</tr>
+<tr class="cell">
+  <td>ZDO_ESTATUS_FACTURA</td>
+  <td>03</td>
+  <td>&nbsp;</td>
+  <td>Cargada con error</td>
+</tr>
+<tr class="cell">
+  <td>ZDO_ESTATUS_FACTURA</td>
+  <td>04</td>
+  <td>&nbsp;</td>
+  <td>Pendientes a facturar</td>
+</tr>
+<tr class="cell">
+  <td>ZDO_ESTATUS_FACTURA</td>
+  <td>05</td>
+  <td>&nbsp;</td>
+  <td>MIRO exitosamente</td>
+</tr>
+<tr class="cell">
+  <td>ZDO_ESTATUS_FACTURA</td>
+  <td>06</td>
+  <td>&nbsp;</td>
+  <td>MIRO con advertencia</td>
+</tr>
+<tr class="cell">
+  <td>ZDO_ESTATUS_FACTURA</td>
+  <td>07</td>
+  <td>&nbsp;</td>
+  <td>MIRO con error</td>
+</tr>
+<tr class="cell">
+  <td>ZDO_ESTATUS_FACTURA</td>
+  <td>08</td>
+  <td>&nbsp;</td>
+  <td>Fact. anulada con MR8M</td>
+</tr>
+<tr class="cell">
+  <td>ZDO_ESTATUS_FACTURA</td>
+  <td>09</td>
+  <td>&nbsp;</td>
+  <td>Factura rechazada</td>
+</tr>
+<tr class="cell">
+  <td>ZDO_ESTATUS_FACTURA</td>
+  <td>10</td>
+  <td>&nbsp;</td>
+  <td>Factura anulada exitosamente</td>
+</tr>
+<tr class="cell">
+  <td>ZDO_ESTATUS_FACTURA</td>
+  <td>11</td>
+  <td>&nbsp;</td>
+  <td>Factura anulada con error</td>
+</tr>
+      </table>
+     </td>
+   </tr>
+   <tr>
+<td class="footer">Extracted by Mass Download version 1.5.5 - E.G.Mellodew. 1998-2025. Sap Release 701</td>
+   </tr>
+</table>
+</body>
+</html>

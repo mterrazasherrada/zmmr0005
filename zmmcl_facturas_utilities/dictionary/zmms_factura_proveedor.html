@@ -1,0 +1,783 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="application/xhtml+xml; charset=ISO-8859-1" />
+<title>Dictionary object- ZMMS_FACTURA_PROVEEDOR</title>
+<style type="text/css">
+  th{text-align:left}
+  .cell{
+     font-family:"Courier New", Courier, monospace;
+     color:#000;
+     font-size:12px;
+     background-color:#F2F4F7;
+  }
+  .cell td { border: thin solid #ccc; }
+</style>
+<style type="text/css">
+  .normal{ font-family:Arial, Helvetica, sans-serif; color:#000; font-size:12px }
+  .footer{ font-family:Arial, Helvetica, sans-serif; color:#000; font-size:12px; text-align: center }
+  h2{ font-family:Arial, Helvetica, sans-serif; color:#000; font-size:16px; font-weight:800 }
+  h3{ font-family:Arial, Helvetica, sans-serif; color:#000; font-size:14px; font-weight:800 }
+  .outerTable{
+   background-color:#E0E7ED;
+   width:100%;
+   border-top-width: thin;
+   border-right-width: thin;
+   border-right-width: thin;
+   border-left-width: thin;
+   border-top-style: solid;
+   border-right-style: solid;
+   border-bottom-style: solid;
+   border-left-style: solid;
+  }
+  .innerTable{
+   background-color:#F2F4F7;
+   width:100%;
+   border-top-width: thin;
+   border-right-width: thin;
+   border-bottom-width: thin;
+   border-left-width: thin;
+   border-top-style: solid;
+   border-right-style: solid;
+   border-bottom-style: solid;
+   border-left-style: solid;
+  }
+</style>
+</head>
+<body>
+  <table class="outerTable">
+    <tr>
+      <td><h2>Table: ZMMS_FACTURA_PROVEEDOR</h2>
+  <h3>Description: Facturas de proveedor</h3></td>
+    </tr>
+    <tr>
+      <td><!--This is where our main table begins  -->
+<table class="innerTable">
+<tr>
+  <th>Row</th>
+  <th>Field name</th>
+  <th>Position</th>
+  <th>Key</th>
+  <th>Data element</th>
+  <th>Domain</th>
+  <th>Datatype</th>
+  <th>Length</th>
+  <th>Lowercase</th>
+  <th>Domain text</th>
+</tr>
+<tr class="cell">
+  <td> 1</td>
+  <td>SELCT</td>
+  <td>1</td>
+  <td>&nbsp;</td>
+  <td>SELECTED_ROW</td>
+  <td>KENNZX</td>
+  <td>CHAR</td>
+  <td>1</td>
+  <td>&nbsp;</td>
+  <td>Línea seleccionada</td>
+</tr>
+<tr class="cell">
+  <td> 2</td>
+  <td>STATUS</td>
+  <td>2</td>
+  <td>&nbsp;</td>
+  <td>STATUS_RP</td>
+  <td>CHAR4</td>
+  <td>CHAR</td>
+  <td>4</td>
+  <td>&nbsp;</td>
+  <td>Campo status para seleccionar datos a crear</td>
+</tr>
+<tr class="cell">
+  <td> 3</td>
+  <td>STATUS_DESCRIP</td>
+  <td>3</td>
+  <td>&nbsp;</td>
+  <td>CHAR30</td>
+  <td>CHAR30</td>
+  <td>CHAR</td>
+  <td>30</td>
+  <td>&nbsp;</td>
+  <td>30 caracteres</td>
+</tr>
+<tr class="cell">
+  <td> 4</td>
+  <td>TIPO_FACTURA</td>
+  <td>4</td>
+  <td>&nbsp;</td>
+  <td>ZDE_TIPO_FACTURAS</td>
+  <td>ZDO_TIPO_FACTURAS</td>
+  <td>CHAR</td>
+  <td>2</td>
+  <td>&nbsp;</td>
+  <td>Tipos de facturas</td>
+</tr>
+<tr class="cell">
+  <td> 5</td>
+  <td>IMPORT_FILE</td>
+  <td>5</td>
+  <td>&nbsp;</td>
+  <td>ICON_D</td>
+  <td>ICON</td>
+  <td>CHAR</td>
+  <td>4</td>
+  <td>&nbsp;</td>
+  <td>Icono en campos de texto (representación adicional, alias)</td>
+</tr>
+<tr class="cell">
+  <td> 6</td>
+  <td>SINMS</td>
+  <td>6</td>
+  <td>&nbsp;</td>
+  <td>ICON_D</td>
+  <td>ICON</td>
+  <td>CHAR</td>
+  <td>4</td>
+  <td>&nbsp;</td>
+  <td>Icono en campos de texto (representación adicional, alias)</td>
+</tr>
+<tr class="cell">
+  <td> 7</td>
+  <td>FECHA_BASE_CONTA</td>
+  <td>7</td>
+  <td>&nbsp;</td>
+  <td>DATUM</td>
+  <td>DATUM</td>
+  <td>DATS</td>
+  <td>8</td>
+  <td>&nbsp;</td>
+  <td>Fecha</td>
+</tr>
+<tr class="cell">
+  <td> 8</td>
+  <td>LIFNR</td>
+  <td>8</td>
+  <td>&nbsp;</td>
+  <td>LIFNR</td>
+  <td>LIFNR</td>
+  <td>CHAR</td>
+  <td>10</td>
+  <td>&nbsp;</td>
+  <td>Número de cuenta del proveedor o acreedor</td>
+</tr>
+<tr class="cell">
+  <td> 9</td>
+  <td>NAME</td>
+  <td>9</td>
+  <td>&nbsp;</td>
+  <td>ZDE_NOMBRE_COMPLETO</td>
+  <td>CHAR140</td>
+  <td>CHAR</td>
+  <td>140</td>
+  <td>&nbsp;</td>
+  <td>Nombre del contratista</td>
+</tr>
+<tr class="cell">
+  <td>10</td>
+  <td>STCD1</td>
+  <td>10</td>
+  <td>&nbsp;</td>
+  <td>STCD1</td>
+  <td>STCD1</td>
+  <td>CHAR</td>
+  <td>16</td>
+  <td>&nbsp;</td>
+  <td>Número de identificación fiscal 1</td>
+</tr>
+<tr class="cell">
+  <td>11</td>
+  <td>EBELN</td>
+  <td>11</td>
+  <td>&nbsp;</td>
+  <td>EBELN</td>
+  <td>EBELN</td>
+  <td>CHAR</td>
+  <td>10</td>
+  <td>&nbsp;</td>
+  <td>Número del documento de compras</td>
+</tr>
+<tr class="cell">
+  <td>12</td>
+  <td>KONNR</td>
+  <td>12</td>
+  <td>&nbsp;</td>
+  <td>KONNR</td>
+  <td>EBELN</td>
+  <td>CHAR</td>
+  <td>10</td>
+  <td>&nbsp;</td>
+  <td>Número del contrato superior</td>
+</tr>
+<tr class="cell">
+  <td>13</td>
+  <td>E_NETWR</td>
+  <td>13</td>
+  <td>&nbsp;</td>
+  <td>DMBTR</td>
+  <td>WERT7</td>
+  <td>CURR</td>
+  <td>13</td>
+  <td>&nbsp;</td>
+  <td>Importe en moneda local</td>
+</tr>
+<tr class="cell">
+  <td>14</td>
+  <td>F_NETWR</td>
+  <td>14</td>
+  <td>&nbsp;</td>
+  <td>BWERT</td>
+  <td>WERT7</td>
+  <td>CURR</td>
+  <td>13</td>
+  <td>&nbsp;</td>
+  <td>Valor neto de pedido en moneda de pedido</td>
+</tr>
+<tr class="cell">
+  <td>15</td>
+  <td>E_NETWR_L</td>
+  <td>15</td>
+  <td>&nbsp;</td>
+  <td>DMBTR</td>
+  <td>WERT7</td>
+  <td>CURR</td>
+  <td>13</td>
+  <td>&nbsp;</td>
+  <td>Importe en moneda local</td>
+</tr>
+<tr class="cell">
+  <td>16</td>
+  <td>F_NETWR_L</td>
+  <td>16</td>
+  <td>&nbsp;</td>
+  <td>BWERT</td>
+  <td>WERT7</td>
+  <td>CURR</td>
+  <td>13</td>
+  <td>&nbsp;</td>
+  <td>Valor neto de pedido en moneda de pedido</td>
+</tr>
+<tr class="cell">
+  <td>17</td>
+  <td>MONTO_TOTAL_FILE</td>
+  <td>17</td>
+  <td>&nbsp;</td>
+  <td>ZDE_MONTO_TOTAL_FACTURA</td>
+  <td>WERT7</td>
+  <td>CURR</td>
+  <td>13</td>
+  <td>&nbsp;</td>
+  <td>Monto total archivo factura</td>
+</tr>
+<tr class="cell">
+  <td>18</td>
+  <td>DIFERENCIA_FILE</td>
+  <td>18</td>
+  <td>&nbsp;</td>
+  <td>ZDE_MONTO_TOTAL_DIFERENCIA</td>
+  <td>WERT7</td>
+  <td>CURR</td>
+  <td>13</td>
+  <td>&nbsp;</td>
+  <td>Diferencia monto total archivo factura</td>
+</tr>
+<tr class="cell">
+  <td>19</td>
+  <td>EXPAND</td>
+  <td>19</td>
+  <td>&nbsp;</td>
+  <td>ZDE_EXPAND_ALV_ROW</td>
+  <td>TEXT40</td>
+  <td>CHAR</td>
+  <td>40</td>
+  <td>X</td>
+  <td>Vis/Ocul. posiciones</td>
+</tr>
+<tr class="cell">
+  <td>20</td>
+  <td>EBELP</td>
+  <td>20</td>
+  <td>&nbsp;</td>
+  <td>EBELP</td>
+  <td>EBELP</td>
+  <td>NUMC</td>
+  <td>5</td>
+  <td>&nbsp;</td>
+  <td>Número de posición del documento de compras</td>
+</tr>
+<tr class="cell">
+  <td>21</td>
+  <td>MENGE</td>
+  <td>21</td>
+  <td>&nbsp;</td>
+  <td>BSTMG</td>
+  <td>MENG13</td>
+  <td>QUAN</td>
+  <td>13</td>
+  <td>&nbsp;</td>
+  <td>Cantidad de pedido</td>
+</tr>
+<tr class="cell">
+  <td>22</td>
+  <td>MEINS</td>
+  <td>22</td>
+  <td>&nbsp;</td>
+  <td>MEINS</td>
+  <td>MEINS</td>
+  <td>UNIT</td>
+  <td>3</td>
+  <td>X</td>
+  <td>Unidad de medida base</td>
+</tr>
+<tr class="cell">
+  <td>23</td>
+  <td>NETPR</td>
+  <td>23</td>
+  <td>&nbsp;</td>
+  <td>ZDE_NETPR</td>
+  <td>WERT11</td>
+  <td>CURR</td>
+  <td>11</td>
+  <td>&nbsp;</td>
+  <td>Precio unitario</td>
+</tr>
+<tr class="cell">
+  <td>24</td>
+  <td>TXZ01</td>
+  <td>24</td>
+  <td>&nbsp;</td>
+  <td>TXZ01</td>
+  <td>TEXT40</td>
+  <td>CHAR</td>
+  <td>40</td>
+  <td>X</td>
+  <td>Texto breve</td>
+</tr>
+<tr class="cell">
+  <td>25</td>
+  <td>BEDAT</td>
+  <td>25</td>
+  <td>&nbsp;</td>
+  <td>BEDAT</td>
+  <td>DATUM</td>
+  <td>DATS</td>
+  <td>8</td>
+  <td>&nbsp;</td>
+  <td>Fecha de pedido</td>
+</tr>
+<tr class="cell">
+  <td>26</td>
+  <td>WAERS</td>
+  <td>26</td>
+  <td>&nbsp;</td>
+  <td>WAERS</td>
+  <td>WAERS</td>
+  <td>CUKY</td>
+  <td>5</td>
+  <td>&nbsp;</td>
+  <td>Clave de moneda</td>
+</tr>
+<tr class="cell">
+  <td>27</td>
+  <td>BUKRS</td>
+  <td>27</td>
+  <td>&nbsp;</td>
+  <td>BUKRS</td>
+  <td>BUKRS</td>
+  <td>CHAR</td>
+  <td>4</td>
+  <td>&nbsp;</td>
+  <td>Sociedad</td>
+</tr>
+<tr class="cell">
+  <td>28</td>
+  <td>SEGMENT</td>
+  <td>28</td>
+  <td>&nbsp;</td>
+  <td>FB_SEGMENT</td>
+  <td>FB_SEGMENT</td>
+  <td>CHAR</td>
+  <td>10</td>
+  <td>&nbsp;</td>
+  <td>Segmento para reporting de segmento</td>
+</tr>
+<tr class="cell">
+  <td>29</td>
+  <td>MWSKZ</td>
+  <td>29</td>
+  <td>&nbsp;</td>
+  <td>MWSKZ</td>
+  <td>MWSKZ</td>
+  <td>CHAR</td>
+  <td>2</td>
+  <td>&nbsp;</td>
+  <td>Indicador IVA</td>
+</tr>
+<tr class="cell">
+  <td>30</td>
+  <td>KOSTL</td>
+  <td>30</td>
+  <td>&nbsp;</td>
+  <td>KOSTL</td>
+  <td>KOSTL</td>
+  <td>CHAR</td>
+  <td>10</td>
+  <td>&nbsp;</td>
+  <td>Centro de coste</td>
+</tr>
+<tr class="cell">
+  <td>31</td>
+  <td>GSBER</td>
+  <td>31</td>
+  <td>&nbsp;</td>
+  <td>GSBER</td>
+  <td>GSBER</td>
+  <td>CHAR</td>
+  <td>4</td>
+  <td>&nbsp;</td>
+  <td>División</td>
+</tr>
+<tr class="cell">
+  <td>32</td>
+  <td>GSBER_TEXT</td>
+  <td>32</td>
+  <td>&nbsp;</td>
+  <td>ZDE_GSBER_TXT</td>
+  <td>CHAR80</td>
+  <td>CHAR</td>
+  <td>80</td>
+  <td>&nbsp;</td>
+  <td>Nombre gerencia</td>
+</tr>
+<tr class="cell">
+  <td>33</td>
+  <td>PRCTR</td>
+  <td>33</td>
+  <td>&nbsp;</td>
+  <td>PRCTR</td>
+  <td>PRCTR</td>
+  <td>CHAR</td>
+  <td>10</td>
+  <td>&nbsp;</td>
+  <td>Centro de beneficio</td>
+</tr>
+<tr class="cell">
+  <td>34</td>
+  <td>PS_PSP_PNR</td>
+  <td>34</td>
+  <td>&nbsp;</td>
+  <td>PS_PSP_PNR</td>
+  <td>PS_POSNR</td>
+  <td>NUMC</td>
+  <td>8</td>
+  <td>&nbsp;</td>
+  <td>Elemento del plan de estructura de proyecto (elemento PEP)</td>
+</tr>
+<tr class="cell">
+  <td>35</td>
+  <td>AUFNR</td>
+  <td>35</td>
+  <td>&nbsp;</td>
+  <td>AUFNR</td>
+  <td>AUFNR</td>
+  <td>CHAR</td>
+  <td>12</td>
+  <td>&nbsp;</td>
+  <td>Número de orden</td>
+</tr>
+<tr class="cell">
+  <td>36</td>
+  <td>SAKTO</td>
+  <td>36</td>
+  <td>&nbsp;</td>
+  <td>SAKNR</td>
+  <td>SAKNR</td>
+  <td>CHAR</td>
+  <td>10</td>
+  <td>&nbsp;</td>
+  <td>Número de la cuenta de mayor</td>
+</tr>
+<tr class="cell">
+  <td>37</td>
+  <td>PSTYP</td>
+  <td>37</td>
+  <td>&nbsp;</td>
+  <td>PSTYP</td>
+  <td>PSTYP</td>
+  <td>CHAR</td>
+  <td>1</td>
+  <td>&nbsp;</td>
+  <td>Tipo de posición del documento de compras</td>
+</tr>
+<tr class="cell">
+  <td>38</td>
+  <td>KNTTP</td>
+  <td>38</td>
+  <td>&nbsp;</td>
+  <td>KNTTP</td>
+  <td>KNTTP</td>
+  <td>CHAR</td>
+  <td>1</td>
+  <td>&nbsp;</td>
+  <td>Tipo de imputación</td>
+</tr>
+<tr class="cell">
+  <td>39</td>
+  <td>CLASE_CONDICION</td>
+  <td>39</td>
+  <td>&nbsp;</td>
+  <td>ZDE_KSCHL</td>
+  <td>CHAR30</td>
+  <td>CHAR</td>
+  <td>30</td>
+  <td>&nbsp;</td>
+  <td>Clase de condiciones</td>
+</tr>
+<tr class="cell">
+  <td>40</td>
+  <td>NRO_FACTURA</td>
+  <td>40</td>
+  <td>&nbsp;</td>
+  <td>ZDE_NRO_FACTURA</td>
+  <td>&nbsp;</td>
+  <td>NUMC</td>
+  <td>10</td>
+  <td>&nbsp;</td>
+  <td>Número de factura</td>
+</tr>
+<tr class="cell">
+  <td>41</td>
+  <td>BELNR_MIRO</td>
+  <td>41</td>
+  <td>&nbsp;</td>
+  <td>ZDE_BELNR_MIRO</td>
+  <td>BELNR</td>
+  <td>CHAR</td>
+  <td>10</td>
+  <td>&nbsp;</td>
+  <td>N° MIRO</td>
+</tr>
+<tr class="cell">
+  <td>42</td>
+  <td>BELNR</td>
+  <td>42</td>
+  <td>&nbsp;</td>
+  <td>ZDE_BELNR</td>
+  <td>BELNR</td>
+  <td>CHAR</td>
+  <td>10</td>
+  <td>&nbsp;</td>
+  <td>N° FI</td>
+</tr>
+<tr class="cell">
+  <td>43</td>
+  <td>FECHA_REGISTRO</td>
+  <td>43</td>
+  <td>&nbsp;</td>
+  <td>ZDE_FECHA_REGISTRO</td>
+  <td>DATS</td>
+  <td>DATS</td>
+  <td>8</td>
+  <td>&nbsp;</td>
+  <td>Fecha de registro</td>
+</tr>
+<tr class="cell">
+  <td>44</td>
+  <td>FECHA_RECEPCION</td>
+  <td>44</td>
+  <td>&nbsp;</td>
+  <td>ZDE_FECHA_RECEPCION</td>
+  <td>DATS</td>
+  <td>DATS</td>
+  <td>8</td>
+  <td>&nbsp;</td>
+  <td>Fecha de recepción</td>
+</tr>
+<tr class="cell">
+  <td>45</td>
+  <td>FECHA_VENCE_FACTU</td>
+  <td>45</td>
+  <td>&nbsp;</td>
+  <td>ZDE_FECHA_VENCE_FACTU</td>
+  <td>DATS</td>
+  <td>DATS</td>
+  <td>8</td>
+  <td>&nbsp;</td>
+  <td>Fecha vencimiento factura</td>
+</tr>
+<tr class="cell">
+  <td>46</td>
+  <td>FECHA_CONTABLE</td>
+  <td>46</td>
+  <td>&nbsp;</td>
+  <td>BUDAT</td>
+  <td>DATUM</td>
+  <td>DATS</td>
+  <td>8</td>
+  <td>&nbsp;</td>
+  <td>Fecha de contabilización en el documento</td>
+</tr>
+<tr class="cell">
+  <td>47</td>
+  <td>MONEDA_FACTURA</td>
+  <td>47</td>
+  <td>&nbsp;</td>
+  <td>WAERS</td>
+  <td>WAERS</td>
+  <td>CUKY</td>
+  <td>5</td>
+  <td>&nbsp;</td>
+  <td>Clave de moneda</td>
+</tr>
+<tr class="cell">
+  <td>48</td>
+  <td>TIPO_CARGA</td>
+  <td>48</td>
+  <td>&nbsp;</td>
+  <td>ZDE_DESC_TIPOCARGA</td>
+  <td>CHAR20</td>
+  <td>CHAR</td>
+  <td>20</td>
+  <td>&nbsp;</td>
+  <td>Descripción tipo de carga</td>
+</tr>
+<tr class="cell">
+  <td>49</td>
+  <td>LOGNM</td>
+  <td>49</td>
+  <td>&nbsp;</td>
+  <td>BALOGNR</td>
+  <td>BALOGNR</td>
+  <td>CHAR</td>
+  <td>20</td>
+  <td>&nbsp;</td>
+  <td>Log de aplicación: Número de log</td>
+</tr>
+<tr class="cell">
+  <td>50</td>
+  <td>XML</td>
+  <td>50</td>
+  <td>&nbsp;</td>
+  <td>&nbsp;</td>
+  <td>&nbsp;</td>
+  <td>STRG</td>
+  <td>0</td>
+  <td>&nbsp;</td>
+  <td>&nbsp;</td>
+</tr>
+<tr class="cell">
+  <td>51</td>
+  <td>PDF</td>
+  <td>51</td>
+  <td>&nbsp;</td>
+  <td>&nbsp;</td>
+  <td>&nbsp;</td>
+  <td>STRG</td>
+  <td>0</td>
+  <td>&nbsp;</td>
+  <td>&nbsp;</td>
+</tr>
+<tr class="cell">
+  <td>52</td>
+  <td>DOCUMENTO_FISICO</td>
+  <td>52</td>
+  <td>&nbsp;</td>
+  <td>ZDE_DOCUMENTO_FISICO</td>
+  <td>KENNZX</td>
+  <td>CHAR</td>
+  <td>1</td>
+  <td>&nbsp;</td>
+  <td>Documento físico</td>
+</tr>
+<tr class="cell">
+  <td>53</td>
+  <td>CELL_TYPE</td>
+  <td>53</td>
+  <td>&nbsp;</td>
+  <td>LVC_T_STYL</td>
+  <td>&nbsp;</td>
+  <td>TTYP</td>
+  <td>0</td>
+  <td>&nbsp;</td>
+  <td>Control LVA: Tabla de estilos para celdas</td>
+</tr>
+<tr class="cell">
+  <td>54</td>
+  <td>CELL_COLOR</td>
+  <td>54</td>
+  <td>&nbsp;</td>
+  <td>LVC_T_SCOL</td>
+  <td>&nbsp;</td>
+  <td>TTYP</td>
+  <td>0</td>
+  <td>&nbsp;</td>
+  <td>Control LVA: Tabla para coloración de celdas</td>
+</tr>
+      </table>
+     </td>
+   </tr>
+<br/>
+  <table class="outerTable">
+    <tr>
+      <td><h2>Fixed Domain Values </h2>
+    </tr>
+    <tr>
+      <td><!--This is where our main table begins  -->
+<table class="innerTable">
+<tr>
+  <th>Domain Name</th>
+  <th>Value Low</th>
+  <th>Value High</th>
+  <th>Text</th>
+</tr>
+<tr class="cell">
+  <td>KENNZX</td>
+  <td>&nbsp;</td>
+  <td>&nbsp;</td>
+  <td>Campo inactivo</td>
+</tr>
+<tr class="cell">
+  <td>KENNZX</td>
+  <td>X</td>
+  <td>&nbsp;</td>
+  <td>Campo activo</td>
+</tr>
+<tr class="cell">
+  <td>ZDO_TIPO_FACTURAS</td>
+  <td>01</td>
+  <td>&nbsp;</td>
+  <td>Factura electrónica</td>
+</tr>
+<tr class="cell">
+  <td>ZDO_TIPO_FACTURAS</td>
+  <td>02</td>
+  <td>&nbsp;</td>
+  <td>Factura computarizada</td>
+</tr>
+<tr class="cell">
+  <td>ZDO_TIPO_FACTURAS</td>
+  <td>03</td>
+  <td>&nbsp;</td>
+  <td>Factura manual</td>
+</tr>
+<tr class="cell">
+  <td>KENNZX</td>
+  <td>&nbsp;</td>
+  <td>&nbsp;</td>
+  <td>Campo inactivo</td>
+</tr>
+<tr class="cell">
+  <td>KENNZX</td>
+  <td>X</td>
+  <td>&nbsp;</td>
+  <td>Campo activo</td>
+</tr>
+      </table>
+     </td>
+   </tr>
+   <tr>
+<td class="footer">Extracted by Mass Download version 1.5.5 - E.G.Mellodew. 1998-2025. Sap Release 701</td>
+   </tr>
+</table>
+</body>
+</html>

@@ -1,0 +1,136 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="application/xhtml+xml; charset=ISO-8859-1" />
+<title>GET_STATUS_LIGHT</title>
+<style type="text/css">
+.code{ font-family:"Courier New", Courier, monospace; color:#000; font-size:14px; background-color:#F2F4F7 }
+  .codeComment {font-family:"Courier New", Courier, monospace; color:#0000F0; font-size:14px; background-color:#F2F4F7 }
+  .normalBold{ font-family:Arial, Helvetica, sans-serif; color:#000; font-size:12px; font-weight:800 }
+  .normalBoldLarge{ font-family:Arial, Helvetica, sans-serif; color:#000; font-size:16px; font-weight:800 }
+</style>
+<style type="text/css">
+  .normal{ font-family:Arial, Helvetica, sans-serif; color:#000; font-size:12px }
+  .footer{ font-family:Arial, Helvetica, sans-serif; color:#000; font-size:12px; text-align: center }
+  h2{ font-family:Arial, Helvetica, sans-serif; color:#000; font-size:16px; font-weight:800 }
+  h3{ font-family:Arial, Helvetica, sans-serif; color:#000; font-size:14px; font-weight:800 }
+  .outerTable{
+   background-color:#E0E7ED;
+   width:100%;
+   border-top-width: thin;
+   border-right-width: thin;
+   border-right-width: thin;
+   border-left-width: thin;
+   border-top-style: solid;
+   border-right-style: solid;
+   border-bottom-style: solid;
+   border-left-style: solid;
+  }
+  .innerTable{
+   background-color:#F2F4F7;
+   width:100%;
+   border-top-width: thin;
+   border-right-width: thin;
+   border-bottom-width: thin;
+   border-left-width: thin;
+   border-top-style: solid;
+   border-right-style: solid;
+   border-bottom-style: solid;
+   border-left-style: solid;
+  }
+</style>
+</head>
+<body>
+<table class="outerTable">
+  <tr class="normalBoldLarge">
+     <td><h2>Code listing for: GET_STATUS_LIGHT</h2>
+<h3> Description: Get Status Light</h3></td>
+   </tr>
+  <tr>
+     <td>
+     <table class="innerTable">
+       <tr>
+          <td>
+   <div class="codeComment">
+**************************************************************************<br />
+*&nbsp;&nbsp;&nbsp;Method&nbsp;attributes.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br />
+**************************************************************************<br />
+   </div>
+   <div class="code">
+Instantiation: Public<br />
+   </div>
+   <div class="codeComment">
+**************************************************************************<br />
+<br />
+   </div>
+   <div class="code">
+METHOD get_status_light.<br />
+<br />
+&nbsp;&nbsp;DATA:&nbsp;lwa_factura_est&nbsp;TYPE&nbsp;zmmt_factura_est.<br />
+<br />
+   </div>
+   <div class="codeComment">
+*&nbsp;&nbsp;CLEAR&nbsp;ep_light&nbsp;.<br />
+*&nbsp;&nbsp;"&nbsp;Validate&nbsp;Status<br />
+*&nbsp;&nbsp;CASE&nbsp;ip_status&nbsp;.<br />
+*&nbsp;&nbsp;&nbsp;&nbsp;WHEN&nbsp;'01'&nbsp;OR&nbsp;"&nbsp;Carga&nbsp;exitosamente<br />
+*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'05'&nbsp;.&nbsp;"&nbsp;MIRO&nbsp;existosamente<br />
+*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ep_light&nbsp;=&nbsp;'@08@'&nbsp;."Green&nbsp;light<br />
+*&nbsp;&nbsp;&nbsp;&nbsp;WHEN&nbsp;'00'&nbsp;OR&nbsp;"&nbsp;Pendientes&nbsp;de&nbsp;carga<br />
+*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'02'&nbsp;OR&nbsp;"&nbsp;Cargada&nbsp;Advertencia<br />
+*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'04'&nbsp;OR&nbsp;"&nbsp;Pendientes&nbsp;a&nbsp;facturar<br />
+*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'06'&nbsp;OR&nbsp;"&nbsp;MIRO&nbsp;Advertencia<br />
+*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'08'&nbsp;OR&nbsp;"Fact.&nbsp;anulada&nbsp;con&nbsp;MR8M<br />
+*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'10'"Fact.&nbsp;anulada&nbsp;exitosamente<br />
+*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.<br />
+*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ep_light&nbsp;=&nbsp;'@09@'&nbsp;."Yellow&nbsp;light<br />
+*&nbsp;&nbsp;&nbsp;&nbsp;WHEN&nbsp;'03'&nbsp;OR&nbsp;"&nbsp;Cargada&nbsp;con&nbsp;error<br />
+*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'07'&nbsp;OR"&nbsp;MIRO&nbsp;con&nbsp;error<br />
+*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'09'&nbsp;OR&nbsp;"Factura&nbsp;rechazada<br />
+*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'11'.&nbsp;"Factura&nbsp;anulada&nbsp;con&nbsp;error<br />
+*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ep_light&nbsp;=&nbsp;'@0A@'&nbsp;."Red&nbsp;light<br />
+*&nbsp;&nbsp;ENDCASE&nbsp;.<br />
+<br />
+*<br />
+*/Obtiene&nbsp;y&nbsp;valida&nbsp;los&nbsp;estados&nbsp;de&nbsp;enrutamiento&nbsp;y&nbsp;factura&nbsp;de&nbsp;la&nbsp;tabla&nbsp;de&nbsp;parámetros<br />
+*<br />
+   </div>
+   <div class="code">
+&nbsp;&nbsp;ep_subrc&nbsp;=&nbsp;0.<br />
+&nbsp;&nbsp;READ&nbsp;TABLE&nbsp;it_factura_est&nbsp;INTO&nbsp;lwa_factura_est&nbsp;WITH&nbsp;KEY&nbsp;etapa_reporte&nbsp;=&nbsp;ip_etapa<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;estado_enrutamiento&nbsp;=&nbsp;ip_estado_enrutamiento.<br />
+&nbsp;&nbsp;IF&nbsp;sy-subrc&nbsp;=&nbsp;0.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;IF&nbsp;ip_next&nbsp;=&nbsp;'X'."Cambio&nbsp;de&nbsp;estado<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ip_estado_enrutamiento&nbsp;=&nbsp;lwa_factura_est-estado_factura."Icono&nbsp;factura&nbsp;next<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ep_estado_icon&nbsp;=&nbsp;lwa_factura_est-estado_factura_icon."Icono&nbsp;estado&nbsp;factura<br />
+&nbsp;&nbsp;&nbsp;&nbsp;ELSE.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ip_estado_enrutamiento&nbsp;=&nbsp;lwa_factura_est-estado_enrutamiento."Icono&nbsp;factura&nbsp;next<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ep_estado_icon&nbsp;=&nbsp;lwa_factura_est-estado_icon."Icono&nbsp;estado&nbsp;enrutamiento<br />
+&nbsp;&nbsp;&nbsp;&nbsp;ENDIF.<br />
+&nbsp;&nbsp;ELSE.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;ep_subrc&nbsp;=&nbsp;sy-subrc.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;READ&nbsp;TABLE&nbsp;it_factura_est&nbsp;INTO&nbsp;lwa_factura_est&nbsp;WITH&nbsp;KEY&nbsp;estado_enrutamiento&nbsp;=&nbsp;ip_estado_enrutamiento.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;IF&nbsp;sy-subrc&nbsp;=&nbsp;0.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IF&nbsp;ip_next&nbsp;=&nbsp;'X'."Cambio&nbsp;de&nbsp;estado<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ip_estado_enrutamiento&nbsp;=&nbsp;lwa_factura_est-estado_factura."Icono&nbsp;factura&nbsp;next<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ep_estado_icon&nbsp;=&nbsp;lwa_factura_est-estado_factura_icon."Icono&nbsp;estado&nbsp;factura<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ELSE.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ip_estado_enrutamiento&nbsp;=&nbsp;lwa_factura_est-estado_enrutamiento."Icono&nbsp;factura&nbsp;next<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ep_estado_icon&nbsp;=&nbsp;lwa_factura_est-estado_icon."Icono&nbsp;estado&nbsp;enrutamiento<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ENDIF.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;ENDIF.<br />
+&nbsp;&nbsp;ENDIF.<br />
+<br />
+ENDMETHOD .                    "GET_STATUS_LIGHT<br />
+            </div>
+          </td>
+        </tr>
+      </table>
+      </td>
+      </tr>
+   <tr>
+<td class="footer">Extracted by Mass Download version 1.5.5 - E.G.Mellodew. 1998-2025. Sap Release 701</td>
+   </tr>
+</table>
+</body>
+</html>

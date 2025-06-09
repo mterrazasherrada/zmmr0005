@@ -1,0 +1,130 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="application/xhtml+xml; charset=ISO-8859-1" />
+<title>SEARCH_SHOW_LOG</title>
+<style type="text/css">
+.code{ font-family:"Courier New", Courier, monospace; color:#000; font-size:14px; background-color:#F2F4F7 }
+  .codeComment {font-family:"Courier New", Courier, monospace; color:#0000F0; font-size:14px; background-color:#F2F4F7 }
+  .normalBold{ font-family:Arial, Helvetica, sans-serif; color:#000; font-size:12px; font-weight:800 }
+  .normalBoldLarge{ font-family:Arial, Helvetica, sans-serif; color:#000; font-size:16px; font-weight:800 }
+</style>
+<style type="text/css">
+  .normal{ font-family:Arial, Helvetica, sans-serif; color:#000; font-size:12px }
+  .footer{ font-family:Arial, Helvetica, sans-serif; color:#000; font-size:12px; text-align: center }
+  h2{ font-family:Arial, Helvetica, sans-serif; color:#000; font-size:16px; font-weight:800 }
+  h3{ font-family:Arial, Helvetica, sans-serif; color:#000; font-size:14px; font-weight:800 }
+  .outerTable{
+   background-color:#E0E7ED;
+   width:100%;
+   border-top-width: thin;
+   border-right-width: thin;
+   border-right-width: thin;
+   border-left-width: thin;
+   border-top-style: solid;
+   border-right-style: solid;
+   border-bottom-style: solid;
+   border-left-style: solid;
+  }
+  .innerTable{
+   background-color:#F2F4F7;
+   width:100%;
+   border-top-width: thin;
+   border-right-width: thin;
+   border-bottom-width: thin;
+   border-left-width: thin;
+   border-top-style: solid;
+   border-right-style: solid;
+   border-bottom-style: solid;
+   border-left-style: solid;
+  }
+</style>
+</head>
+<body>
+<table class="outerTable">
+  <tr class="normalBoldLarge">
+     <td><h2>Code listing for: SEARCH_SHOW_LOG</h2>
+<h3> Description: Get Method Name</h3></td>
+   </tr>
+  <tr>
+     <td>
+     <table class="innerTable">
+       <tr>
+          <td>
+   <div class="codeComment">
+**************************************************************************<br />
+*&nbsp;&nbsp;&nbsp;Method&nbsp;attributes.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br />
+**************************************************************************<br />
+   </div>
+   <div class="code">
+Instantiation: Public<br />
+   </div>
+   <div class="codeComment">
+**************************************************************************<br />
+<br />
+   </div>
+   <div class="code">
+METHOD search_show_log.<br />
+<br />
+   </div>
+   <div class="codeComment">
+*---&nbsp;Structures&nbsp;---------------------------------------------------------------*<br />
+   </div>
+   <div class="code">
+&nbsp;&nbsp;DATA:&nbsp;lwa_log_filter&nbsp;TYPE&nbsp;bal_s_lfil,<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lwa_obj&nbsp;TYPE&nbsp;bal_s_obj,<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lwa_extn&nbsp;TYPE&nbsp;bal_s_obj,<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lwa_lognm&nbsp;TYPE&nbsp;bal_s_logn,<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;t_log_header&nbsp;TYPE&nbsp;balhdr_t.<br />
+   </div>
+   <div class="codeComment">
+*------------------------------------------------------------------------------*<br />
+   </div>
+   <div class="code">
+&nbsp;&nbsp;FIELD-SYMBOLS:&nbsp;&lt;fs_ebeln&gt;&nbsp;TYPE&nbsp;ebeln.<br />
+&nbsp;&nbsp;FIELD-SYMBOLS:&nbsp;&lt;fs_balognr&gt;&nbsp;TYPE&nbsp;balognr.<br />
+<br />
+&nbsp;&nbsp;lwa_obj-sign&nbsp;=&nbsp;'I'.<br />
+&nbsp;&nbsp;lwa_obj-option&nbsp;=&nbsp;'EQ'.<br />
+&nbsp;&nbsp;lwa_obj-low&nbsp;=&nbsp;'ZMMFI_FAC'.<br />
+&nbsp;&nbsp;APPEND&nbsp;lwa_obj&nbsp;TO&nbsp;lwa_log_filter-object.<br />
+<br />
+&nbsp;&nbsp;LOOP&nbsp;AT&nbsp;it_ebeln&nbsp;ASSIGNING&nbsp;&lt;fs_ebeln&gt;.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;lwa_extn-sign&nbsp;=&nbsp;'I'.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;lwa_extn-option&nbsp;=&nbsp;'EQ'.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;lwa_extn-low&nbsp;=&nbsp;&lt;fs_ebeln&gt;.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;APPEND&nbsp;lwa_extn&nbsp;TO&nbsp;lwa_log_filter-extnumber.<br />
+&nbsp;&nbsp;ENDLOOP.<br />
+<br />
+&nbsp;&nbsp;IF&nbsp;it_log_number&nbsp;IS&nbsp;NOT&nbsp;INITIAL.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LOOP&nbsp;AT&nbsp;it_log_number&nbsp;ASSIGNING&nbsp;&lt;fs_balognr&gt;.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lwa_lognm-sign&nbsp;=&nbsp;'I'.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lwa_lognm-option&nbsp;=&nbsp;'EQ'.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lwa_lognm-low&nbsp;=&nbsp;&lt;fs_balognr&gt;.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;APPEND&nbsp;lwa_lognm&nbsp;TO&nbsp;lwa_log_filter-lognumber.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;ENDLOOP.<br />
+&nbsp;&nbsp;ENDIF.<br />
+<br />
+&nbsp;&nbsp;zmmcl_log_utilities=&gt;search_log(<br />
+&nbsp;&nbsp;&nbsp;&nbsp;EXPORTING<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;i_s_log_filter&nbsp;=&nbsp;lwa_log_filter<br />
+&nbsp;&nbsp;&nbsp;&nbsp;IMPORTING<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;e_t_log_header&nbsp;=&nbsp;t_log_header&nbsp;).<br />
+<br />
+&nbsp;&nbsp;zmmcl_log_utilities=&gt;load_messages(&nbsp;i_t_log_header&nbsp;=&nbsp;t_log_header&nbsp;).<br />
+<br />
+&nbsp;&nbsp;zmmcl_log_utilities=&gt;show_log_filters(&nbsp;lwa_log_filter&nbsp;).<br />
+<br />
+ENDMETHOD.                    "SEARCH_SHOW_LOG<br />
+            </div>
+          </td>
+        </tr>
+      </table>
+      </td>
+      </tr>
+   <tr>
+<td class="footer">Extracted by Mass Download version 1.5.5 - E.G.Mellodew. 1998-2025. Sap Release 701</td>
+   </tr>
+</table>
+</body>
+</html>

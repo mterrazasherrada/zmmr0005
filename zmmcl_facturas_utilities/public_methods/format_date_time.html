@@ -1,0 +1,161 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="application/xhtml+xml; charset=ISO-8859-1" />
+<title>FORMAT_DATE_TIME</title>
+<style type="text/css">
+.code{ font-family:"Courier New", Courier, monospace; color:#000; font-size:14px; background-color:#F2F4F7 }
+  .codeComment {font-family:"Courier New", Courier, monospace; color:#0000F0; font-size:14px; background-color:#F2F4F7 }
+  .normalBold{ font-family:Arial, Helvetica, sans-serif; color:#000; font-size:12px; font-weight:800 }
+  .normalBoldLarge{ font-family:Arial, Helvetica, sans-serif; color:#000; font-size:16px; font-weight:800 }
+</style>
+<style type="text/css">
+  .normal{ font-family:Arial, Helvetica, sans-serif; color:#000; font-size:12px }
+  .footer{ font-family:Arial, Helvetica, sans-serif; color:#000; font-size:12px; text-align: center }
+  h2{ font-family:Arial, Helvetica, sans-serif; color:#000; font-size:16px; font-weight:800 }
+  h3{ font-family:Arial, Helvetica, sans-serif; color:#000; font-size:14px; font-weight:800 }
+  .outerTable{
+   background-color:#E0E7ED;
+   width:100%;
+   border-top-width: thin;
+   border-right-width: thin;
+   border-right-width: thin;
+   border-left-width: thin;
+   border-top-style: solid;
+   border-right-style: solid;
+   border-bottom-style: solid;
+   border-left-style: solid;
+  }
+  .innerTable{
+   background-color:#F2F4F7;
+   width:100%;
+   border-top-width: thin;
+   border-right-width: thin;
+   border-bottom-width: thin;
+   border-left-width: thin;
+   border-top-style: solid;
+   border-right-style: solid;
+   border-bottom-style: solid;
+   border-left-style: solid;
+  }
+</style>
+</head>
+<body>
+<table class="outerTable">
+  <tr class="normalBoldLarge">
+     <td><h2>Code listing for: FORMAT_DATE_TIME</h2>
+<h3> Description: Format Date Time</h3></td>
+   </tr>
+  <tr>
+     <td>
+     <table class="innerTable">
+       <tr>
+          <td>
+   <div class="codeComment">
+**************************************************************************<br />
+*&nbsp;&nbsp;&nbsp;Method&nbsp;attributes.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br />
+**************************************************************************<br />
+   </div>
+   <div class="code">
+Instantiation: Public<br />
+   </div>
+   <div class="codeComment">
+**************************************************************************<br />
+<br />
+   </div>
+   <div class="code">
+METHOD format_date_time.<br />
+&nbsp;&nbsp;CLEAR&nbsp;ep_datetime&nbsp;.<br />
+<br />
+&nbsp;&nbsp;CONSTANTS:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;c_utc&nbsp;&nbsp;&nbsp;TYPE&nbsp;tzonref-tzone&nbsp;VALUE&nbsp;'UTC-5',<br />
+&nbsp;&nbsp;&nbsp;&nbsp;c_utc_4&nbsp;TYPE&nbsp;tzonref-tzone&nbsp;VALUE&nbsp;'UTC-4'.<br />
+&nbsp;&nbsp;CONSTANTS:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;c_utc_aux&nbsp;TYPE&nbsp;tzonref-tzone&nbsp;VALUE&nbsp;'UTC'.<br />
+<br />
+&nbsp;&nbsp;DATA:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;c_utc_3&nbsp;TYPE&nbsp;tzonref-tzone&nbsp;VALUE&nbsp;'UTC-3'.<br />
+&nbsp;&nbsp;DATA&nbsp;v_tstp&nbsp;TYPE&nbsp;timestamp.<br />
+&nbsp;&nbsp;DATA&nbsp;v_date&nbsp;TYPE&nbsp;sy-datum.<br />
+&nbsp;&nbsp;DATA&nbsp;v_time&nbsp;TYPE&nbsp;sy-timlo.<br />
+<br />
+&nbsp;&nbsp;IF&nbsp;ip_reenv&nbsp;EQ&nbsp;'X'&nbsp;OR&nbsp;sy-tcode&nbsp;=&nbsp;'IDCP'.<br />
+   </div>
+   <div class="codeComment">
+*&nbsp;Reenvio:Fecha&nbsp;y&nbsp;hora&nbsp;de&nbsp;creación&nbsp;del&nbsp;pedido&nbsp;en&nbsp;horario&nbsp;local<br />
+   </div>
+   <div class="code">
+&nbsp;&nbsp;&nbsp;&nbsp;v_date&nbsp;=&nbsp;sy-datum.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;v_time&nbsp;=&nbsp;sy-timlo.<br />
+<br />
+   </div>
+   <div class="codeComment">
+*&nbsp;obtenemos&nbsp;la&nbsp;fecha&nbsp;y&nbsp;hora&nbsp;de&nbsp;creación&nbsp;del&nbsp;pedido&nbsp;en&nbsp;horario&nbsp;local<br />
+   </div>
+   <div class="code">
+&nbsp;&nbsp;&nbsp;&nbsp;CONVERT&nbsp;DATE&nbsp;v_date&nbsp;TIME&nbsp;v_time&nbsp;INTO&nbsp;TIME&nbsp;STAMP&nbsp;v_tstp&nbsp;TIME&nbsp;ZONE&nbsp;c_utc_aux.<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;CONVERT&nbsp;TIME&nbsp;STAMP&nbsp;v_tstp&nbsp;TIME&nbsp;ZONE&nbsp;c_utc_aux&nbsp;INTO&nbsp;DATE&nbsp;v_date&nbsp;&nbsp;TIME&nbsp;v_time.<br />
+<br />
+&nbsp;&nbsp;ELSE.<br />
+<br />
+   </div>
+   <div class="codeComment">
+*&nbsp;Reenvio:Fecha&nbsp;y&nbsp;hora&nbsp;de&nbsp;creación&nbsp;del&nbsp;pedido&nbsp;en&nbsp;horario&nbsp;local<br />
+   </div>
+   <div class="code">
+&nbsp;&nbsp;&nbsp;&nbsp;v_date&nbsp;=&nbsp;ip_date.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;v_time&nbsp;=&nbsp;ip_time.<br />
+<br />
+   </div>
+   <div class="codeComment">
+*&nbsp;obtenemos&nbsp;la&nbsp;fecha&nbsp;y&nbsp;hora&nbsp;de&nbsp;creación&nbsp;del&nbsp;pedido&nbsp;en&nbsp;horario&nbsp;local<br />
+   </div>
+   <div class="code">
+&nbsp;&nbsp;&nbsp;&nbsp;CONVERT&nbsp;DATE&nbsp;v_date&nbsp;TIME&nbsp;v_time&nbsp;INTO&nbsp;TIME&nbsp;STAMP&nbsp;v_tstp&nbsp;TIME&nbsp;ZONE&nbsp;c_utc_aux.<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;CONVERT&nbsp;TIME&nbsp;STAMP&nbsp;v_tstp&nbsp;TIME&nbsp;ZONE&nbsp;c_utc_aux&nbsp;INTO&nbsp;DATE&nbsp;v_date&nbsp;&nbsp;TIME&nbsp;v_time.<br />
+<br />
+<br />
+   </div>
+   <div class="codeComment">
+**&nbsp;obtenemos&nbsp;la&nbsp;fecha&nbsp;y&nbsp;hora&nbsp;de&nbsp;creación&nbsp;del&nbsp;pedido&nbsp;en&nbsp;horario&nbsp;local<br />
+*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CONVERT&nbsp;DATE&nbsp;ip_date&nbsp;TIME&nbsp;ip_time&nbsp;INTO&nbsp;TIME&nbsp;STAMP&nbsp;v_tstp&nbsp;TIME&nbsp;ZONE&nbsp;c_utc.<br />
+*<br />
+*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CONVERT&nbsp;TIME&nbsp;STAMP&nbsp;v_tstp&nbsp;TIME&nbsp;ZONE&nbsp;c_utc_4&nbsp;INTO&nbsp;DATE&nbsp;v_date&nbsp;&nbsp;TIME&nbsp;v_time.<br />
+   </div>
+   <div class="code">
+&nbsp;&nbsp;ENDIF.<br />
+<br />
+<br />
+   </div>
+   <div class="codeComment">
+*---&nbsp;Format&nbsp;to&nbsp;Date&nbsp;issueDateTime&nbsp;------------------------------------<br />
+   </div>
+   <div class="code">
+&nbsp;&nbsp;CONCATENATE&nbsp;v_date(4)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'-'<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;v_date+4(2)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'-'<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;v_date+6(2)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'T'<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;v_time(2)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;':'<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;v_time+2(2)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;':'<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;v_time+4(2)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;INTO&nbsp;ep_datetime&nbsp;.<br />
+&nbsp;&nbsp;CONDENSE&nbsp;ep_datetime&nbsp;.<br />
+ENDMETHOD .                    "format_date_time<br />
+            </div>
+          </td>
+        </tr>
+      </table>
+      </td>
+      </tr>
+   <tr>
+<td class="footer">Extracted by Mass Download version 1.5.5 - E.G.Mellodew. 1998-2025. Sap Release 701</td>
+   </tr>
+</table>
+</body>
+</html>
