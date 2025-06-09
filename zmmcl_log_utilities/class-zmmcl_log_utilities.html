@@ -1,0 +1,188 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="application/xhtml+xml; charset=ISO-8859-1" />
+<title>ZMMCL_LOG_UTILITIES</title>
+<style type="text/css">
+.code{ font-family:"Courier New", Courier, monospace; color:#000; font-size:14px; background-color:#F2F4F7 }
+  .codeComment {font-family:"Courier New", Courier, monospace; color:#0000F0; font-size:14px; background-color:#F2F4F7 }
+  .normalBold{ font-family:Arial, Helvetica, sans-serif; color:#000; font-size:12px; font-weight:800 }
+  .normalBoldLarge{ font-family:Arial, Helvetica, sans-serif; color:#000; font-size:16px; font-weight:800 }
+</style>
+<style type="text/css">
+  .normal{ font-family:Arial, Helvetica, sans-serif; color:#000; font-size:12px }
+  .footer{ font-family:Arial, Helvetica, sans-serif; color:#000; font-size:12px; text-align: center }
+  h2{ font-family:Arial, Helvetica, sans-serif; color:#000; font-size:16px; font-weight:800 }
+  h3{ font-family:Arial, Helvetica, sans-serif; color:#000; font-size:14px; font-weight:800 }
+  .outerTable{
+   background-color:#E0E7ED;
+   width:100%;
+   border-top-width: thin;
+   border-right-width: thin;
+   border-right-width: thin;
+   border-left-width: thin;
+   border-top-style: solid;
+   border-right-style: solid;
+   border-bottom-style: solid;
+   border-left-style: solid;
+  }
+  .innerTable{
+   background-color:#F2F4F7;
+   width:100%;
+   border-top-width: thin;
+   border-right-width: thin;
+   border-bottom-width: thin;
+   border-left-width: thin;
+   border-top-style: solid;
+   border-right-style: solid;
+   border-bottom-style: solid;
+   border-left-style: solid;
+  }
+</style>
+</head>
+<body>
+<table class="outerTable">
+  <tr class="normalBoldLarge">
+     <td><h2>Code listing for class: ZMMCL_LOG_UTILITIES</h2>
+<h3> Description: Log utility</h3></td>
+   </tr>
+  <tr>
+     <td>
+     <table class="innerTable">
+       <tr>
+          <td>
+   <div class="codeComment">
+**************************************************************************<br />
+*   Class attributes.                                                    *<br />
+**************************************************************************<br />
+   </div>
+   <div class="code">
+Instantiation: Public<br />
+Message class: <br />
+State: Implemented<br />
+Final Indicator: X<br />
+R/3 Release: 701<br />
+<br />
+   </div>
+   <div class="codeComment">
+**************************************************************************<br />
+*   Public section of class.                                             *<br />
+**************************************************************************<br />
+   </div>
+   <div class="code">
+class ZMMCL_LOG_UTILITIES definition<br />
+&nbsp;&nbsp;public<br />
+&nbsp;&nbsp;final<br />
+&nbsp;&nbsp;create&nbsp;public&nbsp;.<br />
+<br />
+   </div>
+   <div class="codeComment">
+*"* public components of class ZMMCL_LOG_UTILITIES<br />
+*"* do not include other source files here!!<br />
+   </div>
+   <div class="code">
+public section.<br />
+<br />
+&nbsp;&nbsp;methods&nbsp;<a&nbsp;href="public_methods/constructor.html">CONSTRUCTOR</a><br />
+&nbsp;&nbsp;&nbsp;&nbsp;importing<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IP_OBJECT&nbsp;type&nbsp;BALOBJ_D&nbsp;optional<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IP_SUBOBJECT&nbsp;type&nbsp;BALSUBOBJ&nbsp;optional<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IP_PROG&nbsp;type&nbsp;SYCPROG<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IP_ID&nbsp;type&nbsp;BALNREXT&nbsp;optional&nbsp;.<br />
+&nbsp;&nbsp;methods&nbsp;<a&nbsp;href="public_methods/add_single_message.html">ADD_SINGLE_MESSAGE</a><br />
+&nbsp;&nbsp;&nbsp;&nbsp;importing<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;value(IP_TYPE)&nbsp;type&nbsp;ANY<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;value(IP_ID)&nbsp;type&nbsp;ANY<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;value(IP_NUM)&nbsp;type&nbsp;ANY<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;value(IP_VAR_1)&nbsp;type&nbsp;ANY&nbsp;optional<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;value(IP_VAR_2)&nbsp;type&nbsp;ANY&nbsp;optional<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;value(IP_VAR_3)&nbsp;type&nbsp;ANY&nbsp;optional<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;value(IP_VAR_4)&nbsp;type&nbsp;ANY&nbsp;optional&nbsp;.<br />
+&nbsp;&nbsp;methods&nbsp;<a&nbsp;href="public_methods/add_from_syst&nbsp;..html">ADD_FROM_SYST&nbsp;.</a><br />
+&nbsp;&nbsp;methods&nbsp;<a&nbsp;href="public_methods/add_s_message_bapiret.html">ADD_S_MESSAGE_BAPIRET</a><br />
+&nbsp;&nbsp;&nbsp;&nbsp;importing<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IW_SINGLE_MESSAGE&nbsp;type&nbsp;BAPIRET2<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IP_COMPLEX_DATA&nbsp;type&nbsp;XFELD&nbsp;optional<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IW_CALLBACK&nbsp;type&nbsp;BAL_S_CLBK&nbsp;optional<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IP_PARNAME&nbsp;type&nbsp;BALPAR&nbsp;optional<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IP_PARVALUE&nbsp;type&nbsp;BALPVAL&nbsp;optional&nbsp;.<br />
+&nbsp;&nbsp;methods&nbsp;<a&nbsp;href="public_methods/add_t_message_bapiret.html">ADD_T_MESSAGE_BAPIRET</a><br />
+&nbsp;&nbsp;&nbsp;&nbsp;importing<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IT_MESSAGE&nbsp;type&nbsp;BAPIRET2_T&nbsp;.<br />
+&nbsp;&nbsp;methods&nbsp;<a&nbsp;href="public_methods/show_log.html">SHOW_LOG</a><br />
+&nbsp;&nbsp;&nbsp;&nbsp;importing<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IP_START_COL&nbsp;type&nbsp;BALCOORD&nbsp;optional<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IP_START_ROW&nbsp;type&nbsp;BALCOORD&nbsp;optional<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IP_END_COL&nbsp;type&nbsp;BALCOORD&nbsp;optional<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IP_END_ROW&nbsp;type&nbsp;BALCOORD&nbsp;optional&nbsp;.<br />
+&nbsp;&nbsp;methods&nbsp;<a&nbsp;href="public_methods/refresh_log&nbsp;..html">REFRESH_LOG&nbsp;.</a><br />
+&nbsp;&nbsp;methods&nbsp;<a&nbsp;href="public_methods/save_db.html">SAVE_DB</a><br />
+&nbsp;&nbsp;&nbsp;&nbsp;importing<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IP_IN_UPDATE_TASK&nbsp;type&nbsp;XFELD&nbsp;optional<br />
+&nbsp;&nbsp;&nbsp;&nbsp;exporting<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ET_NEW_LOG_NUMBERS&nbsp;type&nbsp;BAL_T_LGNM&nbsp;.<br />
+&nbsp;&nbsp;methods&nbsp;<a&nbsp;href="public_methods/show_multiple_log.html">SHOW_MULTIPLE_LOG</a><br />
+&nbsp;&nbsp;&nbsp;&nbsp;importing<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IP_DATE_FROM&nbsp;type&nbsp;DATUM&nbsp;optional<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IP_DATE_TO&nbsp;type&nbsp;DATUM&nbsp;optional<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IP_SHOW_SC&nbsp;type&nbsp;XFELD&nbsp;optional<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IW_DISPLAY_PROFILE&nbsp;type&nbsp;BAL_S_PROF&nbsp;.<br />
+&nbsp;&nbsp;methods&nbsp;<a&nbsp;href="public_methods/search_log.html">SEARCH_LOG</a><br />
+&nbsp;&nbsp;&nbsp;&nbsp;importing<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;I_S_LOG_FILTER&nbsp;type&nbsp;BAL_S_LFIL<br />
+&nbsp;&nbsp;&nbsp;&nbsp;exporting<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;E_T_LOG_HEADER&nbsp;type&nbsp;BALHDR_T&nbsp;.<br />
+&nbsp;&nbsp;methods&nbsp;<a&nbsp;href="public_methods/load_messages.html">LOAD_MESSAGES</a><br />
+&nbsp;&nbsp;&nbsp;&nbsp;importing<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;I_T_LOG_HEADER&nbsp;type&nbsp;BALHDR_T&nbsp;.<br />
+&nbsp;&nbsp;methods&nbsp;<a&nbsp;href="public_methods/show_log_filters.html">SHOW_LOG_FILTERS</a><br />
+&nbsp;&nbsp;&nbsp;&nbsp;importing<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IW_LOG_FILTER&nbsp;type&nbsp;BAL_S_LFIL&nbsp;.<br />
+<br />
+   </div>
+   <div class="codeComment">
+**************************************************************************<br />
+*   Private section of class.                                            *<br />
+**************************************************************************<br />
+*"* private components of class ZMMCL_LOG_UTILITIES<br />
+*"* do not include other source files here!!<br />
+   </div>
+   <div class="code">
+private section.<br />
+<br />
+&nbsp;&nbsp;data&nbsp;GS_SOBJECT&nbsp;type&nbsp;BALSUBOBJ&nbsp;.<br />
+&nbsp;&nbsp;data&nbsp;GS_OBJECT&nbsp;type&nbsp;BALOBJ_D&nbsp;.<br />
+&nbsp;&nbsp;data&nbsp;GS_REPID&nbsp;type&nbsp;SYCPROG&nbsp;.<br />
+&nbsp;&nbsp;data&nbsp;GWA_MSG_DEFAULT&nbsp;type&nbsp;BAL_S_MDEF&nbsp;.<br />
+<br />
+   </div>
+   <div class="codeComment">
+**************************************************************************<br />
+*   Protected section of class.                                          *<br />
+**************************************************************************<br />
+*"* protected components of class ZMMCL_LOG_UTILITIES<br />
+*"* do not include other source files here!!<br />
+   </div>
+   <div class="code">
+protected section.<br />
+<br />
+   </div>
+   <div class="codeComment">
+**************************************************************************<br />
+*   Types section of class.                                              *<br />
+**************************************************************************<br />
+*"* dummy include to reduce generation dependencies between<br />
+*"* class ZMMCL_LOG_UTILITIES and it's users.<br />
+*"* touched if any type reference has been changed<br />
+            </div>
+          </td>
+        </tr>
+      </table>
+      </td>
+      </tr>
+   <tr>
+<td class="footer">Extracted by Mass Download version 1.5.5 - E.G.Mellodew. 1998-2025. Sap Release 701</td>
+   </tr>
+</table>
+</body>
+</html>
