@@ -1,0 +1,194 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="application/xhtml+xml; charset=ISO-8859-1" />
+<title>SET_MESSAGE</title>
+<style type="text/css">
+.code{ font-family:"Courier New", Courier, monospace; color:#000; font-size:14px; background-color:#F2F4F7 }
+  .codeComment {font-family:"Courier New", Courier, monospace; color:#0000F0; font-size:14px; background-color:#F2F4F7 }
+  .normalBold{ font-family:Arial, Helvetica, sans-serif; color:#000; font-size:12px; font-weight:800 }
+  .normalBoldLarge{ font-family:Arial, Helvetica, sans-serif; color:#000; font-size:16px; font-weight:800 }
+</style>
+<style type="text/css">
+  .normal{ font-family:Arial, Helvetica, sans-serif; color:#000; font-size:12px }
+  .footer{ font-family:Arial, Helvetica, sans-serif; color:#000; font-size:12px; text-align: center }
+  h2{ font-family:Arial, Helvetica, sans-serif; color:#000; font-size:16px; font-weight:800 }
+  h3{ font-family:Arial, Helvetica, sans-serif; color:#000; font-size:14px; font-weight:800 }
+  .outerTable{
+   background-color:#E0E7ED;
+   width:100%;
+   border-top-width: thin;
+   border-right-width: thin;
+   border-right-width: thin;
+   border-left-width: thin;
+   border-top-style: solid;
+   border-right-style: solid;
+   border-bottom-style: solid;
+   border-left-style: solid;
+  }
+  .innerTable{
+   background-color:#F2F4F7;
+   width:100%;
+   border-top-width: thin;
+   border-right-width: thin;
+   border-bottom-width: thin;
+   border-left-width: thin;
+   border-top-style: solid;
+   border-right-style: solid;
+   border-bottom-style: solid;
+   border-left-style: solid;
+  }
+</style>
+</head>
+<body>
+<table class="outerTable">
+  <tr class="normalBoldLarge">
+     <td><h2>Code listing for: SET_MESSAGE</h2>
+<h3> Description: +Set Message</h3></td>
+   </tr>
+  <tr>
+     <td>
+     <table class="innerTable">
+       <tr>
+          <td>
+   <div class="codeComment">
+**************************************************************************<br />
+*&nbsp;&nbsp;&nbsp;Method&nbsp;attributes.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br />
+**************************************************************************<br />
+   </div>
+   <div class="code">
+Instantiation: Protected<br />
+   </div>
+   <div class="codeComment">
+**************************************************************************<br />
+<br />
+   </div>
+   <div class="code">
+METHOD set_message.<br />
+   </div>
+   <div class="codeComment">
+*---&nbsp;Constants&nbsp;----------------------------------------------------------------*<br />
+   </div>
+   <div class="code">
+&nbsp;&nbsp;CONSTANTS&nbsp;lc_const_callback_form&nbsp;TYPE&nbsp;baluet&nbsp;VALUE&nbsp;'&nbsp;'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.<br />
+   </div>
+   <div class="codeComment">
+*---&nbsp;Structures&nbsp;---------------------------------------------------------------*<br />
+   </div>
+   <div class="code">
+&nbsp;&nbsp;DATA&nbsp;lwa_callback&nbsp;TYPE&nbsp;bal_s_clbk&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.<br />
+&nbsp;&nbsp;DATA&nbsp;lwa_return&nbsp;&nbsp;&nbsp;TYPE&nbsp;bapiret2&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.<br />
+&nbsp;&nbsp;DATA&nbsp;lv_message&nbsp;&nbsp;&nbsp;TYPE&nbsp;&nbsp;string.<br />
+&nbsp;&nbsp;DATA:&nbsp;ldt_sinms&nbsp;TYPE&nbsp;STANDARD&nbsp;TABLE&nbsp;OF&nbsp;zmms_log_messages&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.<br />
+   </div>
+   <div class="codeComment">
+*------------------------------------------------------------------------------*<br />
+<br />
+*---&nbsp;Build&nbsp;Message&nbsp;---------------------------------------------------<br />
+   </div>
+   <div class="code">
+&nbsp;&nbsp;zmmcl_facturas_utilities=&gt;build_message(<br />
+&nbsp;&nbsp;&nbsp;&nbsp;EXPORTING<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ip_type&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;ip_type<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ip_id&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;ip_id<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ip_number&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;ip_number<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ip_message_v1&nbsp;=&nbsp;ip_message_v1<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ip_message_v2&nbsp;=&nbsp;ip_message_v2<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ip_message_v3&nbsp;=&nbsp;ip_message_v3<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ip_message_v4&nbsp;=&nbsp;ip_message_v4<br />
+&nbsp;&nbsp;&nbsp;&nbsp;IMPORTING<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ew_return&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;lwa_return&nbsp;)&nbsp;.<br />
+<br />
+   </div>
+   <div class="codeComment">
+*---&nbsp;If&nbsp;'X'&nbsp;Complex&nbsp;Data&nbsp;---------------------------------------------<br />
+   </div>
+   <div class="code">
+&nbsp;&nbsp;IF&nbsp;ip_complex_data&nbsp;EQ&nbsp;abap_true&nbsp;.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;lwa_callback-userexitp&nbsp;=&nbsp;'ZVCRSD0334_MONITOR_ELECTRONIC'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;lwa_callback-userexitf&nbsp;=&nbsp;'ZF_CALLBACK_MSG_DETAIL'&nbsp;&nbsp;.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;lwa_callback-userexitt&nbsp;=&nbsp;lc_const_callback_form&nbsp;.<br />
+   </div>
+   <div class="codeComment">
+*{INS<br />
+   </div>
+   <div class="code">
+&nbsp;&nbsp;&nbsp;&nbsp;CALL&nbsp;METHOD&nbsp;zmmcl_facturas_utilities=&gt;message_text_build<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;EXPORTING<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;iw_message&nbsp;=&nbsp;lwa_return<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IMPORTING<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ep_message&nbsp;=&nbsp;lv_message.<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;IF&nbsp;lv_message&nbsp;IS&nbsp;NOT&nbsp;INITIAL.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DATA&nbsp;lwa_sims&nbsp;TYPE&nbsp;zmms_log_messages.<br />
+<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CONCATENATE&nbsp;sy-datum+6(2)&nbsp;'-'&nbsp;sy-datum+4(2)&nbsp;'-'&nbsp;sy-datum+0(4)&nbsp;"&nbsp;Fecha:&nbsp;YYYY-MM-DD<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'&nbsp;'<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sy-uzeit+0(2)&nbsp;':'&nbsp;sy-uzeit+2(2)&nbsp;':'&nbsp;sy-uzeit+4(2)&nbsp;"&nbsp;Hora:&nbsp;HH:MM:SS<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;INTO&nbsp;&nbsp;lwa_sims-date&nbsp;RESPECTING&nbsp;BLANKS.<br />
+<br />
+   </div>
+   <div class="codeComment">
+*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lwa_sims-type&nbsp;=&nbsp;lwa_return-type."INSERT&nbsp;@00XX<br />
+   </div>
+   <div class="code">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CASE&nbsp;lwa_return-type.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;WHEN&nbsp;'S'.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lwa_sims-type&nbsp;=&nbsp;'@08@'."INSERT&nbsp;@00XX<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;WHEN&nbsp;'I'.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lwa_sims-type&nbsp;=&nbsp;'@09@'."INSERT&nbsp;@00XX<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;WHEN&nbsp;'E'.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lwa_sims-type&nbsp;=&nbsp;'@0A@'."INSERT&nbsp;@00XX<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;WHEN&nbsp;OTHERS.<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ENDCASE.&nbsp;&nbsp;.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lwa_sims-field&nbsp;=&nbsp;lwa_return-message_v1.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lwa_sims-descr&nbsp;=&nbsp;lv_message.<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;APPEND&nbsp;lwa_sims&nbsp;TO&nbsp;ldt_sinms.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;ENDIF.<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;CLEAR&nbsp;me-&gt;gwa_complex_log_data.<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;IF&nbsp;ldt_sinms&nbsp;IS&nbsp;NOT&nbsp;INITIAL.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;me-&gt;gwa_complex_log_data-identifier&nbsp;=&nbsp;'SINMS'.<br />
+   </div>
+   <div class="codeComment">
+*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;me-&gt;gwa_complex_log_data-type&nbsp;=&nbsp;ip_type."INSERT&nbsp;@00XX<br />
+   </div>
+   <div class="code">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;me-&gt;gwa_complex_log_data-sinms&nbsp;=&nbsp;ldt_sinms.<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;APPEND&nbsp;me-&gt;gwa_complex_log_data&nbsp;TO&nbsp;gdt_complex_log_data.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;ENDIF.<br />
+<br />
+   </div>
+   <div class="codeComment">
+*}INS<br />
+   </div>
+   <div class="code">
+&nbsp;&nbsp;ENDIF&nbsp;.<br />
+<br />
+&nbsp;&nbsp;me-&gt;go_log-&gt;add_s_message_bapiret(<br />
+&nbsp;&nbsp;&nbsp;&nbsp;EXPORTING<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;iw_single_message&nbsp;=&nbsp;lwa_return<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ip_complex_data&nbsp;&nbsp;&nbsp;=&nbsp;ip_complex_data<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;iw_callback&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;lwa_callback<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ip_parname&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;'MSG_IDENT'<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ip_parvalue&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;ip_parvalue&nbsp;)&nbsp;.<br />
+<br />
+&nbsp;&nbsp;APPEND&nbsp;lwa_return&nbsp;TO&nbsp;me-&gt;gt_return&nbsp;.<br />
+ENDMETHOD .                    "SET_MESSAGE<br />
+            </div>
+          </td>
+        </tr>
+      </table>
+      </td>
+      </tr>
+   <tr>
+<td class="footer">Extracted by Mass Download version 1.5.5 - E.G.Mellodew. 1998-2025. Sap Release 701</td>
+   </tr>
+</table>
+</body>
+</html>

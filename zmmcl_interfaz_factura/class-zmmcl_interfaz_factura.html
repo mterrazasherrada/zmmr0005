@@ -1,0 +1,595 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="application/xhtml+xml; charset=ISO-8859-1" />
+<title>ZMMCL_INTERFAZ_FACTURA</title>
+<style type="text/css">
+.code{ font-family:"Courier New", Courier, monospace; color:#000; font-size:14px; background-color:#F2F4F7 }
+  .codeComment {font-family:"Courier New", Courier, monospace; color:#0000F0; font-size:14px; background-color:#F2F4F7 }
+  .normalBold{ font-family:Arial, Helvetica, sans-serif; color:#000; font-size:12px; font-weight:800 }
+  .normalBoldLarge{ font-family:Arial, Helvetica, sans-serif; color:#000; font-size:16px; font-weight:800 }
+</style>
+<style type="text/css">
+  .normal{ font-family:Arial, Helvetica, sans-serif; color:#000; font-size:12px }
+  .footer{ font-family:Arial, Helvetica, sans-serif; color:#000; font-size:12px; text-align: center }
+  h2{ font-family:Arial, Helvetica, sans-serif; color:#000; font-size:16px; font-weight:800 }
+  h3{ font-family:Arial, Helvetica, sans-serif; color:#000; font-size:14px; font-weight:800 }
+  .outerTable{
+   background-color:#E0E7ED;
+   width:100%;
+   border-top-width: thin;
+   border-right-width: thin;
+   border-right-width: thin;
+   border-left-width: thin;
+   border-top-style: solid;
+   border-right-style: solid;
+   border-bottom-style: solid;
+   border-left-style: solid;
+  }
+  .innerTable{
+   background-color:#F2F4F7;
+   width:100%;
+   border-top-width: thin;
+   border-right-width: thin;
+   border-bottom-width: thin;
+   border-left-width: thin;
+   border-top-style: solid;
+   border-right-style: solid;
+   border-bottom-style: solid;
+   border-left-style: solid;
+  }
+</style>
+</head>
+<body>
+<table class="outerTable">
+  <tr class="normalBoldLarge">
+     <td><h2>Code listing for class: ZMMCL_INTERFAZ_FACTURA</h2>
+<h3> Description: Interfaz de factura</h3></td>
+   </tr>
+  <tr>
+     <td>
+     <table class="innerTable">
+       <tr>
+          <td>
+   <div class="codeComment">
+**************************************************************************<br />
+*   Class attributes.                                                    *<br />
+**************************************************************************<br />
+   </div>
+   <div class="code">
+Instantiation: Public<br />
+Message class: <br />
+State: Implemented<br />
+Final Indicator: <br />
+R/3 Release: 701<br />
+<br />
+   </div>
+   <div class="codeComment">
+**************************************************************************<br />
+*   Public section of class.                                             *<br />
+**************************************************************************<br />
+   </div>
+   <div class="code">
+class ZMMCL_INTERFAZ_FACTURA definition<br />
+&nbsp;&nbsp;public<br />
+&nbsp;&nbsp;create&nbsp;public&nbsp;.<br />
+<br />
+   </div>
+   <div class="codeComment">
+*"* public components of class ZMMCL_INTERFAZ_FACTURA<br />
+*"* do not include other source files here!!<br />
+   </div>
+   <div class="code">
+public section.<br />
+<br />
+&nbsp;&nbsp;types:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;BEGIN&nbsp;OF&nbsp;ty_itab,<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;bukrs&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TYPE&nbsp;ekko-bukrs,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"/&nbsp;Sociedad<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lifnr&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TYPE&nbsp;ekko-lifnr,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"/&nbsp;Proveedor<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ekgrp&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TYPE&nbsp;ekko-ekgrp,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"/&nbsp;Grupo&nbsp;de&nbsp;compra<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;bedat&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TYPE&nbsp;ekko-bedat,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"/&nbsp;Fecha&nbsp;pedido<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;knumv&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TYPE&nbsp;ekko-knumv,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"/&nbsp;Condición<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ekorg&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TYPE&nbsp;ekko-ekorg,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"/&nbsp;Org&nbsp;Compras<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pstyp&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TYPE&nbsp;ekpo-pstyp,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"/&nbsp;Tipo&nbsp;posición<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;werks&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TYPE&nbsp;ekpo-werks,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"/&nbsp;Centro<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lgort&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TYPE&nbsp;ekpo-lgort,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"/&nbsp;Almacén<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;knttp&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TYPE&nbsp;ekpo-knttp,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"/&nbsp;Tipo&nbsp;imputación<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;brtwr&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TYPE&nbsp;ekpo-brtwr,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"/&nbsp;Bruto<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;txz01&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TYPE&nbsp;ekpo-txz01,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"/&nbsp;Texto<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;webre&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TYPE&nbsp;ekpo-webre,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"/&nbsp;Indicador&nbsp;verificación&nbsp;de&nbsp;facturas<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;konnr&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TYPE&nbsp;ekpo-konnr,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"/&nbsp;Contrato<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ebeln&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TYPE&nbsp;ekbe-ebeln,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"/&nbsp;Número&nbsp;de&nbsp;documento<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ebelp&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TYPE&nbsp;ekbe-ebelp,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"/&nbsp;Posición<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;bldat&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TYPE&nbsp;ekbe-bldat,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"/&nbsp;Fecha&nbsp;del&nbsp;documento<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;budat&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TYPE&nbsp;ekbe-budat,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"/&nbsp;Fecha&nbsp;contable<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;belnr&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TYPE&nbsp;ekbe-belnr,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"/&nbsp;Documento&nbsp;material<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;buzei&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TYPE&nbsp;ekbe-buzei,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"/&nbsp;Posición<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;gjahr&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TYPE&nbsp;ekbe-gjahr,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"/&nbsp;Ejercicio<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lfbnr&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TYPE&nbsp;ekbe-lfbnr,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"/&nbsp;Documento&nbsp;de&nbsp;referencia<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lfpos&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TYPE&nbsp;ekbe-lfpos,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"/&nbsp;Posición&nbsp;del&nbsp;documento&nbsp;de&nbsp;referencia<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dmbtr&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TYPE&nbsp;ekbe-dmbtr,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"/&nbsp;Importe&nbsp;ML<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;hswae&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TYPE&nbsp;ekbe-hswae,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"/&nbsp;Moneda&nbsp;local<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;wrbtr&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TYPE&nbsp;ekbe-wrbtr,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"/&nbsp;Importe&nbsp;en&nbsp;moneda&nbsp;del&nbsp;documento<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;waers&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TYPE&nbsp;ekbe-waers,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"/&nbsp;Moneda<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;shkzg&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TYPE&nbsp;ekbe-shkzg,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"/&nbsp;Debe/Haber<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;vgabe&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TYPE&nbsp;ekbe-vgabe,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"/&nbsp;Clase&nbsp;operación<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;bewtp&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TYPE&nbsp;ekbe-bewtp,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"/&nbsp;Tipo&nbsp;de&nbsp;historia&nbsp;de&nbsp;pedido<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;zekkn&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TYPE&nbsp;ekkn-zekkn,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"/&nbsp;Imputación<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ps_psp_pnr&nbsp;&nbsp;&nbsp;TYPE&nbsp;ekkn-ps_psp_pnr,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"/&nbsp;PEP<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;kostl&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TYPE&nbsp;ekkn-kostl,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"/&nbsp;CECO<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;aufnr&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TYPE&nbsp;ekkn-aufnr,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"/&nbsp;Orden<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sakto&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TYPE&nbsp;ekkn-sakto,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"/&nbsp;Cuenta<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;awkey&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TYPE&nbsp;bkpf-awkey,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"/&nbsp;Referencia<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;marca&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TYPE&nbsp;char1,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"/&nbsp;Marca&nbsp;de&nbsp;procesado<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;menge&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TYPE&nbsp;ekpo-menge,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"/&nbsp;Cantidad<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;meins&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TYPE&nbsp;ekpo-meins,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"/&nbsp;Unidad&nbsp;medida<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;NETPR&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;type&nbsp;ekpo-NETPR,<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;mwskz&nbsp;TYPE&nbsp;ekpo-mwskz,<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;gsber&nbsp;TYPE&nbsp;ekkn-gsber.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;TYPES:END&nbsp;OF&nbsp;ty_itab&nbsp;.<br />
+&nbsp;&nbsp;types:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;BEGIN&nbsp;OF&nbsp;ty_rbkp,<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;belnr&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TYPE&nbsp;rbkp-belnr,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"/&nbsp;Número&nbsp;de&nbsp;documento<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;gjahr&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TYPE&nbsp;rbkp-gjahr,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"/&nbsp;Año<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;stblg&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TYPE&nbsp;rbkp-stblg.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"/&nbsp;Anulado&nbsp;con<br />
+&nbsp;&nbsp;&nbsp;&nbsp;TYPES:&nbsp;END&nbsp;OF&nbsp;ty_rbkp&nbsp;.<br />
+&nbsp;&nbsp;types:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;BEGIN&nbsp;OF&nbsp;ty_bkpf,<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;bukrs&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TYPE&nbsp;bseg-bukrs,<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;gjahr&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TYPE&nbsp;bseg-gjahr,<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;belnr&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TYPE&nbsp;bkpf-belnr,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"/&nbsp;Número&nbsp;de&nbsp;documento<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;kursf&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TYPE&nbsp;bkpf-kursf,<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;xblnr&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TYPE&nbsp;bkpf-xblnr,<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;budat&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TYPE&nbsp;bkpf-budat,<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;awkey&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TYPE&nbsp;bkpf-awkey.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;TYPES:&nbsp;END&nbsp;OF&nbsp;ty_bkpf&nbsp;.<br />
+&nbsp;&nbsp;types:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;BEGIN&nbsp;OF&nbsp;ty_bseg,<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;bukrs&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TYPE&nbsp;bseg-bukrs,<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;gjahr&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TYPE&nbsp;bseg-gjahr,<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;belnr&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TYPE&nbsp;bseg-belnr,<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;buzei&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TYPE&nbsp;bseg-buzei,<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;augdt&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TYPE&nbsp;bseg-augdt,<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;augbl&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TYPE&nbsp;bseg-augbl,<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;buzid&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TYPE&nbsp;bseg-buzid,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"/&nbsp;Tipo<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dmbtr&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TYPE&nbsp;bseg-dmbtr,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"/&nbsp;Importe&nbsp;en&nbsp;moneda&nbsp;local<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dmbe2&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TYPE&nbsp;bseg-dmbe2,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"/&nbsp;Importe&nbsp;en&nbsp;moneda&nbsp;extranjera<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ebeln&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TYPE&nbsp;bseg-ebeln,<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ebelp&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TYPE&nbsp;bseg-ebelp,<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;zekkn&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TYPE&nbsp;bseg-zekkn,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"/&nbsp;Posición&nbsp;imputación<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;segment&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TYPE&nbsp;bseg-segment,<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;marca&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TYPE&nbsp;char1.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"/&nbsp;Marca&nbsp;procesado/no&nbsp;procesado<br />
+&nbsp;&nbsp;&nbsp;&nbsp;TYPES:&nbsp;END&nbsp;OF&nbsp;ty_bseg&nbsp;.<br />
+&nbsp;&nbsp;types:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;BEGIN&nbsp;OF&nbsp;ty_lfa1,<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lifnr&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TYPE&nbsp;lfa1-lifnr,<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;name1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TYPE&nbsp;lfa1-name1,<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;name2&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TYPE&nbsp;lfa1-name2,<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;name3&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TYPE&nbsp;lfa1-name3,<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;name4&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TYPE&nbsp;lfa1-name4,<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;stcd1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TYPE&nbsp;lfa1-stcd1,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"/&nbsp;NIT&nbsp;@0099<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;stras&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TYPE&nbsp;lfa1-stras,<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ort01&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TYPE&nbsp;lfa1-ort01.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;TYPES:&nbsp;END&nbsp;OF&nbsp;ty_lfa1&nbsp;.<br />
+&nbsp;&nbsp;types:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;BEGIN&nbsp;OF&nbsp;ty_konv,<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;knumv&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TYPE&nbsp;konv-knumv,<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;kposn&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TYPE&nbsp;konv-kposn,<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;kschl&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TYPE&nbsp;konv-kschl,<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;kawrt&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TYPE&nbsp;konv-kawrt,<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;kbetr&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TYPE&nbsp;konv-kbetr.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;TYPES:&nbsp;END&nbsp;OF&nbsp;ty_konv&nbsp;.<br />
+&nbsp;&nbsp;types:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;BEGIN&nbsp;OF&nbsp;ty_ekkn1,<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ebeln&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TYPE&nbsp;ekkn-ebeln,<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ebelp&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TYPE&nbsp;ekkn-ebelp,<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;zekkn&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TYPE&nbsp;ekkn-zekkn,<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;prctr&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TYPE&nbsp;ekkn-prctr,<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ps_psp_pnr&nbsp;&nbsp;&nbsp;TYPE&nbsp;ekkn-ps_psp_pnr,<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;kostl&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TYPE&nbsp;ekkn-kostl,<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;aufnr&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TYPE&nbsp;ekkn-aufnr,<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sakto&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TYPE&nbsp;ekkn-sakto,<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;gsber&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TYPE&nbsp;ekkn-gsber.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;TYPES:&nbsp;END&nbsp;OF&nbsp;ty_ekkn1&nbsp;.<br />
+&nbsp;&nbsp;types:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;BEGIN&nbsp;OF&nbsp;ty_tgsbt,<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;gsber&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TYPE&nbsp;tgsbt-gsber,<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;gtext&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TYPE&nbsp;tgsbt-gtext.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;TYPES:&nbsp;END&nbsp;OF&nbsp;ty_tgsbt&nbsp;.<br />
+&nbsp;&nbsp;types:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;BEGIN&nbsp;OF&nbsp;ty_essr,<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ebeln&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TYPE&nbsp;essr-ebeln,<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ebelp&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TYPE&nbsp;essr-ebelp,<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;packno&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TYPE&nbsp;essr-packno,<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;extrow&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TYPE&nbsp;esll-extrow.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;TYPES:&nbsp;END&nbsp;OF&nbsp;ty_essr&nbsp;.<br />
+&nbsp;&nbsp;types:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;BEGIN&nbsp;OF&nbsp;ty_ekab,<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;konnr&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TYPE&nbsp;ekab-konnr,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"/&nbsp;Contrato<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ktpnr&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TYPE&nbsp;ekab-ktpnr,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"/&nbsp;Posición&nbsp;contrato<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ebeln&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TYPE&nbsp;ekab-ebeln,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"/&nbsp;Documento&nbsp;de&nbsp;compras<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ebelp&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TYPE&nbsp;ekab-ebelp.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"/&nbsp;Posición<br />
+&nbsp;&nbsp;&nbsp;&nbsp;TYPES:&nbsp;END&nbsp;OF&nbsp;ty_ekab&nbsp;.<br />
+&nbsp;&nbsp;types:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;gr_konnr&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TYPE&nbsp;RANGE&nbsp;OF&nbsp;ekab-konnr&nbsp;.<br />
+&nbsp;&nbsp;types:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;gr_ekorg&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TYPE&nbsp;RANGE&nbsp;OF&nbsp;ekko-ekorg&nbsp;.<br />
+&nbsp;&nbsp;types:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;gtp_t_monitor&nbsp;&nbsp;TYPE&nbsp;STANDARD&nbsp;TABLE&nbsp;OF&nbsp;zmms_factura_proveedor&nbsp;.<br />
+&nbsp;&nbsp;types:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;gtp_t_monitor_p&nbsp;TYPE&nbsp;STANDARD&nbsp;TABLE&nbsp;OF&nbsp;zmms_factura_proveedor&nbsp;.<br />
+<br />
+&nbsp;&nbsp;constants&nbsp;GC_ST_EXITOSO&nbsp;type&nbsp;CHAR2&nbsp;value&nbsp;'01'.&nbsp;"#EC&nbsp;NOTEXT<br />
+&nbsp;&nbsp;constants&nbsp;GC_ST_ADVERTENCIA&nbsp;type&nbsp;CHAR2&nbsp;value&nbsp;'02'.&nbsp;"#EC&nbsp;NOTEXT<br />
+&nbsp;&nbsp;constants&nbsp;GC_ST_ERROR&nbsp;type&nbsp;CHAR2&nbsp;value&nbsp;'03'.&nbsp;"#EC&nbsp;NOTEXT<br />
+&nbsp;&nbsp;constants&nbsp;GC_ST_MIRO_EXITOSO&nbsp;type&nbsp;CHAR2&nbsp;value&nbsp;'05'.&nbsp;"#EC&nbsp;NOTEXT<br />
+&nbsp;&nbsp;constants&nbsp;GC_ST_MIRO_ADVERTENCIA&nbsp;type&nbsp;CHAR2&nbsp;value&nbsp;'06'.&nbsp;"#EC&nbsp;NOTEXT<br />
+&nbsp;&nbsp;constants&nbsp;GC_ST_MIRO_ERROR&nbsp;type&nbsp;CHAR2&nbsp;value&nbsp;'07'.&nbsp;"#EC&nbsp;NOTEXT<br />
+&nbsp;&nbsp;constants&nbsp;GC_ST_MIRO_RECHAZO&nbsp;type&nbsp;CHAR2&nbsp;value&nbsp;'09'.&nbsp;"#EC&nbsp;NOTEXT<br />
+&nbsp;&nbsp;data:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;BEGIN&nbsp;OF&nbsp;gwa_complex_log_data,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;identifier&nbsp;TYPE&nbsp;char50,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sinms&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TYPE&nbsp;STANDARD&nbsp;TABLE&nbsp;OF&nbsp;zmms_log_messages,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;END&nbsp;OF&nbsp;gwa_complex_log_data&nbsp;.<br />
+&nbsp;&nbsp;data:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;gdt_complex_log_data&nbsp;LIKE&nbsp;STANDARD&nbsp;TABLE&nbsp;OF&nbsp;gwa_complex_log_data&nbsp;.<br />
+&nbsp;&nbsp;data&nbsp;IP_PFSTATUS&nbsp;type&nbsp;SYPFKEY&nbsp;.<br />
+&nbsp;&nbsp;data&nbsp;IT_BUKRS&nbsp;type&nbsp;ACE_DS_BUKRS_RANGE_T&nbsp;.<br />
+&nbsp;&nbsp;data&nbsp;IT_GSBER&nbsp;type&nbsp;FAGL_RANGE_T_GSBER&nbsp;.<br />
+&nbsp;&nbsp;data&nbsp;IP_DESG&nbsp;type&nbsp;CHAR1&nbsp;.<br />
+&nbsp;&nbsp;data&nbsp;IT_EKGRP&nbsp;type&nbsp;FIP_T_EKGRP_RANGE&nbsp;.<br />
+&nbsp;&nbsp;data&nbsp;IT_KONNR&nbsp;type&nbsp;GR_KONNR&nbsp;.<br />
+&nbsp;&nbsp;data&nbsp;IT_EBELN&nbsp;type&nbsp;MMPUR_T_EBELN&nbsp;.<br />
+&nbsp;&nbsp;data&nbsp;IT_LIFNR&nbsp;type&nbsp;MSR_T_INSP_LIFNR_RANGE&nbsp;.<br />
+&nbsp;&nbsp;data&nbsp;IT_BEDAT&nbsp;type&nbsp;WPOCS_BEDAT_RANGE_TAB&nbsp;.<br />
+&nbsp;&nbsp;data&nbsp;IT_PRCTR&nbsp;type&nbsp;FAGL_RANGE_T_PRCTR&nbsp;.<br />
+&nbsp;&nbsp;data&nbsp;IT_PEP&nbsp;type&nbsp;HRPP_SEL_PS_PSP_PNR&nbsp;.<br />
+&nbsp;&nbsp;data&nbsp;IT_KOSTL&nbsp;type&nbsp;HRPP_SEL_KOSTL&nbsp;.<br />
+&nbsp;&nbsp;data&nbsp;IT_AUFNR&nbsp;type&nbsp;FAGL_RANGE_T_AUFNR&nbsp;.<br />
+&nbsp;&nbsp;data&nbsp;IT_SAKTO&nbsp;type&nbsp;FAGL_RANGE_T_AUFNR&nbsp;.<br />
+&nbsp;&nbsp;data&nbsp;IP_FECHAB&nbsp;type&nbsp;DATUM&nbsp;.<br />
+&nbsp;&nbsp;data&nbsp;GO_ALV_LOG&nbsp;type&nbsp;ref&nbsp;to&nbsp;CL_GUI_ALV_GRID&nbsp;.<br />
+&nbsp;&nbsp;data&nbsp;GTI_DATOS_MONITOR_P&nbsp;type&nbsp;GTP_T_MONITOR_P&nbsp;.<br />
+&nbsp;&nbsp;data&nbsp;GTI_DATOS_MONITOR&nbsp;type&nbsp;GTP_T_MONITOR&nbsp;.<br />
+&nbsp;&nbsp;data&nbsp;GWA_VIEWER&nbsp;type&nbsp;ref&nbsp;to&nbsp;CL_GUI_HTML_VIEWER&nbsp;.<br />
+&nbsp;&nbsp;data&nbsp;GT_RETURN&nbsp;type&nbsp;BAPIRET2_T&nbsp;.<br />
+&nbsp;&nbsp;data:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;et_itab&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TYPE&nbsp;STANDARD&nbsp;TABLE&nbsp;OF&nbsp;ty_itab&nbsp;.<br />
+&nbsp;&nbsp;data&nbsp;GWA_ITAB&nbsp;type&nbsp;TY_ITAB&nbsp;.<br />
+&nbsp;&nbsp;data:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;gt_em_pendiente&nbsp;&nbsp;TYPE&nbsp;STANDARD&nbsp;TABLE&nbsp;OF&nbsp;ty_itab&nbsp;.<br />
+&nbsp;&nbsp;data:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;gt_em_facturadas&nbsp;TYPE&nbsp;STANDARD&nbsp;TABLE&nbsp;OF&nbsp;ty_itab&nbsp;.<br />
+&nbsp;&nbsp;data:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;gti_factura_p_c&nbsp;TYPE&nbsp;STANDARD&nbsp;TABLE&nbsp;OF&nbsp;zmmt_factura_p_c&nbsp;.<br />
+&nbsp;&nbsp;data:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;gti_factura_p_p&nbsp;TYPE&nbsp;STANDARD&nbsp;TABLE&nbsp;OF&nbsp;zmmt_factura_p_p&nbsp;.<br />
+&nbsp;&nbsp;data:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;it_user&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TYPE&nbsp;RANGE&nbsp;OF&nbsp;zmmt_factura_p_c-usuario&nbsp;.<br />
+&nbsp;&nbsp;data:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;it_status&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TYPE&nbsp;RANGE&nbsp;OF&nbsp;zmmt_factura_p_c-estado&nbsp;.<br />
+&nbsp;&nbsp;data&nbsp;G_START_ZEIT&nbsp;type&nbsp;T&nbsp;.<br />
+&nbsp;&nbsp;data:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;gr_tipos_fac&nbsp;&nbsp;TYPE&nbsp;RANGE&nbsp;OF&nbsp;ekbe-vgabe&nbsp;.<br />
+&nbsp;&nbsp;data:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lwa_tipos_fac&nbsp;LIKE&nbsp;LINE&nbsp;OF&nbsp;gr_tipos_fac&nbsp;.<br />
+&nbsp;&nbsp;data:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;et_rbkp&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TYPE&nbsp;STANDARD&nbsp;TABLE&nbsp;OF&nbsp;ty_rbkp&nbsp;.<br />
+&nbsp;&nbsp;data:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;et_bkpf&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TYPE&nbsp;STANDARD&nbsp;TABLE&nbsp;OF&nbsp;ty_bkpf&nbsp;.<br />
+&nbsp;&nbsp;data:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;et_bseg&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TYPE&nbsp;STANDARD&nbsp;TABLE&nbsp;OF&nbsp;ty_bseg&nbsp;.<br />
+&nbsp;&nbsp;data:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;et_lfa1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TYPE&nbsp;HASHED&nbsp;TABLE&nbsp;OF&nbsp;ty_lfa1&nbsp;WITH&nbsp;UNIQUE&nbsp;KEY&nbsp;lifnr&nbsp;.<br />
+&nbsp;&nbsp;data:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;gt_konv&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TYPE&nbsp;STANDARD&nbsp;TABLE&nbsp;OF&nbsp;ty_konv&nbsp;.<br />
+&nbsp;&nbsp;data:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;gt_ekkn&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TYPE&nbsp;HASHED&nbsp;TABLE&nbsp;OF&nbsp;ty_ekkn1&nbsp;WITH&nbsp;UNIQUE&nbsp;KEY&nbsp;ebeln&nbsp;ebelp&nbsp;zekkn&nbsp;.<br />
+&nbsp;&nbsp;data:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;gt_tgsbt&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TYPE&nbsp;STANDARD&nbsp;TABLE&nbsp;OF&nbsp;&nbsp;ty_tgsbt&nbsp;.<br />
+&nbsp;&nbsp;data:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;gt_essr&nbsp;&nbsp;&nbsp;&nbsp;TYPE&nbsp;STANDARD&nbsp;TABLE&nbsp;OF&nbsp;ty_essr&nbsp;.<br />
+&nbsp;&nbsp;data:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;gt_ekab&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TYPE&nbsp;STANDARD&nbsp;TABLE&nbsp;OF&nbsp;ty_ekab&nbsp;.<br />
+&nbsp;&nbsp;data:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;gt_factura_est&nbsp;&nbsp;TYPE&nbsp;STANDARD&nbsp;TABLE&nbsp;OF&nbsp;zmmt_factura_est&nbsp;.<br />
+&nbsp;&nbsp;data&nbsp;GWA_EKKN&nbsp;type&nbsp;TY_EKKN1&nbsp;.<br />
+&nbsp;&nbsp;data&nbsp;GWA_EKAB&nbsp;type&nbsp;TY_EKAB&nbsp;.<br />
+&nbsp;&nbsp;data&nbsp;GWA_KONV&nbsp;type&nbsp;TY_KONV&nbsp;.<br />
+&nbsp;&nbsp;data&nbsp;GR_AGGREGATION&nbsp;type&nbsp;ref&nbsp;to&nbsp;CL_SALV_AGGREGATIONS&nbsp;.<br />
+&nbsp;&nbsp;data&nbsp;GR_SORTS&nbsp;type&nbsp;ref&nbsp;to&nbsp;CL_SALV_SORTS&nbsp;.<br />
+&nbsp;&nbsp;data&nbsp;GV_ETAPA&nbsp;type&nbsp;CHAR2&nbsp;.<br />
+&nbsp;&nbsp;data:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;BEGIN&nbsp;OF&nbsp;gy_ekbes,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ebeln&nbsp;TYPE&nbsp;ebeln,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ekbes&nbsp;TYPE&nbsp;STANDARD&nbsp;TABLE&nbsp;OF&nbsp;ekbes,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;END&nbsp;OF&nbsp;gy_ekbes&nbsp;.<br />
+&nbsp;&nbsp;data:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;gt_ekbes&nbsp;LIKE&nbsp;STANDARD&nbsp;TABLE&nbsp;OF&nbsp;gy_ekbes&nbsp;.<br />
+&nbsp;&nbsp;data&nbsp;GWA_EKBES&nbsp;like&nbsp;GY_EKBES&nbsp;.<br />
+<br />
+&nbsp;&nbsp;methods&nbsp;<a&nbsp;href="public_methods/constructor.html">CONSTRUCTOR</a><br />
+&nbsp;&nbsp;&nbsp;&nbsp;importing<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;value(IP_REPID)&nbsp;type&nbsp;SYREPID&nbsp;optional<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;value(IP_PFSTATUS)&nbsp;type&nbsp;SYPFKEY&nbsp;optional<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;value(IP_SEL)&nbsp;type&nbsp;CHAR1&nbsp;optional<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;value(IP_CON)&nbsp;type&nbsp;CHAR1&nbsp;optional<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;value(IP_REP)&nbsp;type&nbsp;CHAR1&nbsp;optional<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;value(IP_FECHAB)&nbsp;type&nbsp;DATUM&nbsp;optional<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;value(IT_STATUS)&nbsp;type&nbsp;STANDARD&nbsp;TABLE&nbsp;optional<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;value(IT_USER)&nbsp;type&nbsp;STANDARD&nbsp;TABLE&nbsp;optional<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;value(IT_BUKRS)&nbsp;type&nbsp;STANDARD&nbsp;TABLE&nbsp;optional<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;value(IT_GSBER)&nbsp;type&nbsp;STANDARD&nbsp;TABLE&nbsp;optional<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;value(IT_EKGRP)&nbsp;type&nbsp;STANDARD&nbsp;TABLE&nbsp;optional<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;value(IT_KONNR)&nbsp;type&nbsp;STANDARD&nbsp;TABLE&nbsp;optional<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;value(IT_EBELN)&nbsp;type&nbsp;STANDARD&nbsp;TABLE&nbsp;optional<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;value(IT_LIFNR)&nbsp;type&nbsp;STANDARD&nbsp;TABLE&nbsp;optional<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;value(IT_BEDAT)&nbsp;type&nbsp;STANDARD&nbsp;TABLE&nbsp;optional<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;value(IT_PRCTR)&nbsp;type&nbsp;STANDARD&nbsp;TABLE&nbsp;optional<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;value(IT_PEP)&nbsp;type&nbsp;STANDARD&nbsp;TABLE&nbsp;optional<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;value(IT_KOSTL)&nbsp;type&nbsp;STANDARD&nbsp;TABLE&nbsp;optional<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;value(IT_AUFNR)&nbsp;type&nbsp;STANDARD&nbsp;TABLE&nbsp;optional<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;value(IT_SAKTO)&nbsp;type&nbsp;STANDARD&nbsp;TABLE&nbsp;optional<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;value(IP_DESG)&nbsp;type&nbsp;CHAR1&nbsp;optional&nbsp;.<br />
+&nbsp;&nbsp;methods&nbsp;<a&nbsp;href="public_methods/mostrar_reporte&nbsp;..html">MOSTRAR_REPORTE&nbsp;.</a><br />
+&nbsp;&nbsp;methods&nbsp;<a&nbsp;href="public_methods/construir_catalogo.html">CONSTRUIR_CATALOGO</a><br />
+&nbsp;&nbsp;&nbsp;&nbsp;changing<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;value(C_TI_CATALOGO)&nbsp;type&nbsp;LVC_T_FCAT&nbsp;.<br />
+&nbsp;&nbsp;methods&nbsp;<a&nbsp;href="public_methods/toolbar.html">TOOLBAR</a><br />
+&nbsp;&nbsp;&nbsp;&nbsp;for&nbsp;event&nbsp;TOOLBAR&nbsp;of&nbsp;CL_GUI_ALV_GRID<br />
+&nbsp;&nbsp;&nbsp;&nbsp;importing<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;E_OBJECT&nbsp;.<br />
+&nbsp;&nbsp;methods&nbsp;<a&nbsp;href="public_methods/user_command.html">USER_COMMAND</a><br />
+&nbsp;&nbsp;&nbsp;&nbsp;for&nbsp;event&nbsp;USER_COMMAND&nbsp;of&nbsp;CL_GUI_ALV_GRID<br />
+&nbsp;&nbsp;&nbsp;&nbsp;importing<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;E_UCOMM&nbsp;.<br />
+&nbsp;&nbsp;methods&nbsp;<a&nbsp;href="public_methods/funciones_mdw.html">FUNCIONES_MDW</a><br />
+&nbsp;&nbsp;&nbsp;&nbsp;importing<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IP_COMANDO&nbsp;type&nbsp;SYUCOMM&nbsp;.<br />
+&nbsp;&nbsp;methods&nbsp;<a&nbsp;href="public_methods/hotspot_click.html">HOTSPOT_CLICK</a><br />
+&nbsp;&nbsp;&nbsp;&nbsp;for&nbsp;event&nbsp;HOTSPOT_CLICK&nbsp;of&nbsp;CL_GUI_ALV_GRID<br />
+&nbsp;&nbsp;&nbsp;&nbsp;importing<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;E_ROW_ID<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;E_COLUMN_ID<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SENDER&nbsp;.<br />
+&nbsp;&nbsp;methods&nbsp;<a&nbsp;href="public_methods/button_click.html">BUTTON_CLICK</a><br />
+&nbsp;&nbsp;&nbsp;&nbsp;for&nbsp;event&nbsp;BUTTON_CLICK&nbsp;of&nbsp;CL_GUI_ALV_GRID<br />
+&nbsp;&nbsp;&nbsp;&nbsp;importing<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ES_ROW_NO<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ES_COL_ID&nbsp;.<br />
+&nbsp;&nbsp;methods&nbsp;<a&nbsp;href="public_methods/on_double_click.html">ON_DOUBLE_CLICK</a><br />
+&nbsp;&nbsp;&nbsp;&nbsp;for&nbsp;event&nbsp;DOUBLE_CLICK&nbsp;of&nbsp;CL_GUI_ALV_GRID<br />
+&nbsp;&nbsp;&nbsp;&nbsp;importing<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;E_ROW<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;E_COLUMN<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ES_ROW_NO&nbsp;.<br />
+&nbsp;&nbsp;methods&nbsp;<a&nbsp;href="public_methods/handle_top_of_page.html">HANDLE_TOP_OF_PAGE</a><br />
+&nbsp;&nbsp;&nbsp;&nbsp;for&nbsp;event&nbsp;TOP_OF_PAGE&nbsp;of&nbsp;CL_GUI_ALV_GRID<br />
+&nbsp;&nbsp;&nbsp;&nbsp;importing<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;E_DYNDOC_ID&nbsp;.<br />
+&nbsp;&nbsp;methods&nbsp;<a&nbsp;href="public_methods/data_changed.html">DATA_CHANGED</a><br />
+&nbsp;&nbsp;&nbsp;&nbsp;for&nbsp;event&nbsp;DATA_CHANGED&nbsp;of&nbsp;CL_GUI_ALV_GRID<br />
+&nbsp;&nbsp;&nbsp;&nbsp;importing<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;E_ONF4<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;E_ONF4_BEFORE<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;E_ONF4_AFTER<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;E_UCOMM&nbsp;.<br />
+&nbsp;&nbsp;methods&nbsp;<a&nbsp;href="public_methods/set_cargar_archivo.html">SET_CARGAR_ARCHIVO</a><br />
+&nbsp;&nbsp;&nbsp;&nbsp;importing<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IP_TIPO_ARCHIVO&nbsp;type&nbsp;STRING<br />
+&nbsp;&nbsp;&nbsp;&nbsp;exporting<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;EP_RUTA_ARCHIVO&nbsp;type&nbsp;STRING<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;EP_CONTENIDO&nbsp;type&nbsp;XSTRING&nbsp;.<br />
+&nbsp;&nbsp;methods&nbsp;<a&nbsp;href="public_methods/set_procesar_txt.html">SET_PROCESAR_TXT</a><br />
+&nbsp;&nbsp;&nbsp;&nbsp;importing<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IP_CONTENIDO&nbsp;type&nbsp;XSTRING<br />
+&nbsp;&nbsp;&nbsp;&nbsp;exporting<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;EP_FACTURA&nbsp;type&nbsp;ZMMT_FACTURA_P_C<br />
+&nbsp;&nbsp;&nbsp;&nbsp;changing<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IW_MONITOR&nbsp;type&nbsp;ZMMS_FACTURA_PROVEEDOR&nbsp;.<br />
+&nbsp;&nbsp;methods&nbsp;<a&nbsp;href="public_methods/set_enviar_rechazo.html">SET_ENVIAR_RECHAZO</a><br />
+&nbsp;&nbsp;&nbsp;&nbsp;changing<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IW_FACTURA_P_C&nbsp;type&nbsp;ZMMT_FACTURA_P_C<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IW_FACTURA_P_P&nbsp;type&nbsp;ZMMT_FACTURA_P_P<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IW_MONITOR&nbsp;type&nbsp;ZMMS_FACTURA_PROVEEDOR&nbsp;.<br />
+&nbsp;&nbsp;methods&nbsp;<a&nbsp;href="public_methods/set_crear_miro.html">SET_CREAR_MIRO</a><br />
+&nbsp;&nbsp;&nbsp;&nbsp;changing<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IW_FACTURA_P_C&nbsp;type&nbsp;ZMMT_FACTURA_P_C<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IW_FACTURA_P_P&nbsp;type&nbsp;ZMMT_FACTURA_P_P<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IW_MONITOR&nbsp;type&nbsp;ZMMS_FACTURA_PROVEEDOR&nbsp;.<br />
+&nbsp;&nbsp;methods&nbsp;<a&nbsp;href="public_methods/set_procesar_pdf.html">SET_PROCESAR_PDF</a><br />
+&nbsp;&nbsp;&nbsp;&nbsp;importing<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IP_CONTENIDO&nbsp;type&nbsp;XSTRING<br />
+&nbsp;&nbsp;&nbsp;&nbsp;changing<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IW_MONITOR&nbsp;type&nbsp;ZMMS_FACTURA_PROVEEDOR<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IW_FACTURA&nbsp;type&nbsp;ZMMT_FACTURA_P_C&nbsp;.<br />
+&nbsp;&nbsp;methods&nbsp;<a&nbsp;href="public_methods/set_procesar_manual.html">SET_PROCESAR_MANUAL</a><br />
+&nbsp;&nbsp;&nbsp;&nbsp;importing<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IP_CONTENIDO&nbsp;type&nbsp;XSTRING<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IT_FACTURA_P&nbsp;type&nbsp;ZMMTT_FACTURA_P_P&nbsp;optional<br />
+&nbsp;&nbsp;&nbsp;&nbsp;exporting<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;EP_FACTURA&nbsp;type&nbsp;ZMMT_FACTURA_P_C<br />
+&nbsp;&nbsp;&nbsp;&nbsp;changing<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IW_MONITOR&nbsp;type&nbsp;ZMMS_FACTURA_PROVEEDOR<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IW_FACTURA&nbsp;type&nbsp;ZMMT_FACTURA_P_C&nbsp;.<br />
+&nbsp;&nbsp;methods&nbsp;<a&nbsp;href="public_methods/set_procesar_xml.html">SET_PROCESAR_XML</a><br />
+&nbsp;&nbsp;&nbsp;&nbsp;importing<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IP_CONTENIDO&nbsp;type&nbsp;XSTRING<br />
+&nbsp;&nbsp;&nbsp;&nbsp;exporting<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;EP_FACTURA&nbsp;type&nbsp;ZMMT_FACTURA_P_C<br />
+&nbsp;&nbsp;&nbsp;&nbsp;changing<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IW_MONITOR&nbsp;type&nbsp;ZMMS_FACTURA_PROVEEDOR&nbsp;.<br />
+&nbsp;&nbsp;methods&nbsp;<a&nbsp;href="public_methods/set_anular_miro.html">SET_ANULAR_MIRO</a><br />
+&nbsp;&nbsp;&nbsp;&nbsp;changing<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IW_FACTURA_P_C&nbsp;type&nbsp;ZMMT_FACTURA_P_C<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IW_FACTURA_P_P&nbsp;type&nbsp;ZMMT_FACTURA_P_P<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IW_MONITOR&nbsp;type&nbsp;ZMMS_FACTURA_PROVEEDOR&nbsp;.<br />
+&nbsp;&nbsp;methods&nbsp;<a&nbsp;href="public_methods/get_datos_anulacion.html">GET_DATOS_ANULACION</a><br />
+&nbsp;&nbsp;&nbsp;&nbsp;changing<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;value(IW_FACTURA_P_C)&nbsp;type&nbsp;ZMMT_FACTURA_P_C&nbsp;optional<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;value(IW_FACTURA_P_P)&nbsp;type&nbsp;ZMMT_FACTURA_P_P&nbsp;optional<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;value(IW_MONITOR)&nbsp;type&nbsp;ZMMS_FACTURA_PROVEEDOR&nbsp;optional<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;value(IW_MOTIVO_ANUL)&nbsp;type&nbsp;ZMMS_FACTURA_MOTIVO_ANULACION&nbsp;optional&nbsp;.<br />
+&nbsp;&nbsp;methods&nbsp;<a&nbsp;href="public_methods/spi_setzen_ekko.html">SPI_SETZEN_EKKO</a><br />
+&nbsp;&nbsp;&nbsp;&nbsp;exporting<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ANZ_BEARB&nbsp;type&nbsp;I&nbsp;.<br />
+&nbsp;&nbsp;methods&nbsp;<a&nbsp;href="public_methods/get_tabla_estados&nbsp;..html">GET_TABLA_ESTADOS&nbsp;.</a><br />
+&nbsp;&nbsp;methods&nbsp;<a&nbsp;href="public_methods/set_agrupar_datos&nbsp;..html">SET_AGRUPAR_DATOS&nbsp;.</a><br />
+&nbsp;&nbsp;methods&nbsp;<a&nbsp;href="public_methods/set_procesar_facturas_estado&nbsp;..html">SET_PROCESAR_FACTURAS_ESTADO&nbsp;.</a><br />
+&nbsp;&nbsp;methods&nbsp;<a&nbsp;href="public_methods/get_nombre_proveedor&nbsp;..html">GET_NOMBRE_PROVEEDOR&nbsp;.</a><br />
+&nbsp;&nbsp;methods&nbsp;<a&nbsp;href="public_methods/get_condiciones&nbsp;..html">GET_CONDICIONES&nbsp;.</a><br />
+&nbsp;&nbsp;methods&nbsp;<a&nbsp;href="public_methods/get_documentos_fi&nbsp;..html">GET_DOCUMENTOS_FI&nbsp;.</a><br />
+&nbsp;&nbsp;methods&nbsp;<a&nbsp;href="public_methods/get_imputaciones&nbsp;..html">GET_IMPUTACIONES&nbsp;.</a><br />
+&nbsp;&nbsp;methods&nbsp;<a&nbsp;href="public_methods/get_filtrar_em_facturadas&nbsp;..html">GET_FILTRAR_EM_FACTURADAS&nbsp;.</a><br />
+&nbsp;&nbsp;methods&nbsp;<a&nbsp;href="public_methods/get_filtrar_em_pendientes&nbsp;..html">GET_FILTRAR_EM_PENDIENTES&nbsp;.</a><br />
+&nbsp;&nbsp;methods&nbsp;<a&nbsp;href="public_methods/get_datos_principales&nbsp;..html">GET_DATOS_PRINCIPALES&nbsp;.</a><br />
+&nbsp;&nbsp;methods&nbsp;<a&nbsp;href="public_methods/get_obtener_data&nbsp;..html">GET_OBTENER_DATA&nbsp;.</a><br />
+<br />
+   </div>
+   <div class="codeComment">
+**************************************************************************<br />
+*   Private section of class.                                            *<br />
+**************************************************************************<br />
+*"* private components of class ZMMCL_INTERFAZ_FACTURA<br />
+*"* do not include other source files here!!<br />
+   </div>
+   <div class="code">
+private section.<br />
+<br />
+&nbsp;&nbsp;data&nbsp;IT_EKORG&nbsp;type&nbsp;FIP_T_EKKO_EKORG&nbsp;.<br />
+&nbsp;&nbsp;data&nbsp;IP_REPID&nbsp;type&nbsp;SYREPID&nbsp;.<br />
+&nbsp;&nbsp;data:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;gt_tolerancia&nbsp;TYPE&nbsp;STANDARD&nbsp;TABLE&nbsp;OF&nbsp;zmmt_factura_tol&nbsp;.<br />
+&nbsp;&nbsp;data&nbsp;GV_ANZ_EKKO&nbsp;type&nbsp;I&nbsp;.<br />
+&nbsp;&nbsp;data&nbsp;GV_ANZ_EKKO_BEARB&nbsp;type&nbsp;I&nbsp;.<br />
+<br />
+&nbsp;&nbsp;methods&nbsp;<a&nbsp;href="private_methods/set_inicializar_variables&nbsp;..html">SET_INICIALIZAR_VARIABLES&nbsp;.</a><br />
+&nbsp;&nbsp;methods&nbsp;<a&nbsp;href="private_methods/get_tablaz_facturas&nbsp;..html">GET_TABLAZ_FACTURAS&nbsp;.</a><br />
+&nbsp;&nbsp;methods&nbsp;<a&nbsp;href="private_methods/construir_from_clause.html">CONSTRUIR_FROM_CLAUSE</a><br />
+&nbsp;&nbsp;&nbsp;&nbsp;exporting<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;value(EP_FROM_CLAUSE)&nbsp;type&nbsp;STRING&nbsp;.<br />
+&nbsp;&nbsp;methods&nbsp;<a&nbsp;href="private_methods/construir_select_fields.html">CONSTRUIR_SELECT_FIELDS</a><br />
+&nbsp;&nbsp;&nbsp;&nbsp;exporting<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;value(EP_SELECT_FIELDS)&nbsp;type&nbsp;STRING&nbsp;.<br />
+&nbsp;&nbsp;methods&nbsp;<a&nbsp;href="private_methods/construir_where_clause.html">CONSTRUIR_WHERE_CLAUSE</a><br />
+&nbsp;&nbsp;&nbsp;&nbsp;exporting<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;value(EP_WHERE_CLAUSE)&nbsp;type&nbsp;STRING&nbsp;.<br />
+&nbsp;&nbsp;methods&nbsp;<a&nbsp;href="private_methods/get_rango_factura&nbsp;..html">GET_RANGO_FACTURA&nbsp;.</a><br />
+&nbsp;&nbsp;methods&nbsp;<a&nbsp;href="private_methods/benutzer_warnen.html">BENUTZER_WARNEN</a><br />
+&nbsp;&nbsp;&nbsp;&nbsp;importing<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;START_ZEIT&nbsp;type&nbsp;T&nbsp;.<br />
+&nbsp;&nbsp;methods&nbsp;<a&nbsp;href="private_methods/spi_setzen_ekpo.html">SPI_SETZEN_EKPO</a><br />
+&nbsp;&nbsp;&nbsp;&nbsp;importing<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ANZ_BEARB&nbsp;type&nbsp;I<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ANZ_MAX&nbsp;type&nbsp;I&nbsp;.<br />
+&nbsp;&nbsp;methods&nbsp;<a&nbsp;href="private_methods/get_ocos_abiertos&nbsp;..html">GET_OCOS_ABIERTOS&nbsp;.</a><br />
+&nbsp;&nbsp;methods&nbsp;<a&nbsp;href="private_methods/validate_difference.html">VALIDATE_DIFFERENCE</a><br />
+&nbsp;&nbsp;&nbsp;&nbsp;importing<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;value(IP_MONTO_MONITOR)&nbsp;type&nbsp;DMBTR&nbsp;optional<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;value(IP_MONTO_ARCHIVO)&nbsp;type&nbsp;DMBTR&nbsp;optional<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;value(IP_TOLERANCIA_I)&nbsp;type&nbsp;ZDE_TOLERANCIA_I&nbsp;optional<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;value(IP_TOLERANCIA_F)&nbsp;type&nbsp;ZDE_TOLERANCIA_F&nbsp;optional<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;value(IP_ESTATUS_ICON)&nbsp;type&nbsp;STATUS_RP<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;value(IP_ESTATUS_DESC)&nbsp;type&nbsp;CHAR30<br />
+&nbsp;&nbsp;&nbsp;&nbsp;changing<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IW_MONITOR&nbsp;type&nbsp;ZMMS_FACTURA_PROVEEDOR<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IW_FACTURA&nbsp;type&nbsp;ZMMT_FACTURA_P_C&nbsp;.<br />
+&nbsp;&nbsp;methods&nbsp;<a&nbsp;href="private_methods/validate_and_handle_error.html">VALIDATE_AND_HANDLE_ERROR</a><br />
+&nbsp;&nbsp;&nbsp;&nbsp;exporting<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IP_ESTATUS_ICON&nbsp;type&nbsp;STATUS_RP<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IP_ESTATUS_DESC&nbsp;type&nbsp;CHAR30<br />
+&nbsp;&nbsp;&nbsp;&nbsp;changing<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IW_MONITOR&nbsp;type&nbsp;ZMMS_FACTURA_PROVEEDOR<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IW_FACTURA&nbsp;type&nbsp;ZMMT_FACTURA_P_C<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IT_FACTURA_P&nbsp;type&nbsp;ZMMTT_FACTURA_P_P&nbsp;.<br />
+&nbsp;&nbsp;methods&nbsp;<a&nbsp;href="private_methods/read_tolerancia&nbsp;..html">READ_TOLERANCIA&nbsp;.</a><br />
+&nbsp;&nbsp;methods&nbsp;<a&nbsp;href="private_methods/mapear_campos_xml.html">MAPEAR_CAMPOS_XML</a><br />
+&nbsp;&nbsp;&nbsp;&nbsp;importing<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IT_XML_INFO&nbsp;type&nbsp;HRPAYFR_T_SMUM_XMLTB<br />
+&nbsp;&nbsp;&nbsp;&nbsp;changing<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IW_FACTURA&nbsp;type&nbsp;ZMMT_FACTURA_P_C<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IT_FACTURA_P&nbsp;type&nbsp;ZMMTT_FACTURA_P_P&nbsp;.<br />
+<br />
+   </div>
+   <div class="codeComment">
+**************************************************************************<br />
+*   Protected section of class.                                          *<br />
+**************************************************************************<br />
+*"* protected components of class ZMMCL_INTERFAZ_FACTURA<br />
+*"* do not include other source files here!!<br />
+   </div>
+   <div class="code">
+protected section.<br />
+<br />
+&nbsp;&nbsp;data&nbsp;GO_LOG&nbsp;type&nbsp;ref&nbsp;to&nbsp;ZMMCL_LOG_UTILITIES&nbsp;.<br />
+<br />
+&nbsp;&nbsp;methods&nbsp;<a&nbsp;href="protected_methods/seleccionar_datos.html">SELECCIONAR_DATOS</a><br />
+&nbsp;&nbsp;&nbsp;&nbsp;importing<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IP_FLAG&nbsp;type&nbsp;FLAG&nbsp;.<br />
+&nbsp;&nbsp;methods&nbsp;<a&nbsp;href="protected_methods/instance_log.html">INSTANCE_LOG</a><br />
+&nbsp;&nbsp;&nbsp;&nbsp;importing<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IP_EBELN&nbsp;type&nbsp;EBELN&nbsp;.<br />
+&nbsp;&nbsp;methods&nbsp;<a&nbsp;href="protected_methods/set_message.html">SET_MESSAGE</a><br />
+&nbsp;&nbsp;&nbsp;&nbsp;importing<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IP_TYPE&nbsp;type&nbsp;BAPI_MTYPE<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IP_ID&nbsp;type&nbsp;SYMSGID&nbsp;optional<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IP_NUMBER&nbsp;type&nbsp;SYMSGNO<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IP_MESSAGE_V1&nbsp;type&nbsp;ANY&nbsp;optional<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IP_MESSAGE_V2&nbsp;type&nbsp;ANY&nbsp;optional<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IP_MESSAGE_V3&nbsp;type&nbsp;ANY&nbsp;optional<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IP_MESSAGE_V4&nbsp;type&nbsp;ANY&nbsp;optional<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IP_COMPLEX_DATA&nbsp;type&nbsp;XFELD&nbsp;optional<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IP_PARVALUE&nbsp;type&nbsp;BALPVAL&nbsp;optional&nbsp;.<br />
+&nbsp;&nbsp;methods&nbsp;<a&nbsp;href="protected_methods/excepcion_message_ws.html">EXCEPCION_MESSAGE_WS</a><br />
+&nbsp;&nbsp;&nbsp;&nbsp;importing<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IO_OPROX&nbsp;type&nbsp;ref&nbsp;to&nbsp;CX_AI_SYSTEM_FAULT&nbsp;.<br />
+&nbsp;&nbsp;methods&nbsp;<a&nbsp;href="protected_methods/save_log.html">SAVE_LOG</a><br />
+&nbsp;&nbsp;&nbsp;&nbsp;exporting<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;EP_LOG_NUMBER&nbsp;type&nbsp;BALOGNR&nbsp;.<br />
+<br />
+   </div>
+   <div class="codeComment">
+**************************************************************************<br />
+*   Types section of class.                                              *<br />
+**************************************************************************<br />
+*"* dummy include to reduce generation dependencies between<br />
+*"* class ZMMCL_INTERFAZ_FACTURA and it's users.<br />
+*"* touched if any type reference has been changed<br />
+<br />
+*Text elements<br />
+*----------------------------------------------------------<br />
+* 001 Status<br />
+* 002 Cod.Proveedor<br />
+* 003 Nombre del Proveedor<br />
+* 004 OS/OC<br />
+* 005 Nro. Documento<br />
+* 007 Moneda ped.<br />
+* 008 Importe en USD(Con IVA)<br />
+* 009 Importe en USD(Sin IVA)<br />
+* 010 Importe en BOB(Con IVA)<br />
+* 011 Importe en BOB(Sin IVA)<br />
+* 012 Seleccionar archivo<br />
+* 013 Info Log<br />
+* 014 Estado de la factura<br />
+* 015 XML<br />
+* 016 Fecha base conta.<br />
+* 017 PDF<br />
+* 018 Factura MIRO<br />
+* 019 Doc. FI EM<br />
+* 020 Doc. MIRO<br />
+* 021 Doc. Pago<br />
+* 022 Moneda Fact.<br />
+* 023 NIT<br />
+* 024 Contrato SAP<br />
+* 025 Cant.Pedido<br />
+* 026 Txt.Pedido<br />
+* 027 Gerencia<br />
+* 050 Selección documentos compras<br />
+* 051 La selección está en curso desde<br />
+* 052 &1 minuto(s) y &2 segundo(s)<br />
+* 054 ¿Desea que la selección<br />
+* 055 continúe ?<br />
+* 100 Leer dat.cab.: & documentos ...<br />
+* 110 Leer dat.posición: &1 de &2 documentos ...<br />
+* 200 (& seleccionado)<br />
+* 300 Selecciones p.documento compras<br />
+* 301 otras selecciones<br />
+* E01 La factura ya fue cargada...<br />
+* E02 Solo se puede seleccionar un registro.<br />
+* E03 Seleccione por lo menos un (1) registro.<br />
+* E04 Configure las tolerancias en ZMMFI_CONFIG_FACTURA<br />
+* E05 Para realizar la carga, al menos marque un (1) registro.<br />
+* T01 Ingrese un motivo de rechazo<br />
+* T02 Rechazo de factura<br />
+* T03 Motivo de anulación<br />
+<br />
+<br />
+*Messages<br />
+*----------------------------------------------------------<br />
+*<br />
+* Message class: ZMM<br />
+*000   & & & &<br />
+*001   No puede anular movimiento...Pedido con factura(s) activa(s)<br />
+*008   La orden OC/OS & no tiene documento MIRO. No se puede anular.<br />
+            </div>
+          </td>
+        </tr>
+      </table>
+      </td>
+      </tr>
+   <tr>
+<td class="footer">Extracted by Mass Download version 1.5.5 - E.G.Mellodew. 1998-2025. Sap Release 701</td>
+   </tr>
+</table>
+</body>
+</html>

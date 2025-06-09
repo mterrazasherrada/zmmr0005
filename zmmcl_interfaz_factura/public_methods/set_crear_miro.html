@@ -1,0 +1,534 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="application/xhtml+xml; charset=ISO-8859-1" />
+<title>SET_CREAR_MIRO</title>
+<style type="text/css">
+.code{ font-family:"Courier New", Courier, monospace; color:#000; font-size:14px; background-color:#F2F4F7 }
+  .codeComment {font-family:"Courier New", Courier, monospace; color:#0000F0; font-size:14px; background-color:#F2F4F7 }
+  .normalBold{ font-family:Arial, Helvetica, sans-serif; color:#000; font-size:12px; font-weight:800 }
+  .normalBoldLarge{ font-family:Arial, Helvetica, sans-serif; color:#000; font-size:16px; font-weight:800 }
+</style>
+<style type="text/css">
+  .normal{ font-family:Arial, Helvetica, sans-serif; color:#000; font-size:12px }
+  .footer{ font-family:Arial, Helvetica, sans-serif; color:#000; font-size:12px; text-align: center }
+  h2{ font-family:Arial, Helvetica, sans-serif; color:#000; font-size:16px; font-weight:800 }
+  h3{ font-family:Arial, Helvetica, sans-serif; color:#000; font-size:14px; font-weight:800 }
+  .outerTable{
+   background-color:#E0E7ED;
+   width:100%;
+   border-top-width: thin;
+   border-right-width: thin;
+   border-right-width: thin;
+   border-left-width: thin;
+   border-top-style: solid;
+   border-right-style: solid;
+   border-bottom-style: solid;
+   border-left-style: solid;
+  }
+  .innerTable{
+   background-color:#F2F4F7;
+   width:100%;
+   border-top-width: thin;
+   border-right-width: thin;
+   border-bottom-width: thin;
+   border-left-width: thin;
+   border-top-style: solid;
+   border-right-style: solid;
+   border-bottom-style: solid;
+   border-left-style: solid;
+  }
+</style>
+</head>
+<body>
+<table class="outerTable">
+  <tr class="normalBoldLarge">
+     <td><h2>Code listing for: SET_CREAR_MIRO</h2>
+<h3> Description: Crear MIRO</h3></td>
+   </tr>
+  <tr>
+     <td>
+     <table class="innerTable">
+       <tr>
+          <td>
+   <div class="codeComment">
+**************************************************************************<br />
+*&nbsp;&nbsp;&nbsp;Method&nbsp;attributes.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br />
+**************************************************************************<br />
+   </div>
+   <div class="code">
+Instantiation: Public<br />
+   </div>
+   <div class="codeComment">
+**************************************************************************<br />
+<br />
+   </div>
+   <div class="code">
+METHOD set_crear_miro.<br />
+<br />
+&nbsp;&nbsp;DATA:&nbsp;wa_header&nbsp;TYPE&nbsp;bapi_incinv_create_header,<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;it_item&nbsp;TYPE&nbsp;STANDARD&nbsp;TABLE&nbsp;OF&nbsp;bapi_incinv_create_item,<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;it_accountingdata&nbsp;TYPE&nbsp;STANDARD&nbsp;TABLE&nbsp;OF&nbsp;bapi_incinv_create_account,&nbsp;"INSERT&nbsp;@00XX<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;wa_item&nbsp;TYPE&nbsp;bapi_incinv_create_item,<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;wa_accountingdata&nbsp;TYPE&nbsp;bapi_incinv_create_account,&nbsp;"INSERT&nbsp;@00XX<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;it_ret&nbsp;TYPE&nbsp;STANDARD&nbsp;TABLE&nbsp;OF&nbsp;bapiret2,<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;wa_ret&nbsp;TYPE&nbsp;bapiret2,<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lv_sheet_no&nbsp;TYPE&nbsp;essr-lblni,<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lv_sheet_item&nbsp;TYPE&nbsp;i.<br />
+&nbsp;&nbsp;DATA:&nbsp;g_invno&nbsp;TYPE&nbsp;bapi_incinv_fld-inv_doc_no,<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;g_fyear&nbsp;TYPE&nbsp;bapi_incinv_fld-fisc_year.<br />
+<br />
+&nbsp;&nbsp;DATA:&nbsp;lv_fecha_emision&nbsp;TYPE&nbsp;datum.<br />
+&nbsp;&nbsp;DATA:&nbsp;&nbsp;lv_ddtext&nbsp;TYPE&nbsp;ddtext.<br />
+&nbsp;&nbsp;DATA:&nbsp;lv_subrc&nbsp;TYPE&nbsp;sy-subrc.<br />
+&nbsp;&nbsp;DATA:&nbsp;lwa_datos_monitor_p&nbsp;TYPE&nbsp;zmms_factura_proveedor.<br />
+&nbsp;&nbsp;DATA:&nbsp;lv_textocabecera&nbsp;TYPE&nbsp;char50.<br />
+&nbsp;&nbsp;DATA&nbsp;lv_count&nbsp;TYPE&nbsp;num2.<br />
+&nbsp;&nbsp;DATA:&nbsp;lv_longitud_txz01&nbsp;TYPE&nbsp;i,<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lv_longitud_total&nbsp;TYPE&nbsp;i,<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lv_longitud_max&nbsp;&nbsp;&nbsp;TYPE&nbsp;i&nbsp;VALUE&nbsp;50.&nbsp;"&nbsp;Longitud&nbsp;máxima&nbsp;permitida<br />
+<br />
+<br />
+&nbsp;&nbsp;lv_fecha_emision(4)&nbsp;=&nbsp;iw_factura_p_c-fecha_emision(4).<br />
+&nbsp;&nbsp;lv_fecha_emision+4(2)&nbsp;=&nbsp;iw_factura_p_c-fecha_emision+5(2).<br />
+&nbsp;&nbsp;lv_fecha_emision+6(2)&nbsp;=&nbsp;iw_factura_p_c-fecha_emision+8(2).<br />
+<br />
+&nbsp;&nbsp;"&nbsp;Inicializar&nbsp;cabecera&nbsp;de&nbsp;factura<br />
+&nbsp;&nbsp;CLEAR&nbsp;wa_header.<br />
+&nbsp;&nbsp;wa_header-invoice_ind&nbsp;=&nbsp;'X'."Indicador:&nbsp;Contabilizar&nbsp;factura<br />
+&nbsp;&nbsp;IF&nbsp;sy-uname&nbsp;=&nbsp;'MTERRAZAS'&nbsp;AND&nbsp;sy-sysid&nbsp;=&nbsp;'ID4'."PARA&nbsp;LAS&nbsp;PRUEBAS&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;wa_header-doc_date&nbsp;=&nbsp;me-&gt;ip_fechab.&nbsp;&nbsp;"&nbsp;Fecha&nbsp;del&nbsp;documento&nbsp;desde&nbsp;la&nbsp;estructura<br />
+&nbsp;&nbsp;&nbsp;&nbsp;wa_header-pstng_date&nbsp;=&nbsp;me-&gt;ip_fechab.&nbsp;"&nbsp;Fecha&nbsp;de&nbsp;contabilización&nbsp;desde&nbsp;la&nbsp;estructura&nbsp;"MODIFY&nbsp;@0001<br />
+&nbsp;&nbsp;&nbsp;&nbsp;wa_header-bline_date&nbsp;=&nbsp;me-&gt;ip_fechab."INSERT&nbsp;@00XX&nbsp;Fecha&nbsp;base&nbsp;de&nbsp;recepcion&nbsp;factura<br />
+&nbsp;&nbsp;ELSE.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;wa_header-doc_date&nbsp;=&nbsp;&nbsp;lv_fecha_emision.&nbsp;&nbsp;"&nbsp;Fecha&nbsp;del&nbsp;documento&nbsp;desde&nbsp;la&nbsp;estructura<br />
+&nbsp;&nbsp;&nbsp;&nbsp;wa_header-pstng_date&nbsp;=&nbsp;lv_fecha_emision.&nbsp;"&nbsp;Fecha&nbsp;de&nbsp;contabilización&nbsp;desde&nbsp;la&nbsp;estructura&nbsp;"MODIFY&nbsp;@0001<br />
+&nbsp;&nbsp;&nbsp;&nbsp;wa_header-bline_date&nbsp;=&nbsp;me-&gt;ip_fechab."INSERT&nbsp;@00XX&nbsp;Fecha&nbsp;base&nbsp;de&nbsp;recepcion&nbsp;factura<br />
+&nbsp;&nbsp;ENDIF.<br />
+<br />
+&nbsp;&nbsp;"/Campo&nbsp;Referencia<br />
+&nbsp;&nbsp;wa_header-ref_doc_no&nbsp;=&nbsp;iw_monitor-nro_factura.<br />
+   </div>
+   <div class="codeComment">
+*&nbsp;&nbsp;CALL&nbsp;FUNCTION&nbsp;'CONVERSION_EXIT_ALPHA_OUTPUT'<br />
+*&nbsp;&nbsp;&nbsp;&nbsp;EXPORTING<br />
+*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;input&nbsp;&nbsp;=&nbsp;wa_header-ref_doc_no<br />
+*&nbsp;&nbsp;&nbsp;&nbsp;IMPORTING<br />
+*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;output&nbsp;=&nbsp;wa_header-ref_doc_no.<br />
+<br />
+   </div>
+   <div class="code">
+&nbsp;&nbsp;"/Nro&nbsp;de&nbsp;asignacion&nbsp;"/Texto&nbsp;de&nbsp;cabecera<br />
+&nbsp;&nbsp;CASE&nbsp;iw_monitor-tipo_factura.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;WHEN&nbsp;'01'."FE<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;wa_header-alloc_nmbr&nbsp;=&nbsp;'0'.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;wa_header-header_txt&nbsp;=&nbsp;'1'.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;WHEN&nbsp;'02'."Computarizada<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"FALTA&nbsp;CREAR&nbsp;CAMPO&nbsp;PARA&nbsp;EL&nbsp;COD.&nbsp;DE&nbsp;CONTROL<br />
+   </div>
+   <div class="codeComment">
+*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;wa_header-alloc_nmbr&nbsp;=&nbsp;'0'.<br />
+   </div>
+   <div class="code">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"FALTA&nbsp;CREAR&nbsp;EL&nbsp;CAMPO&nbsp;COD.&nbsp;AUTORIZACION<br />
+   </div>
+   <div class="codeComment">
+*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;wa_header-header_txt&nbsp;=&nbsp;'1'.<br />
+   </div>
+   <div class="code">
+&nbsp;&nbsp;&nbsp;&nbsp;WHEN&nbsp;'03'."Manual<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"FALTA&nbsp;CREAR&nbsp;CAMPO&nbsp;PARA&nbsp;EL&nbsp;COD.&nbsp;DE&nbsp;CONTROL<br />
+   </div>
+   <div class="codeComment">
+*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;wa_header-alloc_nmbr&nbsp;=&nbsp;'0'.<br />
+   </div>
+   <div class="code">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"FALTA&nbsp;CREAR&nbsp;EL&nbsp;CAMPO&nbsp;COD.&nbsp;AUTORIZACION<br />
+   </div>
+   <div class="codeComment">
+*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;wa_header-header_txt&nbsp;=&nbsp;'1'.<br />
+   </div>
+   <div class="code">
+&nbsp;&nbsp;&nbsp;&nbsp;WHEN&nbsp;OTHERS.<br />
+&nbsp;&nbsp;ENDCASE.<br />
+<br />
+&nbsp;&nbsp;wa_header-comp_code&nbsp;=&nbsp;iw_monitor-bukrs.&nbsp;&nbsp;"&nbsp;Código&nbsp;de&nbsp;la&nbsp;compañía&nbsp;desde&nbsp;la&nbsp;estructura<br />
+&nbsp;&nbsp;CASE&nbsp;iw_monitor-waers.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;WHEN&nbsp;'BOB'.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;wa_header-gross_amount&nbsp;=&nbsp;iw_monitor-e_netwr_l.&nbsp;&nbsp;"&nbsp;Importe&nbsp;bruto&nbsp;desde&nbsp;la&nbsp;estructura<br />
+&nbsp;&nbsp;&nbsp;&nbsp;WHEN&nbsp;'USD'.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;wa_header-gross_amount&nbsp;=&nbsp;iw_monitor-e_netwr.&nbsp;&nbsp;"&nbsp;Importe&nbsp;bruto&nbsp;desde&nbsp;la&nbsp;estructura<br />
+&nbsp;&nbsp;&nbsp;&nbsp;WHEN&nbsp;OTHERS.<br />
+&nbsp;&nbsp;ENDCASE.<br />
+<br />
+   </div>
+   <div class="codeComment">
+*{INSERT&nbsp;@00XX<br />
+<br />
+   </div>
+   <div class="code">
+&nbsp;&nbsp;wa_header-calc_tax_ind&nbsp;=&nbsp;''.&nbsp;&nbsp;"&nbsp;Si&nbsp;se&nbsp;requiere&nbsp;cálculo&nbsp;de&nbsp;impuestos<br />
+&nbsp;&nbsp;READ&nbsp;TABLE&nbsp;et_itab&nbsp;INTO&nbsp;gwa_itab&nbsp;WITH&nbsp;KEY&nbsp;ebeln&nbsp;=&nbsp;iw_monitor-ebeln.<br />
+&nbsp;&nbsp;IF&nbsp;sy-subrc&nbsp;=&nbsp;0.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;READ&nbsp;TABLE&nbsp;gt_konv&nbsp;INTO&nbsp;gwa_konv&nbsp;WITH&nbsp;KEY&nbsp;knumv&nbsp;=&nbsp;gwa_itab-knumv<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;kposn&nbsp;=&nbsp;gwa_itab-ebelp.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;IF&nbsp;sy-subrc&nbsp;=&nbsp;0.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;wa_header-calc_tax_ind&nbsp;=&nbsp;'X'.&nbsp;&nbsp;"&nbsp;Si&nbsp;se&nbsp;requiere&nbsp;cálculo&nbsp;de&nbsp;impuestos<br />
+&nbsp;&nbsp;&nbsp;&nbsp;ENDIF.<br />
+&nbsp;&nbsp;ENDIF.<br />
+<br />
+<br />
+   </div>
+   <div class="codeComment">
+*}INSERT&nbsp;@00XX<br />
+   </div>
+   <div class="code">
+&nbsp;&nbsp;wa_header-currency&nbsp;=&nbsp;iw_monitor-waers.&nbsp;&nbsp;"&nbsp;Moneda&nbsp;desde&nbsp;la&nbsp;estructura<br />
+<br />
+&nbsp;&nbsp;"/&nbsp;Cebe&nbsp;al&nbsp;texto&nbsp;de&nbsp;posicion<br />
+&nbsp;&nbsp;LOOP&nbsp;AT&nbsp;me-&gt;gti_datos_monitor_p&nbsp;INTO&nbsp;lwa_datos_monitor_p<br />
+&nbsp;&nbsp;&nbsp;&nbsp;WHERE&nbsp;ebeln&nbsp;=&nbsp;iw_monitor-ebeln&nbsp;AND&nbsp;prctr&nbsp;IS&nbsp;NOT&nbsp;INITIAL.<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;"&nbsp;Obtener&nbsp;la&nbsp;longitud&nbsp;de&nbsp;los&nbsp;textos<br />
+&nbsp;&nbsp;&nbsp;&nbsp;lv_longitud_txz01&nbsp;=&nbsp;STRLEN(&nbsp;lwa_datos_monitor_p-txz01&nbsp;).<br />
+&nbsp;&nbsp;&nbsp;&nbsp;lv_longitud_total&nbsp;=&nbsp;lv_longitud_txz01&nbsp;+&nbsp;STRLEN(&nbsp;lwa_datos_monitor_p-prctr&nbsp;)&nbsp;+&nbsp;1.&nbsp;"&nbsp;+1&nbsp;por&nbsp;el&nbsp;espacio<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;IF&nbsp;lv_longitud_total&nbsp;&gt;&nbsp;lv_longitud_max.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"&nbsp;Calcular&nbsp;cuánto&nbsp;podemos&nbsp;conservar&nbsp;de&nbsp;txz01&nbsp;para&nbsp;que&nbsp;prctr&nbsp;siempre&nbsp;esté&nbsp;incluido<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lv_longitud_txz01&nbsp;=&nbsp;lv_longitud_max&nbsp;-&nbsp;STRLEN(&nbsp;lwa_datos_monitor_p-prctr&nbsp;)&nbsp;-&nbsp;1.<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"&nbsp;Truncar&nbsp;txz01&nbsp;si&nbsp;es&nbsp;necesario<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lwa_datos_monitor_p-txz01&nbsp;=&nbsp;lwa_datos_monitor_p-txz01(lv_longitud_txz01).<br />
+&nbsp;&nbsp;&nbsp;&nbsp;ENDIF.<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;"&nbsp;Concatenar&nbsp;el&nbsp;texto&nbsp;asegurando&nbsp;que&nbsp;prctr&nbsp;esté&nbsp;al&nbsp;final<br />
+&nbsp;&nbsp;&nbsp;&nbsp;CONCATENATE&nbsp;lwa_datos_monitor_p-txz01&nbsp;lwa_datos_monitor_p-prctr&nbsp;INTO&nbsp;wa_header-item_text&nbsp;SEPARATED&nbsp;BY&nbsp;space.<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;EXIT.<br />
+&nbsp;&nbsp;ENDLOOP.<br />
+<br />
+<br />
+   </div>
+   <div class="codeComment">
+*{INSERT&nbsp;@00XX<br />
+*-------------------posiciones------------------<br />
+   </div>
+   <div class="code">
+&nbsp;&nbsp;"&nbsp;Iterar&nbsp;sobre&nbsp;gt_ekbes&nbsp;para&nbsp;llenar&nbsp;las&nbsp;posiciones<br />
+&nbsp;&nbsp;DATA:&nbsp;lwa_posicion&nbsp;TYPE&nbsp;ekbes.&nbsp;"&nbsp;Variable&nbsp;para&nbsp;las&nbsp;posiciones&nbsp;de&nbsp;gt_ekbes<br />
+&nbsp;&nbsp;FREE&nbsp;it_item..<br />
+&nbsp;&nbsp;FREE&nbsp;it_accountingdata.<br />
+&nbsp;&nbsp;LOOP&nbsp;AT&nbsp;gt_ekbes&nbsp;INTO&nbsp;gwa_ekbes&nbsp;WHERE&nbsp;ebeln&nbsp;=&nbsp;iw_monitor-ebeln.<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LOOP&nbsp;AT&nbsp;gwa_ekbes-ekbes&nbsp;INTO&nbsp;lwa_posicion.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IF&nbsp;lwa_posicion-zekkn&nbsp;=&nbsp;'00'."Posicion&nbsp;principal<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;READ&nbsp;TABLE&nbsp;me-&gt;et_itab&nbsp;INTO&nbsp;me-&gt;gwa_itab&nbsp;WITH&nbsp;KEY&nbsp;ebeln&nbsp;=&nbsp;iw_monitor-ebeln<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ebelp&nbsp;=&nbsp;lwa_posicion-ebelp.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IF&nbsp;sy-subrc&nbsp;=&nbsp;0.<br />
+<br />
+   </div>
+   <div class="codeComment">
+*---&nbsp;Instance&nbsp;Log&nbsp;Object&nbsp;---------------------------------------------<br />
+   </div>
+   <div class="code">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;me-&gt;instance_log(&nbsp;iw_monitor-ebeln&nbsp;)&nbsp;.<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IF&nbsp;me-&gt;gwa_itab-pstyp&nbsp;=&nbsp;'9'.&nbsp;"&nbsp;Tipo&nbsp;9&nbsp;indica&nbsp;Orden&nbsp;de&nbsp;Servicio<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"&nbsp;Se&nbsp;requiere&nbsp;hoja&nbsp;de&nbsp;entrada&nbsp;de&nbsp;servicios&nbsp;(SES)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SELECT&nbsp;SINGLE&nbsp;lblni&nbsp;INTO&nbsp;lv_sheet_no<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;FROM&nbsp;essr<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;WHERE&nbsp;ebeln&nbsp;=&nbsp;iw_monitor-ebeln<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;AND&nbsp;ebelp&nbsp;=&nbsp;lwa_posicion-ebelp.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IF&nbsp;sy-subrc&nbsp;=&nbsp;0.<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ENDIF.<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IF&nbsp;sy-subrc&nbsp;=&nbsp;0.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lv_sheet_item&nbsp;=&nbsp;1.&nbsp;"&nbsp;Usamos&nbsp;el&nbsp;primer&nbsp;item<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"&nbsp;Crear&nbsp;item&nbsp;para&nbsp;el&nbsp;BAPI<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CLEAR&nbsp;wa_item.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;wa_item-invoice_doc_item&nbsp;=&nbsp;lwa_posicion-ebelp.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;wa_item-po_number&nbsp;=&nbsp;iw_monitor-ebeln.&nbsp;&nbsp;"&nbsp;Número&nbsp;de&nbsp;OC&nbsp;desde&nbsp;la&nbsp;estructura<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;wa_item-po_item&nbsp;=&nbsp;lwa_posicion-ebelp.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"&nbsp;Item&nbsp;de&nbsp;la&nbsp;OC&nbsp;desde&nbsp;la&nbsp;estructura<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;wa_item-ref_doc&nbsp;=&nbsp;lv_sheet_no.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"&nbsp;Número&nbsp;de&nbsp;SES<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;wa_item-ref_doc_year&nbsp;=&nbsp;iw_monitor-bedat(4).&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"&nbsp;Ajusta&nbsp;según&nbsp;sea&nbsp;necesario<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;wa_item-tax_code&nbsp;=&nbsp;'C1'."iw_monitor-tax_code.&nbsp;&nbsp;"&nbsp;Código&nbsp;de&nbsp;impuesto&nbsp;desde&nbsp;la&nbsp;estructura<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IF&nbsp;wa_header-calc_tax_ind&nbsp;=&nbsp;''."INSERT&nbsp;@00XX<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;wa_item-tax_code&nbsp;=&nbsp;'C0'."INSERT&nbsp;@00XX<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ENDIF."INSERT&nbsp;@00XX<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CASE&nbsp;iw_monitor-waers.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;WHEN&nbsp;'BOB'.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;wa_item-item_amount&nbsp;=&nbsp;lwa_posicion-wewrt.&nbsp;"&nbsp;Monto&nbsp;de&nbsp;la&nbsp;posición&nbsp;en&nbsp;moneda&nbsp;local<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;WHEN&nbsp;'USD'.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;wa_item-item_amount&nbsp;=&nbsp;lwa_posicion-wewwr.&nbsp;"&nbsp;Monto&nbsp;de&nbsp;la&nbsp;posición&nbsp;en&nbsp;moneda&nbsp;extranjera<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;WHEN&nbsp;OTHERS.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ENDCASE.<br />
+<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;wa_item-sheet_no&nbsp;=&nbsp;lv_sheet_no.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;wa_item-sheet_item&nbsp;=&nbsp;lwa_posicion-ebelp.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"&nbsp;Primer&nbsp;item&nbsp;de&nbsp;la&nbsp;hoja&nbsp;de&nbsp;entrada<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;APPEND&nbsp;wa_item&nbsp;TO&nbsp;it_item.<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ELSE.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"&nbsp;Manejar&nbsp;error&nbsp;si&nbsp;no&nbsp;se&nbsp;encontró&nbsp;la&nbsp;SES<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CLEAR&nbsp;wa_item.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;wa_item-invoice_doc_item&nbsp;=&nbsp;lwa_posicion-ebelp.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;wa_item-po_number&nbsp;=&nbsp;iw_monitor-ebeln.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;wa_item-po_item&nbsp;=&nbsp;iw_monitor-ebelp.<br />
+   </div>
+   <div class="codeComment">
+*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;wa_item-ref_doc&nbsp;=&nbsp;'No&nbsp;SES'.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"&nbsp;Sin&nbsp;SES&nbsp;para&nbsp;órdenes&nbsp;de&nbsp;servicio<br />
+   </div>
+   <div class="code">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CASE&nbsp;iw_monitor-waers.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;WHEN&nbsp;'BOB'.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;wa_item-item_amount&nbsp;=&nbsp;lwa_posicion-wewrt.&nbsp;"&nbsp;Monto&nbsp;de&nbsp;la&nbsp;posición&nbsp;en&nbsp;moneda&nbsp;local<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;WHEN&nbsp;'USD'.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;wa_item-item_amount&nbsp;=&nbsp;lwa_posicion-wewwr.&nbsp;"&nbsp;Monto&nbsp;de&nbsp;la&nbsp;posición&nbsp;en&nbsp;moneda&nbsp;extranjera<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;WHEN&nbsp;OTHERS.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ENDCASE.<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;APPEND&nbsp;wa_item&nbsp;TO&nbsp;it_item.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ENDIF.<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ELSE."&nbsp;OC:&nbsp;tipo&nbsp;de&nbsp;documento&nbsp;diferente<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"&nbsp;Crear&nbsp;item&nbsp;para&nbsp;el&nbsp;BAPI&nbsp;sin&nbsp;necesidad&nbsp;de&nbsp;SES<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CLEAR&nbsp;wa_item.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;wa_item-invoice_doc_item&nbsp;=&nbsp;lwa_posicion-ebelp.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;wa_item-po_number&nbsp;=&nbsp;iw_monitor-ebeln.&nbsp;&nbsp;"&nbsp;Número&nbsp;de&nbsp;OC&nbsp;desde&nbsp;la&nbsp;estructura<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;wa_item-po_item&nbsp;=&nbsp;lwa_posicion-ebelp.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"&nbsp;Item&nbsp;de&nbsp;la&nbsp;OC&nbsp;desde&nbsp;la&nbsp;estructura<br />
+   </div>
+   <div class="codeComment">
+*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;wa_item-ref_doc&nbsp;=&nbsp;'No&nbsp;SES'.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"&nbsp;Sin&nbsp;SES<br />
+   </div>
+   <div class="code">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;wa_item-tax_code&nbsp;=&nbsp;'C1'."iw_monitor-tax_code.&nbsp;&nbsp;"&nbsp;Código&nbsp;de&nbsp;impuesto&nbsp;desde&nbsp;la&nbsp;estructura<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IF&nbsp;wa_header-calc_tax_ind&nbsp;=&nbsp;''."INSERT&nbsp;@00XX<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;wa_item-tax_code&nbsp;=&nbsp;'C0'."INSERT&nbsp;@00XX<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ENDIF."INSERT&nbsp;@00XX<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;READ&nbsp;TABLE&nbsp;me-&gt;gti_datos_monitor_p&nbsp;INTO&nbsp;lwa_datos_monitor_p&nbsp;WITH&nbsp;KEY&nbsp;ebeln&nbsp;=&nbsp;iw_monitor-ebeln&nbsp;ebelp&nbsp;=&nbsp;lwa_posicion-ebelp.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IF&nbsp;sy-subrc&nbsp;=&nbsp;0.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;wa_item-quantity&nbsp;=&nbsp;lwa_datos_monitor_p-menge.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;wa_item-po_unit&nbsp;=&nbsp;&nbsp;lwa_datos_monitor_p-meins.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ENDIF.<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CASE&nbsp;iw_monitor-waers.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;WHEN&nbsp;'BOB'.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;wa_item-item_amount&nbsp;=&nbsp;lwa_posicion-wewrt.&nbsp;"&nbsp;Monto&nbsp;de&nbsp;la&nbsp;posición&nbsp;en&nbsp;moneda&nbsp;local<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;WHEN&nbsp;'USD'.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;wa_item-item_amount&nbsp;=&nbsp;lwa_posicion-wewwr.&nbsp;"&nbsp;Monto&nbsp;de&nbsp;la&nbsp;posición&nbsp;en&nbsp;moneda&nbsp;extranjera<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;WHEN&nbsp;OTHERS.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ENDCASE.<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;APPEND&nbsp;wa_item&nbsp;TO&nbsp;it_item.<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ENDIF.<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ENDIF.<br />
+<br />
+   </div>
+   <div class="codeComment">
+*{INSERT&nbsp;@00XX<br />
+   </div>
+   <div class="code">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ELSE.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IF&nbsp;wa_item-sheet_item&nbsp;IS&nbsp;NOT&nbsp;INITIAL.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;wa_accountingdata-invoice_doc_item&nbsp;=&nbsp;wa_item-sheet_item.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ELSE.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;wa_accountingdata-invoice_doc_item&nbsp;=&nbsp;wa_item-invoice_doc_item.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ENDIF.<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lv_count&nbsp;=&nbsp;lv_count&nbsp;+&nbsp;1.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;wa_accountingdata-serial_no&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;lv_count&nbsp;.<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;wa_accountingdata-tax_code&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;wa_item-tax_code.<br />
+<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DATA:&nbsp;lt_ekkn&nbsp;TYPE&nbsp;STANDARD&nbsp;TABLE&nbsp;OF&nbsp;ekkn.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DATA:&nbsp;lwa_ekkn&nbsp;TYPE&nbsp;ekkn.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SELECT&nbsp;*<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;FROM&nbsp;ekkn<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;INTO&nbsp;TABLE&nbsp;lt_ekkn<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;WHERE&nbsp;ebeln&nbsp;EQ&nbsp;iw_monitor-ebeln<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;AND&nbsp;&nbsp;&nbsp;ebelp&nbsp;EQ&nbsp;lwa_posicion-ebelp<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;AND&nbsp;&nbsp;&nbsp;zekkn&nbsp;=&nbsp;lwa_posicion-zekkn.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;LOOP&nbsp;AT&nbsp;lt_ekkn&nbsp;INTO&nbsp;lwa_ekkn.<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;wa_accountingdata-gl_account&nbsp;=&nbsp;lwa_ekkn-sakto.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;wa_accountingdata-costcenter&nbsp;=&nbsp;lwa_ekkn-kostl.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;wa_accountingdata-sd_doc&nbsp;=&nbsp;lwa_ekkn-vbeln.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;wa_accountingdata-sdoc_item&nbsp;=&nbsp;lwa_ekkn-vbelp.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;wa_accountingdata-asset_no&nbsp;=&nbsp;lwa_ekkn-anln1.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;wa_accountingdata-sub_number&nbsp;=&nbsp;lwa_ekkn-anln2.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;wa_accountingdata-ref_date&nbsp;=&nbsp;lwa_ekkn-dabrz.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;wa_accountingdata-funds_ctr&nbsp;=&nbsp;lwa_ekkn-fistl.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;wa_accountingdata-fund&nbsp;=&nbsp;lwa_ekkn-geber.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;wa_accountingdata-grant_nbr&nbsp;=&nbsp;lwa_ekkn-grant_nbr.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;wa_accountingdata-bus_area&nbsp;=&nbsp;lwa_ekkn-gsber.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;wa_accountingdata-rl_est_key&nbsp;=&nbsp;lwa_ekkn-imkey.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;wa_accountingdata-co_area&nbsp;=&nbsp;lwa_ekkn-kokrs.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;wa_accountingdata-costobject&nbsp;=&nbsp;lwa_ekkn-kstrg.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;wa_accountingdata-profit_segm_no&nbsp;=&nbsp;lwa_ekkn-paobjnr.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;wa_accountingdata-profit_ctr&nbsp;=&nbsp;lwa_ekkn-prctr.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;wa_accountingdata-wbs_elem&nbsp;=&nbsp;lwa_ekkn-ps_psp_pnr.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;wa_accountingdata-orderid&nbsp;=&nbsp;lwa_ekkn-aufnr.<br />
+   </div>
+   <div class="codeComment">
+*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;wa_accountingdata-quantity&nbsp;=&nbsp;lwa_ekkn-menge.<br />
+*{REPLACE&nbsp;@00XX<br />
+*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CASE&nbsp;iw_monitor-waers.<br />
+*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;WHEN&nbsp;'BOB'.<br />
+*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;wa_accountingdata-item_amount&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;lwa_posicion-wewrt.&nbsp;"&nbsp;Monto&nbsp;de&nbsp;la&nbsp;posición&nbsp;en&nbsp;moneda&nbsp;local<br />
+*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;WHEN&nbsp;'USD'.<br />
+*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;wa_accountingdata-item_amount&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;lwa_posicion-wewwr.&nbsp;"&nbsp;Monto&nbsp;de&nbsp;la&nbsp;posición&nbsp;en&nbsp;moneda&nbsp;extranjera<br />
+*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;WHEN&nbsp;OTHERS.<br />
+*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ENDCASE.<br />
+   </div>
+   <div class="code">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;wa_accountingdata-item_amount&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;&nbsp;wa_item-item_amount.<br />
+   </div>
+   <div class="codeComment">
+*}REPLACE&nbsp;@00XX<br />
+   </div>
+   <div class="code">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;APPEND&nbsp;wa_accountingdata&nbsp;TO&nbsp;it_accountingdata.<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ENDLOOP.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ENDIF.<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;ENDLOOP.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;CLEAR&nbsp;lv_count.<br />
+&nbsp;&nbsp;ENDLOOP.<br />
+   </div>
+   <div class="codeComment">
+*}INSERT&nbsp;@00XX<br />
+   </div>
+   <div class="code">
+&nbsp;&nbsp;"&nbsp;Llamar&nbsp;al&nbsp;BAPI&nbsp;para&nbsp;crear&nbsp;la&nbsp;factura<br />
+&nbsp;&nbsp;CALL&nbsp;FUNCTION&nbsp;'BAPI_INCOMINGINVOICE_CREATE'<br />
+&nbsp;&nbsp;&nbsp;&nbsp;EXPORTING<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;headerdata&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;wa_header<br />
+&nbsp;&nbsp;&nbsp;&nbsp;IMPORTING<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;invoicedocnumber&nbsp;=&nbsp;g_invno<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fiscalyear&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;g_fyear<br />
+&nbsp;&nbsp;&nbsp;&nbsp;TABLES<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;itemdata&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;it_item<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;accountingdata&nbsp;&nbsp;&nbsp;=&nbsp;it_accountingdata"INSERT&nbsp;@00XX<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;it_ret.<br />
+<br />
+&nbsp;&nbsp;"&nbsp;Manejar&nbsp;mensajes&nbsp;de&nbsp;retorno<br />
+&nbsp;&nbsp;LOOP&nbsp;AT&nbsp;it_ret&nbsp;INTO&nbsp;wa_ret.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;"&nbsp;Procesar&nbsp;los&nbsp;mensajes&nbsp;de&nbsp;retorno&nbsp;según&nbsp;sea&nbsp;necesario<br />
+&nbsp;&nbsp;&nbsp;&nbsp;me-&gt;set_message(<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;EXPORTING<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ip_type&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;wa_ret-type<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ip_id&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;wa_ret-id<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ip_number&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;wa_ret-number<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ip_message_v1&nbsp;&nbsp;&nbsp;=&nbsp;wa_ret-message_v1<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ip_message_v2&nbsp;&nbsp;&nbsp;=&nbsp;wa_ret-message_v2<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ip_message_v3&nbsp;&nbsp;&nbsp;=&nbsp;wa_ret-message_v3<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ip_message_v4&nbsp;&nbsp;&nbsp;=&nbsp;wa_ret-message_v4<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ip_complex_data&nbsp;=&nbsp;'X'<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ip_parvalue&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;'WARNING_RANGE'<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;).<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;CASE&nbsp;wa_ret-type.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;WHEN&nbsp;'S'.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;iw_factura_p_c-estado&nbsp;=&nbsp;'05'.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lv_ddtext&nbsp;=&nbsp;zmmcl_facturas_utilities=&gt;get_domain_value(&nbsp;ip_field&nbsp;=&nbsp;iw_factura_p_c-estado&nbsp;).<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;iw_monitor-status_descrip&nbsp;=&nbsp;lv_ddtext.<br />
+   </div>
+   <div class="codeComment">
+*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;iw_monitor-status&nbsp;=&nbsp;zmmcl_facturas_utilities=&gt;get_status_light(&nbsp;ip_status&nbsp;=&nbsp;iw_factura_p_c-estado&nbsp;).<br />
+<br />
+   </div>
+   <div class="code">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;WHEN&nbsp;'W'.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;iw_factura_p_c-estado&nbsp;=&nbsp;'06'.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lv_ddtext&nbsp;=&nbsp;zmmcl_facturas_utilities=&gt;get_domain_value(&nbsp;ip_field&nbsp;=&nbsp;iw_factura_p_c-estado&nbsp;).<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;iw_monitor-status_descrip&nbsp;=&nbsp;lv_ddtext.<br />
+   </div>
+   <div class="codeComment">
+*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;iw_monitor-status&nbsp;=&nbsp;zmmcl_facturas_utilities=&gt;get_status_light(&nbsp;ip_status&nbsp;=&nbsp;iw_factura_p_c-estado&nbsp;).<br />
+   </div>
+   <div class="code">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;WHEN&nbsp;'E'.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;iw_factura_p_c-estado&nbsp;=&nbsp;'07'.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lv_ddtext&nbsp;=&nbsp;zmmcl_facturas_utilities=&gt;get_domain_value(&nbsp;ip_field&nbsp;=&nbsp;iw_factura_p_c-estado&nbsp;).<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;iw_monitor-status_descrip&nbsp;=&nbsp;lv_ddtext.<br />
+   </div>
+   <div class="codeComment">
+*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;iw_monitor-status&nbsp;=&nbsp;zmmcl_facturas_utilities=&gt;get_status_light(&nbsp;ip_status&nbsp;=&nbsp;iw_factura_p_c-estado&nbsp;).<br />
+<br />
+   </div>
+   <div class="code">
+&nbsp;&nbsp;&nbsp;&nbsp;ENDCASE.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;zmmcl_facturas_utilities=&gt;get_status_light(&nbsp;EXPORTING<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ip_etapa&nbsp;=&nbsp;gv_etapa<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ip_next&nbsp;=&nbsp;''<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;it_factura_est&nbsp;=&nbsp;gt_factura_est<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IMPORTING<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ep_estado_icon&nbsp;=&nbsp;iw_monitor-status<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ep_subrc&nbsp;=&nbsp;lv_subrc<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CHANGING<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ip_estado_enrutamiento&nbsp;=&nbsp;iw_factura_p_c-estado<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;).<br />
+&nbsp;&nbsp;ENDLOOP.<br />
+<br />
+&nbsp;&nbsp;"&nbsp;Realizar&nbsp;commit&nbsp;si&nbsp;la&nbsp;factura&nbsp;fue&nbsp;creada&nbsp;exitosamente<br />
+&nbsp;&nbsp;IF&nbsp;g_invno&nbsp;IS&nbsp;NOT&nbsp;INITIAL.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;iw_factura_p_c-estado&nbsp;=&nbsp;'05'.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;lv_ddtext&nbsp;=&nbsp;zmmcl_facturas_utilities=&gt;get_domain_value(&nbsp;ip_field&nbsp;=&nbsp;iw_factura_p_c-estado&nbsp;).<br />
+&nbsp;&nbsp;&nbsp;&nbsp;iw_monitor-status_descrip&nbsp;=&nbsp;lv_ddtext.<br />
+   </div>
+   <div class="codeComment">
+*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;iw_monitor-status&nbsp;=&nbsp;zmmcl_facturas_utilities=&gt;get_status_light(&nbsp;ip_status&nbsp;=&nbsp;iw_factura_p_c-estado&nbsp;).<br />
+   </div>
+   <div class="code">
+&nbsp;&nbsp;&nbsp;&nbsp;zmmcl_facturas_utilities=&gt;get_status_light(&nbsp;EXPORTING<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ip_etapa&nbsp;=&nbsp;gv_etapa<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ip_next&nbsp;=&nbsp;''<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;it_factura_est&nbsp;=&nbsp;gt_factura_est<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IMPORTING<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ep_estado_icon&nbsp;=&nbsp;iw_monitor-status<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ep_subrc&nbsp;=&nbsp;lv_subrc<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CHANGING<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ip_estado_enrutamiento&nbsp;=&nbsp;iw_factura_p_c-estado<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;).<br />
+<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;iw_monitor-belnr_miro&nbsp;=&nbsp;g_invno."Documento&nbsp;MIRO<br />
+&nbsp;&nbsp;&nbsp;&nbsp;CALL&nbsp;FUNCTION&nbsp;'BAPI_TRANSACTION_COMMIT'.<br />
+&nbsp;&nbsp;ENDIF.<br />
+<br />
+   </div>
+   <div class="codeComment">
+*---&nbsp;Save&nbsp;Log&nbsp;Object&nbsp;---------------------------------------------<br />
+   </div>
+   <div class="code">
+&nbsp;&nbsp;me-&gt;save_log(&nbsp;IMPORTING&nbsp;ep_log_number&nbsp;=&nbsp;iw_monitor-lognm&nbsp;)&nbsp;.<br />
+&nbsp;&nbsp;iw_factura_p_c-lognm&nbsp;=&nbsp;iw_monitor-lognm.<br />
+&nbsp;&nbsp;"&nbsp;Insertar&nbsp;o&nbsp;modificar&nbsp;los&nbsp;datos&nbsp;en&nbsp;la&nbsp;tabla&nbsp;ZMMT_FACTURA_P_C<br />
+&nbsp;&nbsp;MODIFY&nbsp;zmmt_factura_p_c&nbsp;FROM&nbsp;iw_factura_p_c.<br />
+&nbsp;&nbsp;IF&nbsp;sy-subrc&nbsp;=&nbsp;0.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;COMMIT&nbsp;WORK.<br />
+&nbsp;&nbsp;ENDIF.<br />
+<br />
+ENDMETHOD.<br />
+            </div>
+          </td>
+        </tr>
+      </table>
+      </td>
+      </tr>
+   <tr>
+<td class="footer">Extracted by Mass Download version 1.5.5 - E.G.Mellodew. 1998-2025. Sap Release 701</td>
+   </tr>
+</table>
+</body>
+</html>

@@ -1,0 +1,244 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="application/xhtml+xml; charset=ISO-8859-1" />
+<title>SET_AGRUPAR_DATOS</title>
+<style type="text/css">
+.code{ font-family:"Courier New", Courier, monospace; color:#000; font-size:14px; background-color:#F2F4F7 }
+  .codeComment {font-family:"Courier New", Courier, monospace; color:#0000F0; font-size:14px; background-color:#F2F4F7 }
+  .normalBold{ font-family:Arial, Helvetica, sans-serif; color:#000; font-size:12px; font-weight:800 }
+  .normalBoldLarge{ font-family:Arial, Helvetica, sans-serif; color:#000; font-size:16px; font-weight:800 }
+</style>
+<style type="text/css">
+  .normal{ font-family:Arial, Helvetica, sans-serif; color:#000; font-size:12px }
+  .footer{ font-family:Arial, Helvetica, sans-serif; color:#000; font-size:12px; text-align: center }
+  h2{ font-family:Arial, Helvetica, sans-serif; color:#000; font-size:16px; font-weight:800 }
+  h3{ font-family:Arial, Helvetica, sans-serif; color:#000; font-size:14px; font-weight:800 }
+  .outerTable{
+   background-color:#E0E7ED;
+   width:100%;
+   border-top-width: thin;
+   border-right-width: thin;
+   border-right-width: thin;
+   border-left-width: thin;
+   border-top-style: solid;
+   border-right-style: solid;
+   border-bottom-style: solid;
+   border-left-style: solid;
+  }
+  .innerTable{
+   background-color:#F2F4F7;
+   width:100%;
+   border-top-width: thin;
+   border-right-width: thin;
+   border-bottom-width: thin;
+   border-left-width: thin;
+   border-top-style: solid;
+   border-right-style: solid;
+   border-bottom-style: solid;
+   border-left-style: solid;
+  }
+</style>
+</head>
+<body>
+<table class="outerTable">
+  <tr class="normalBoldLarge">
+     <td><h2>Code listing for: SET_AGRUPAR_DATOS</h2>
+<h3> Description: ##8. Agrupar datos de facturas para la cabecera</h3></td>
+   </tr>
+  <tr>
+     <td>
+     <table class="innerTable">
+       <tr>
+          <td>
+   <div class="codeComment">
+**************************************************************************<br />
+*&nbsp;&nbsp;&nbsp;Method&nbsp;attributes.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br />
+**************************************************************************<br />
+   </div>
+   <div class="code">
+Instantiation: Public<br />
+   </div>
+   <div class="codeComment">
+**************************************************************************<br />
+<br />
+   </div>
+   <div class="code">
+METHOD set_agrupar_datos.<br />
+<br />
+&nbsp;&nbsp;DATA:&nbsp;lv_status&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TYPE&nbsp;char21.<br />
+&nbsp;&nbsp;DATA:&nbsp;lv_ebeln&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TYPE&nbsp;ebeln.<br />
+&nbsp;&nbsp;DATA:&nbsp;lv_belnr&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TYPE&nbsp;bseg-belnr.<br />
+&nbsp;&nbsp;DATA:&nbsp;lwa_monitor_p&nbsp;&nbsp;&nbsp;&nbsp;LIKE&nbsp;LINE&nbsp;OF&nbsp;gti_datos_monitor_p.<br />
+&nbsp;&nbsp;DATA:&nbsp;lwa_monitor&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;LIKE&nbsp;LINE&nbsp;OF&nbsp;gti_datos_monitor.<br />
+   </div>
+   <div class="codeComment">
+*&nbsp;&nbsp;DATA:&nbsp;lt_factura_tmp&nbsp;&nbsp;&nbsp;TYPE&nbsp;STANDARD&nbsp;TABLE&nbsp;OF&nbsp;zmmt_factura_p_c.<br />
+   </div>
+   <div class="code">
+&nbsp;&nbsp;DATA:&nbsp;lwa_factura_tmp&nbsp;&nbsp;TYPE&nbsp;zmmt_factura_p_c.<br />
+&nbsp;&nbsp;DATA:&nbsp;ls_cell_type&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TYPE&nbsp;lvc_s_styl.<br />
+&nbsp;&nbsp;DATA:&nbsp;gw_color_field&nbsp;&nbsp;&nbsp;TYPE&nbsp;lvc_s_scol.<br />
+&nbsp;&nbsp;DATA:&nbsp;gw_color&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TYPE&nbsp;lvc_s_colo.<br />
+&nbsp;&nbsp;DATA:&nbsp;lv_ddtext&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TYPE&nbsp;ddtext.<br />
+&nbsp;&nbsp;DATA:&nbsp;lv_subrc&nbsp;TYPE&nbsp;sy-subrc.<br />
+<br />
+&nbsp;&nbsp;"/&nbsp;Agrupar&nbsp;para&nbsp;cabecera<br />
+&nbsp;&nbsp;CLEAR:&nbsp;lv_status,&nbsp;lv_ebeln,&nbsp;lv_belnr.<br />
+<br />
+&nbsp;&nbsp;CHECK&nbsp;gti_datos_monitor_p[]&nbsp;IS&nbsp;NOT&nbsp;INITIAL.<br />
+<br />
+&nbsp;&nbsp;SORT&nbsp;gti_datos_monitor_p&nbsp;BY&nbsp;status&nbsp;ebeln&nbsp;belnr&nbsp;ASCENDING.<br />
+   </div>
+   <div class="codeComment">
+*<br />
+*/&nbsp;Agrupar&nbsp;en&nbsp;las&nbsp;posiciones&nbsp;para&nbsp;la&nbsp;línea&nbsp;de&nbsp;cabecera<br />
+*<br />
+   </div>
+   <div class="code">
+&nbsp;&nbsp;LOOP&nbsp;AT&nbsp;gti_datos_monitor_p&nbsp;INTO&nbsp;lwa_monitor_p.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;IF&nbsp;(&nbsp;lwa_monitor_p-status&nbsp;NE&nbsp;lv_status&nbsp;OR&nbsp;lwa_monitor_p-ebeln&nbsp;NE&nbsp;lv_ebeln&nbsp;"OR&nbsp;lwa_monitor_p-belnr&nbsp;NE&nbsp;lv_belnr&nbsp;"DEL<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)&nbsp;AND&nbsp;lv_status&nbsp;IS&nbsp;NOT&nbsp;INITIAL&nbsp;AND&nbsp;lv_ebeln&nbsp;IS&nbsp;NOT&nbsp;INITIAL&nbsp;AND&nbsp;lwa_monitor&nbsp;IS&nbsp;NOT&nbsp;INITIAL."&nbsp;AND&nbsp;lv_belnr&nbsp;IS&nbsp;NOT&nbsp;INITIAL.&nbsp;"DEL<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ls_cell_type-fieldname&nbsp;=&nbsp;'EXPAND'."INS<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ls_cell_type-style&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;cl_gui_alv_grid=&gt;mc_style_hotspot."INS<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lwa_monitor-expand&nbsp;=&nbsp;'@3S\QExpand&nbsp;Details@'."INS<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;APPEND&nbsp;ls_cell_type&nbsp;TO&nbsp;lwa_monitor-cell_type."INS<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"&nbsp;Se&nbsp;detecta&nbsp;un&nbsp;cambio&nbsp;en&nbsp;STATUS&nbsp;o&nbsp;EBELN&nbsp;y&nbsp;no&nbsp;es&nbsp;la&nbsp;primera&nbsp;iteración<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;APPEND&nbsp;lwa_monitor&nbsp;TO&nbsp;gti_datos_monitor.<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"&nbsp;Reiniciar&nbsp;el&nbsp;acumulador<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CLEAR&nbsp;lwa_monitor.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;ENDIF.<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;"&nbsp;Acumular&nbsp;los&nbsp;montos<br />
+&nbsp;&nbsp;&nbsp;&nbsp;lwa_monitor-status&nbsp;=&nbsp;lwa_monitor_p-status.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;lwa_monitor-ebeln&nbsp;=&nbsp;lwa_monitor_p-ebeln.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;lwa_monitor-e_netwr&nbsp;=&nbsp;lwa_monitor-e_netwr&nbsp;+&nbsp;lwa_monitor_p-e_netwr.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;lwa_monitor-f_netwr&nbsp;=&nbsp;lwa_monitor-f_netwr&nbsp;+&nbsp;lwa_monitor_p-f_netwr.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;lwa_monitor-e_netwr_l&nbsp;=&nbsp;lwa_monitor-e_netwr_l&nbsp;+&nbsp;lwa_monitor_p-e_netwr_l.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;lwa_monitor-f_netwr_l&nbsp;=&nbsp;lwa_monitor-f_netwr_l&nbsp;+&nbsp;lwa_monitor_p-f_netwr_l.<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;lwa_monitor-netpr&nbsp;=&nbsp;lwa_monitor-netpr&nbsp;+&nbsp;lwa_monitor_p-netpr.<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;"&nbsp;Copiar&nbsp;otros&nbsp;campos&nbsp;no&nbsp;agrupados<br />
+&nbsp;&nbsp;&nbsp;&nbsp;lwa_monitor-bukrs&nbsp;=&nbsp;lwa_monitor_p-bukrs.<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;lwa_monitor-konnr&nbsp;=&nbsp;lwa_monitor_p-konnr.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;lwa_monitor-lifnr&nbsp;=&nbsp;lwa_monitor_p-lifnr.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;lwa_monitor-name&nbsp;=&nbsp;lwa_monitor_p-name.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;lwa_monitor-stcd1&nbsp;=&nbsp;lwa_monitor_p-stcd1."INSERT&nbsp;@0099<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;lwa_monitor-fecha_contable&nbsp;=&nbsp;lwa_monitor_p-fecha_contable.<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;lwa_monitor-belnr_miro&nbsp;=&nbsp;lwa_monitor_p-belnr_miro."INSERT&nbsp;@0099<br />
+&nbsp;&nbsp;&nbsp;&nbsp;IF&nbsp;lwa_monitor_p-belnr_miro&nbsp;IS&nbsp;INITIAL.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SELECT&nbsp;SINGLE&nbsp;belnr<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;INTO&nbsp;lwa_monitor-belnr_miro<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;FROM&nbsp;rbkp<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;WHERE&nbsp;belnr&nbsp;EQ&nbsp;lwa_monitor_p-belnr<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;AND&nbsp;gjahr&nbsp;EQ&nbsp;lwa_monitor_p-bedat(4).<br />
+&nbsp;&nbsp;&nbsp;&nbsp;ENDIF.<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;CALL&nbsp;FUNCTION&nbsp;'CONVERSION_EXIT_ALPHA_OUTPUT'<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;EXPORTING<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;input&nbsp;&nbsp;=&nbsp;lwa_monitor-stcd1<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IMPORTING<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;output&nbsp;=&nbsp;lwa_monitor-stcd1.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;lwa_monitor-belnr&nbsp;=&nbsp;lwa_monitor_p-belnr.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;lwa_monitor-bedat&nbsp;=&nbsp;lwa_monitor_p-bedat.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;lwa_monitor-waers&nbsp;=&nbsp;lwa_monitor_p-waers.<br />
+   </div>
+   <div class="codeComment">
+*&nbsp;&nbsp;&nbsp;&nbsp;lwa_monitor-descrip_belnr&nbsp;=&nbsp;lwa_monitor_p-descrip_belnr.<br />
+   </div>
+   <div class="code">
+&nbsp;&nbsp;&nbsp;&nbsp;"&nbsp;Actualizar&nbsp;el&nbsp;STATUS&nbsp;y&nbsp;EBELN&nbsp;actuales<br />
+&nbsp;&nbsp;&nbsp;&nbsp;lv_status&nbsp;=&nbsp;lwa_monitor_p-status.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;lv_ebeln&nbsp;=&nbsp;lwa_monitor_p-ebeln.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;lv_belnr&nbsp;=&nbsp;lwa_monitor_p-belnr.<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;CLEAR&nbsp;lwa_factura_tmp.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;READ&nbsp;TABLE&nbsp;me-&gt;gti_factura_p_c&nbsp;INTO&nbsp;lwa_factura_tmp&nbsp;WITH&nbsp;KEY&nbsp;ebeln&nbsp;=&nbsp;lwa_monitor_p-ebeln.<br />
+   </div>
+   <div class="codeComment">
+*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;tipo_carga&nbsp;=&nbsp;'01'."Total<br />
+   </div>
+   <div class="code">
+&nbsp;&nbsp;&nbsp;&nbsp;IF&nbsp;sy-subrc&nbsp;=&nbsp;0.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"/&nbsp;Validar&nbsp;diferencia&nbsp;de&nbsp;montos&nbsp;según&nbsp;la&nbsp;moneda<br />
+   </div>
+   <div class="codeComment">
+*{INSERT&nbsp;@0001<br />
+   </div>
+   <div class="code">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lwa_monitor-fecha_base_conta&nbsp;=&nbsp;me-&gt;ip_fechab.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lwa_monitor-monto_total_file&nbsp;=&nbsp;&nbsp;lwa_factura_tmp-monto_total.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IF&nbsp;lwa_factura_tmp-monto_total&nbsp;IS&nbsp;NOT&nbsp;INITIAL.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CASE&nbsp;lwa_factura_tmp-codigo_moneda.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;WHEN&nbsp;'1'.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lwa_monitor-moneda_factura&nbsp;=&nbsp;'BOB'.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lwa_monitor-diferencia_file&nbsp;=&nbsp;&nbsp;&nbsp;ABS(&nbsp;lwa_monitor_p-e_netwr_l&nbsp;-&nbsp;lwa_factura_tmp-monto_total&nbsp;).<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;WHEN&nbsp;'2'.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lwa_monitor-diferencia_file&nbsp;=&nbsp;&nbsp;&nbsp;ABS(&nbsp;lwa_monitor_p-e_netwr&nbsp;-&nbsp;lwa_factura_tmp-monto_total&nbsp;).<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lwa_monitor-moneda_factura&nbsp;=&nbsp;'BOB'.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ENDCASE.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ENDIF.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lwa_monitor-tipo_factura&nbsp;=&nbsp;lwa_factura_tmp-tipo_archivo.&nbsp;&nbsp;"&nbsp;Factura&nbsp;electrónica&nbsp;por&nbsp;defecto<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lv_ddtext&nbsp;=&nbsp;zmmcl_facturas_utilities=&gt;get_domain_value(&nbsp;ip_field&nbsp;=&nbsp;lwa_factura_tmp-tipo_carga&nbsp;).<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lwa_monitor-tipo_carga&nbsp;=&nbsp;lv_ddtext.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lwa_monitor-nro_factura&nbsp;=&nbsp;lwa_factura_tmp-numero_factura.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lwa_monitor-fecha_registro&nbsp;=&nbsp;lwa_factura_tmp-fecha_upd.<br />
+   </div>
+   <div class="codeComment">
+*}INSERT&nbsp;@0001<br />
+   </div>
+   <div class="code">
+&nbsp;&nbsp;&nbsp;&nbsp;ELSE.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"/&nbsp;Si&nbsp;no&nbsp;hay&nbsp;factura,&nbsp;asignar&nbsp;el&nbsp;estado&nbsp;por&nbsp;defecto&nbsp;'00'<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lwa_factura_tmp-estado&nbsp;=&nbsp;'00'.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lwa_monitor-tipo_factura&nbsp;=&nbsp;'01'.&nbsp;&nbsp;"&nbsp;Factura&nbsp;electrónica&nbsp;por&nbsp;defecto<br />
+&nbsp;&nbsp;&nbsp;&nbsp;ENDIF.<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;zmmcl_facturas_utilities=&gt;get_status_light(&nbsp;EXPORTING<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ip_etapa&nbsp;=&nbsp;gv_etapa<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ip_next&nbsp;=&nbsp;'X'<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;it_factura_est&nbsp;=&nbsp;gt_factura_est<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IMPORTING<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ep_estado_icon&nbsp;=&nbsp;lwa_monitor-status<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ep_subrc&nbsp;=&nbsp;lv_subrc<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CHANGING<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ip_estado_enrutamiento&nbsp;=&nbsp;lwa_factura_tmp-estado<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;).<br />
+&nbsp;&nbsp;&nbsp;&nbsp;lv_ddtext&nbsp;=&nbsp;zmmcl_facturas_utilities=&gt;get_domain_value(&nbsp;ip_field&nbsp;=&nbsp;lwa_factura_tmp-estado&nbsp;).<br />
+&nbsp;&nbsp;&nbsp;&nbsp;lwa_monitor-status_descrip&nbsp;=&nbsp;lv_ddtext.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;"&nbsp;Otros&nbsp;datos<br />
+&nbsp;&nbsp;&nbsp;&nbsp;lwa_monitor-pdf&nbsp;=&nbsp;lwa_factura_tmp-archivo_pdf.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;lwa_monitor-xml&nbsp;=&nbsp;lwa_factura_tmp-archivo_contenido.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;lwa_monitor-lognm&nbsp;=&nbsp;lwa_factura_tmp-lognm.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;lwa_monitor-sinms&nbsp;=&nbsp;'@8P@'.&nbsp;&nbsp;"&nbsp;Icono&nbsp;de&nbsp;información<br />
+&nbsp;&nbsp;&nbsp;&nbsp;lwa_monitor-import_file&nbsp;=&nbsp;icon_import.<br />
+<br />
+&nbsp;&nbsp;ENDLOOP.<br />
+<br />
+&nbsp;&nbsp;"&nbsp;Agregar&nbsp;el&nbsp;último&nbsp;grupo<br />
+&nbsp;&nbsp;IF&nbsp;lv_status&nbsp;IS&nbsp;NOT&nbsp;INITIAL&nbsp;AND&nbsp;lv_ebeln&nbsp;IS&nbsp;NOT&nbsp;INITIAL&nbsp;AND&nbsp;lv_belnr&nbsp;IS&nbsp;NOT&nbsp;INITIAL&nbsp;AND&nbsp;lwa_monitor&nbsp;IS&nbsp;NOT&nbsp;INITIAL.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;ls_cell_type-fieldname&nbsp;=&nbsp;'EXPAND'."INS<br />
+&nbsp;&nbsp;&nbsp;&nbsp;ls_cell_type-style&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;cl_gui_alv_grid=&gt;mc_style_hotspot."INS<br />
+&nbsp;&nbsp;&nbsp;&nbsp;lwa_monitor-expand&nbsp;=&nbsp;'@3S\QExpand&nbsp;Details@'."INS<br />
+&nbsp;&nbsp;&nbsp;&nbsp;APPEND&nbsp;ls_cell_type&nbsp;TO&nbsp;lwa_monitor-cell_type."INS<br />
+&nbsp;&nbsp;&nbsp;&nbsp;APPEND&nbsp;lwa_monitor&nbsp;TO&nbsp;gti_datos_monitor.<br />
+&nbsp;&nbsp;ENDIF.<br />
+<br />
+ENDMETHOD.<br />
+            </div>
+          </td>
+        </tr>
+      </table>
+      </td>
+      </tr>
+   <tr>
+<td class="footer">Extracted by Mass Download version 1.5.5 - E.G.Mellodew. 1998-2025. Sap Release 701</td>
+   </tr>
+</table>
+</body>
+</html>

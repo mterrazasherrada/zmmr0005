@@ -1,0 +1,176 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="application/xhtml+xml; charset=ISO-8859-1" />
+<title>ZMMF_FACTURA_MANUAL_SCREN</title>
+<style type="text/css">
+.code{ font-family:"Courier New", Courier, monospace; color:#000; font-size:14px; background-color:#F2F4F7 }
+  .codeComment {font-family:"Courier New", Courier, monospace; color:#0000F0; font-size:14px; background-color:#F2F4F7 }
+  .normalBold{ font-family:Arial, Helvetica, sans-serif; color:#000; font-size:12px; font-weight:800 }
+  .normalBoldLarge{ font-family:Arial, Helvetica, sans-serif; color:#000; font-size:16px; font-weight:800 }
+</style>
+<style type="text/css">
+  .normal{ font-family:Arial, Helvetica, sans-serif; color:#000; font-size:12px }
+  .footer{ font-family:Arial, Helvetica, sans-serif; color:#000; font-size:12px; text-align: center }
+  h2{ font-family:Arial, Helvetica, sans-serif; color:#000; font-size:16px; font-weight:800 }
+  h3{ font-family:Arial, Helvetica, sans-serif; color:#000; font-size:14px; font-weight:800 }
+  .outerTable{
+   background-color:#E0E7ED;
+   width:100%;
+   border-top-width: thin;
+   border-right-width: thin;
+   border-right-width: thin;
+   border-left-width: thin;
+   border-top-style: solid;
+   border-right-style: solid;
+   border-bottom-style: solid;
+   border-left-style: solid;
+  }
+  .innerTable{
+   background-color:#F2F4F7;
+   width:100%;
+   border-top-width: thin;
+   border-right-width: thin;
+   border-bottom-width: thin;
+   border-left-width: thin;
+   border-top-style: solid;
+   border-right-style: solid;
+   border-bottom-style: solid;
+   border-left-style: solid;
+  }
+</style>
+</head>
+<body>
+<table class="outerTable">
+  <tr class="normalBoldLarge">
+     <td><h2>Code listing for function ZMMF_FACTURA_MANUAL_SCREN</h2>
+<h3> Description: Registro de factura manual</h3></td>
+   </tr>
+  <tr>
+     <td>
+     <table class="innerTable">
+       <tr>
+          <td>
+   <div class="code">
+FUNCTION zmmf_factura_manual_scren.<br />
+   </div>
+   <div class="codeComment">
+*"----------------------------------------------------------------------<br />
+*"*"Interfase local<br />
+*"  IMPORTING<br />
+*"     VALUE(ENDPOS_COL) OPTIONAL<br />
+*"     VALUE(ENDPOS_ROW) OPTIONAL<br />
+*"     VALUE(STARTPOS_COL) OPTIONAL<br />
+*"     VALUE(STARTPOS_ROW) OPTIONAL<br />
+*"     VALUE(TITLETEXT) OPTIONAL<br />
+*"  TABLES<br />
+*"      IT_POSICIONES TYPE  ZMMTT_FACTURA_PROVEEDOR<br />
+*"  CHANGING<br />
+*"     REFERENCE(IW_MONITOR) TYPE  ZMMS_FACTURA_PROVEEDOR<br />
+*"     REFERENCE(IW_FACTURA) TYPE  ZMMT_FACTURA_P_C<br />
+*"     REFERENCE(IT_FACTURA_P) TYPE  ZMMTT_FACTURA_P_P OPTIONAL<br />
+*"----------------------------------------------------------------------<br />
+
+<div class="codeComment">*       <a href ="global-zmmf_factura_manual_scren.html">Global data declarations</a></div><br />
+   </div>
+   <div class="code">
+&nbsp;&nbsp;gv_title_text&nbsp;&nbsp;=&nbsp;titletext.<br />
+&nbsp;&nbsp;"/Cabecera<br />
+&nbsp;&nbsp;CLEAR&nbsp;gs_factura_proveedor.<br />
+&nbsp;&nbsp;gs_factura_proveedor&nbsp;=&nbsp;iw_monitor.<br />
+&nbsp;&nbsp;"/Posiciones<br />
+&nbsp;&nbsp;FREE&nbsp;gt_posiciones.<br />
+&nbsp;&nbsp;gt_posiciones[]&nbsp;=&nbsp;it_posiciones[].<br />
+&nbsp;&nbsp;CALL&nbsp;SCREEN&nbsp;0100&nbsp;STARTING&nbsp;AT&nbsp;startpos_col&nbsp;startpos_row<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ENDING&nbsp;AT&nbsp;endpos_col&nbsp;endpos_row.<br />
+<br />
+&nbsp;&nbsp;IF&nbsp;zmms_facturas_screen&nbsp;IS&nbsp;NOT&nbsp;INITIAL&nbsp;AND&nbsp;gt_items[]&nbsp;IS&nbsp;NOT&nbsp;INITIAL.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DATA:&nbsp;lwa_factura_p&nbsp;TYPE&nbsp;zmmt_factura_p_p.<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;iw_factura-nit_emisor&nbsp;=&nbsp;zmms_facturas_screen-nit.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;iw_factura-razon_social&nbsp;=&nbsp;zmms_facturas_screen-razon_social.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;lwa_factura_p-numero_factura&nbsp;=&nbsp;iw_factura-numero_factura&nbsp;=&nbsp;zmms_facturas_screen-nro_factura.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;iw_factura-monto_total&nbsp;=&nbsp;zmms_facturas_screen-total_factura.<br />
+   </div>
+   <div class="codeComment">
+*    iw_factura-monto_sujeto_iva = zmms_facturas_screen-total_factura.<br />
+*    iw_factura-monto_deduccion_iehd = zmms_facturas_screen-total_factura.<br />
+   </div>
+   <div class="code">
+&nbsp;&nbsp;&nbsp;&nbsp;iw_factura-codigo_moneda&nbsp;=&nbsp;zmms_facturas_screen-moneda_factura.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;iw_factura-fecha_emision&nbsp;=&nbsp;zmms_facturas_screen-fecha.<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;CLEAR&nbsp;lwa_factura_p.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LOOP&nbsp;AT&nbsp;gt_items&nbsp;INTO&nbsp;gwa_items.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lwa_factura_p-descripcion&nbsp;=&nbsp;gwa_items-descripcion.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lwa_factura_p-cantidad&nbsp;=&nbsp;gwa_items-cantidad.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lwa_factura_p-precio_unitario&nbsp;=&nbsp;gwa_items-precio_unitario.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lwa_factura_p-subtotal&nbsp;=&nbsp;gwa_items-monto.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;APPEND&nbsp;lwa_factura_p&nbsp;TO&nbsp;it_factura_p."Al&nbsp;final&nbsp;de&nbsp;cada&nbsp;grupo&nbsp;de&nbsp;detalle,&nbsp;agregar&nbsp;la&nbsp;información&nbsp;de&nbsp;la&nbsp;posición&nbsp;a&nbsp;la&nbsp;tabla<br />
+&nbsp;&nbsp;&nbsp;&nbsp;ENDLOOP.<br />
+&nbsp;&nbsp;ENDIF.<br />
+<br />
+ENDFUNCTION.<br />
+<br />
+<br />
+AT USER-COMMAND.<br />
+&nbsp;&nbsp;CASE&nbsp;sy-ucomm.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;WHEN&nbsp;'SLCT'&nbsp;OR&nbsp;&nbsp;'&F03'&nbsp;&nbsp;OR&nbsp;&nbsp;'&F15'&nbsp;OR&nbsp;&nbsp;'&F12'&nbsp;OR&nbsp;'CANC'.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SET&nbsp;SCREEN&nbsp;0.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;LEAVE&nbsp;SCREEN.<br />
+&nbsp;&nbsp;ENDCASE.<br />
+<br />
+   </div>
+   <div class="codeComment">
+*---------------------------------------------------------------------*<br />
+*       MODULE SET_TITLE                                              *<br />
+*---------------------------------------------------------------------*<br />
+*       Set the title given by calling program                        *<br />
+*---------------------------------------------------------------------*<br />
+<br />
+   </div>
+   <div class="code">
+MODULE set_title OUTPUT.<br />
+   </div>
+   <div class="codeComment">
+*<br />
+   </div>
+   <div class="code">
+&nbsp;&nbsp;SET&nbsp;TITLEBAR&nbsp;'001'&nbsp;WITH&nbsp;gv_title_text.<br />
+   </div>
+   <div class="codeComment">
+*<br />
+   </div>
+   <div class="code">
+ENDMODULE.                    "set_title OUTPUT<br />
+<br />
+<br />
+   </div>
+   <div class="codeComment">
+*---------------------------------------------------------------------*<br />
+*       MODULE LISTPROCESSING OUTPUT                                  *<br />
+*---------------------------------------------------------------------*<br />
+*       Switchs to list-processing and displays internal table data   *<br />
+*---------------------------------------------------------------------*<br />
+*module listprocessing output.<br />
+*<br />
+*  set pf-status 'PICK'.<br />
+*  leave to list-processing and return to screen 100.<br />
+*  loop at listtab.<br />
+*    write: / listtab.<br />
+*  endloop.<br />
+*  leave screen.<br />
+*<br />
+*endmodule.<br />
+            </div>
+          </td>
+        </tr>
+      </table>
+      </td>
+      </tr>
+   <tr>
+<td class="footer">Extracted by Mass Download version 1.5.5 - E.G.Mellodew. 1998-2025. Sap Release 701</td>
+   </tr>
+</table>
+</body>
+</html>

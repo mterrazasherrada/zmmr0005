@@ -1,0 +1,161 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="application/xhtml+xml; charset=ISO-8859-1" />
+<title>SET_PROCESAR_PDF</title>
+<style type="text/css">
+.code{ font-family:"Courier New", Courier, monospace; color:#000; font-size:14px; background-color:#F2F4F7 }
+  .codeComment {font-family:"Courier New", Courier, monospace; color:#0000F0; font-size:14px; background-color:#F2F4F7 }
+  .normalBold{ font-family:Arial, Helvetica, sans-serif; color:#000; font-size:12px; font-weight:800 }
+  .normalBoldLarge{ font-family:Arial, Helvetica, sans-serif; color:#000; font-size:16px; font-weight:800 }
+</style>
+<style type="text/css">
+  .normal{ font-family:Arial, Helvetica, sans-serif; color:#000; font-size:12px }
+  .footer{ font-family:Arial, Helvetica, sans-serif; color:#000; font-size:12px; text-align: center }
+  h2{ font-family:Arial, Helvetica, sans-serif; color:#000; font-size:16px; font-weight:800 }
+  h3{ font-family:Arial, Helvetica, sans-serif; color:#000; font-size:14px; font-weight:800 }
+  .outerTable{
+   background-color:#E0E7ED;
+   width:100%;
+   border-top-width: thin;
+   border-right-width: thin;
+   border-right-width: thin;
+   border-left-width: thin;
+   border-top-style: solid;
+   border-right-style: solid;
+   border-bottom-style: solid;
+   border-left-style: solid;
+  }
+  .innerTable{
+   background-color:#F2F4F7;
+   width:100%;
+   border-top-width: thin;
+   border-right-width: thin;
+   border-bottom-width: thin;
+   border-left-width: thin;
+   border-top-style: solid;
+   border-right-style: solid;
+   border-bottom-style: solid;
+   border-left-style: solid;
+  }
+</style>
+</head>
+<body>
+<table class="outerTable">
+  <tr class="normalBoldLarge">
+     <td><h2>Code listing for: SET_PROCESAR_PDF</h2>
+<h3> Description: Subir PDF</h3></td>
+   </tr>
+  <tr>
+     <td>
+     <table class="innerTable">
+       <tr>
+          <td>
+   <div class="codeComment">
+**************************************************************************<br />
+*&nbsp;&nbsp;&nbsp;Method&nbsp;attributes.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br />
+**************************************************************************<br />
+   </div>
+   <div class="code">
+Instantiation: Public<br />
+   </div>
+   <div class="codeComment">
+**************************************************************************<br />
+<br />
+   </div>
+   <div class="code">
+METHOD set_procesar_pdf.<br />
+&nbsp;&nbsp;"&nbsp;Estructura&nbsp;basada&nbsp;en&nbsp;la&nbsp;tabla&nbsp;ZMMT_FACTURA_P_C<br />
+&nbsp;&nbsp;DATA:&nbsp;lwa_factura&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TYPE&nbsp;zmmt_factura_p_c,<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lt_return&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TYPE&nbsp;TABLE&nbsp;OF&nbsp;bapiret2,<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lv_archiv_id&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TYPE&nbsp;char25,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"&nbsp;ID&nbsp;del&nbsp;archivo&nbsp;generado<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lv_object_id&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TYPE&nbsp;char40,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"&nbsp;ID&nbsp;de&nbsp;referencia&nbsp;del&nbsp;objeto<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lv_url&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TYPE&nbsp;string.<br />
+<br />
+&nbsp;&nbsp;DATA:&nbsp;lv_ddtext&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TYPE&nbsp;ddtext,<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lv_error_status&nbsp;&nbsp;&nbsp;&nbsp;TYPE&nbsp;zde_estatus,<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lv_error_status_icon&nbsp;TYPE&nbsp;zmms_factura_proveedor-status,<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lv_error_status_desc&nbsp;TYPE&nbsp;zmms_factura_proveedor-status_descrip.<br />
+<br />
+&nbsp;&nbsp;lwa_factura&nbsp;=&nbsp;iw_factura.<br />
+   </div>
+   <div class="codeComment">
+*&nbsp;&nbsp;"&nbsp;Crear&nbsp;log&nbsp;de&nbsp;la&nbsp;instancia<br />
+*&nbsp;&nbsp;me-&gt;instance_log(&nbsp;iw_monitor-ebeln&nbsp;).<br />
+*<br />
+*&nbsp;&nbsp;"&nbsp;Estado&nbsp;exitoso&nbsp;por&nbsp;defecto<br />
+*&nbsp;&nbsp;lwa_factura-estado&nbsp;=&nbsp;gc_st_exitoso.<br />
+*&nbsp;&nbsp;lv_ddtext&nbsp;=&nbsp;zmmcl_facturas_utilities=&gt;get_domain_value(&nbsp;ip_field&nbsp;=&nbsp;lwa_factura-estado&nbsp;).<br />
+*&nbsp;&nbsp;iw_monitor-status_descrip&nbsp;=&nbsp;lv_ddtext.<br />
+*&nbsp;&nbsp;iw_monitor-status&nbsp;=&nbsp;zmmcl_facturas_utilities=&gt;get_status_light(&nbsp;ip_status&nbsp;=&nbsp;lwa_factura-estado&nbsp;).<br />
+*<br />
+*&nbsp;&nbsp;"&nbsp;Estado&nbsp;de&nbsp;error&nbsp;predefinido<br />
+*&nbsp;&nbsp;lv_error_status&nbsp;=&nbsp;gc_st_error.<br />
+*&nbsp;&nbsp;lv_error_status_icon&nbsp;=&nbsp;zmmcl_facturas_utilities=&gt;get_status_light(&nbsp;ip_status&nbsp;=&nbsp;lv_error_status&nbsp;).<br />
+*&nbsp;&nbsp;lv_error_status_desc&nbsp;=&nbsp;zmmcl_facturas_utilities=&gt;get_domain_value(&nbsp;ip_field&nbsp;=&nbsp;lv_error_status&nbsp;).<br />
+<br />
+   </div>
+   <div class="code">
+&nbsp;&nbsp;"&nbsp;------&nbsp;Subir&nbsp;el&nbsp;PDF&nbsp;al&nbsp;repositorio&nbsp;remoto&nbsp;------<br />
+   </div>
+   <div class="codeComment">
+*&nbsp;&nbsp;CALL&nbsp;FUNCTION&nbsp;'ARCHIV_CONNECTION_INSERT'<br />
+*&nbsp;&nbsp;&nbsp;&nbsp;EXPORTING<br />
+*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;archiv_id&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;'ZMM_PDF_ARCH'&nbsp;&nbsp;&nbsp;"&nbsp;ID&nbsp;del&nbsp;repositorio,&nbsp;debe&nbsp;estar&nbsp;configurado<br />
+*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;archiv_doc_id&nbsp;=&nbsp;lv_archiv_id&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"&nbsp;ID&nbsp;generado&nbsp;para&nbsp;el&nbsp;documento<br />
+*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;document_type&nbsp;=&nbsp;'PDF'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"&nbsp;Tipo&nbsp;de&nbsp;documento<br />
+*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sap_object&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;'ZMM_FACTURA'&nbsp;&nbsp;&nbsp;&nbsp;"&nbsp;Objeto&nbsp;SAP&nbsp;asociado<br />
+*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sap_obj_id&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;iw_monitor-ebeln&nbsp;"&nbsp;ID&nbsp;de&nbsp;referencia&nbsp;(número&nbsp;de&nbsp;pedido&nbsp;en&nbsp;este&nbsp;caso)<br />
+*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;binary_data&nbsp;&nbsp;&nbsp;=&nbsp;ip_contenido&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"&nbsp;Contenido&nbsp;en&nbsp;formato&nbsp;XSTRING&nbsp;(PDF)<br />
+*&nbsp;&nbsp;&nbsp;&nbsp;EXCEPTIONS<br />
+*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;OTHERS&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;1.<br />
+*<br />
+*&nbsp;&nbsp;IF&nbsp;sy-subrc&nbsp;&lt;&gt;&nbsp;0.<br />
+*&nbsp;&nbsp;&nbsp;&nbsp;"&nbsp;Si&nbsp;ocurre&nbsp;un&nbsp;error&nbsp;al&nbsp;subir&nbsp;el&nbsp;PDF&nbsp;al&nbsp;repositorio,&nbsp;manejar&nbsp;el&nbsp;error<br />
+*&nbsp;&nbsp;&nbsp;&nbsp;iw_monitor-status&nbsp;=&nbsp;lv_error_status_icon.<br />
+*&nbsp;&nbsp;&nbsp;&nbsp;iw_monitor-status_descrip&nbsp;=&nbsp;lv_error_status_desc.<br />
+*&nbsp;&nbsp;&nbsp;&nbsp;RETURN.<br />
+*&nbsp;&nbsp;ELSE.<br />
+*&nbsp;&nbsp;&nbsp;&nbsp;"&nbsp;Subida&nbsp;exitosa,&nbsp;crear&nbsp;URL&nbsp;para&nbsp;acceso&nbsp;al&nbsp;documento&nbsp;si&nbsp;es&nbsp;necesario<br />
+*&nbsp;&nbsp;&nbsp;&nbsp;CONCATENATE&nbsp;'http://myrepository.com/'&nbsp;lv_archiv_id&nbsp;INTO&nbsp;lv_url.<br />
+*&nbsp;&nbsp;ENDIF.<br />
+<br />
+   </div>
+   <div class="code">
+&nbsp;&nbsp;"&nbsp;------&nbsp;Guardar&nbsp;el&nbsp;PDF&nbsp;en&nbsp;la&nbsp;tabla&nbsp;SAP&nbsp;ZMMT_FACTURA_P_C&nbsp;------<br />
+&nbsp;&nbsp;lwa_factura-archivo_pdf&nbsp;=&nbsp;ip_contenido.&nbsp;&nbsp;"&nbsp;Guardar&nbsp;el&nbsp;contenido&nbsp;del&nbsp;PDF&nbsp;en&nbsp;la&nbsp;tabla<br />
+&nbsp;&nbsp;iw_monitor-pdf&nbsp;=&nbsp;ip_contenido.<br />
+   </div>
+   <div class="codeComment">
+**&nbsp;&nbsp;lwa_factura-url_archivo&nbsp;=&nbsp;lv_url.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"&nbsp;Opcional:&nbsp;guardar&nbsp;la&nbsp;URL&nbsp;si&nbsp;se&nbsp;necesita&nbsp;acceder<br />
+*&nbsp;&nbsp;lwa_factura-tipo_archivo&nbsp;=&nbsp;'02'.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"&nbsp;Código&nbsp;para&nbsp;PDF<br />
+*&nbsp;&nbsp;lwa_factura-usuario&nbsp;=&nbsp;sy-uname.<br />
+*&nbsp;&nbsp;lwa_factura-fecha_upd&nbsp;=&nbsp;sy-datum.<br />
+*&nbsp;&nbsp;lwa_factura-hora_upd&nbsp;=&nbsp;sy-uzeit.<br />
+*&nbsp;&nbsp;lwa_factura-tcode&nbsp;=&nbsp;sy-tcode.<br />
+*&nbsp;&nbsp;lwa_factura-ebeln&nbsp;=&nbsp;iw_monitor-ebeln.<br />
+*<br />
+*&nbsp;&nbsp;"&nbsp;Guardar&nbsp;log&nbsp;e&nbsp;insertar/actualizar&nbsp;en&nbsp;ZMMT_FACTURA_P_C<br />
+*&nbsp;&nbsp;me-&gt;save_log(&nbsp;IMPORTING&nbsp;ep_log_number&nbsp;=&nbsp;iw_monitor-lognm&nbsp;).<br />
+*&nbsp;&nbsp;lwa_factura-lognm&nbsp;=&nbsp;iw_monitor-lognm.<br />
+<br />
+   </div>
+   <div class="code">
+&nbsp;&nbsp;MODIFY&nbsp;zmmt_factura_p_c&nbsp;FROM&nbsp;lwa_factura.<br />
+&nbsp;&nbsp;IF&nbsp;sy-subrc&nbsp;=&nbsp;0.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;COMMIT&nbsp;WORK.<br />
+&nbsp;&nbsp;ENDIF.<br />
+<br />
+ENDMETHOD.<br />
+            </div>
+          </td>
+        </tr>
+      </table>
+      </td>
+      </tr>
+   <tr>
+<td class="footer">Extracted by Mass Download version 1.5.5 - E.G.Mellodew. 1998-2025. Sap Release 701</td>
+   </tr>
+</table>
+</body>
+</html>

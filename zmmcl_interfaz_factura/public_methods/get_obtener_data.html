@@ -1,0 +1,173 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="application/xhtml+xml; charset=ISO-8859-1" />
+<title>GET_OBTENER_DATA</title>
+<style type="text/css">
+.code{ font-family:"Courier New", Courier, monospace; color:#000; font-size:14px; background-color:#F2F4F7 }
+  .codeComment {font-family:"Courier New", Courier, monospace; color:#0000F0; font-size:14px; background-color:#F2F4F7 }
+  .normalBold{ font-family:Arial, Helvetica, sans-serif; color:#000; font-size:12px; font-weight:800 }
+  .normalBoldLarge{ font-family:Arial, Helvetica, sans-serif; color:#000; font-size:16px; font-weight:800 }
+</style>
+<style type="text/css">
+  .normal{ font-family:Arial, Helvetica, sans-serif; color:#000; font-size:12px }
+  .footer{ font-family:Arial, Helvetica, sans-serif; color:#000; font-size:12px; text-align: center }
+  h2{ font-family:Arial, Helvetica, sans-serif; color:#000; font-size:16px; font-weight:800 }
+  h3{ font-family:Arial, Helvetica, sans-serif; color:#000; font-size:14px; font-weight:800 }
+  .outerTable{
+   background-color:#E0E7ED;
+   width:100%;
+   border-top-width: thin;
+   border-right-width: thin;
+   border-right-width: thin;
+   border-left-width: thin;
+   border-top-style: solid;
+   border-right-style: solid;
+   border-bottom-style: solid;
+   border-left-style: solid;
+  }
+  .innerTable{
+   background-color:#F2F4F7;
+   width:100%;
+   border-top-width: thin;
+   border-right-width: thin;
+   border-bottom-width: thin;
+   border-left-width: thin;
+   border-top-style: solid;
+   border-right-style: solid;
+   border-bottom-style: solid;
+   border-left-style: solid;
+  }
+</style>
+</head>
+<body>
+<table class="outerTable">
+  <tr class="normalBoldLarge">
+     <td><h2>Code listing for: GET_OBTENER_DATA</h2>
+<h3> Description: ##0. Método principal para la obtención de datos</h3></td>
+   </tr>
+  <tr>
+     <td>
+     <table class="innerTable">
+       <tr>
+          <td>
+   <div class="codeComment">
+**************************************************************************<br />
+*&nbsp;&nbsp;&nbsp;Method&nbsp;attributes.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br />
+**************************************************************************<br />
+   </div>
+   <div class="code">
+Instantiation: Public<br />
+   </div>
+   <div class="codeComment">
+**************************************************************************<br />
+<br />
+   </div>
+   <div class="code">
+METHOD get_obtener_data.<br />
+   </div>
+   <div class="codeComment">
+*<br />
+*/&nbsp;Inicializar&nbsp;variables<br />
+*<br />
+   </div>
+   <div class="code">
+&nbsp;&nbsp;me-&gt;set_inicializar_variables(&nbsp;).<br />
+   </div>
+   <div class="codeComment">
+*<br />
+*/&nbsp;Obtener&nbsp;datos&nbsp;principales<br />
+*<br />
+   </div>
+   <div class="code">
+&nbsp;&nbsp;me-&gt;get_datos_principales(&nbsp;).<br />
+   </div>
+   <div class="codeComment">
+*<br />
+*/&nbsp;Filtrar&nbsp;las&nbsp;EM&nbsp;y&nbsp;facturas&nbsp;pendientes/facturadas<br />
+*<br />
+   </div>
+   <div class="code">
+&nbsp;&nbsp;IF&nbsp;gv_etapa&nbsp;=&nbsp;'01'.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;me-&gt;get_filtrar_em_pendientes(&nbsp;).<br />
+&nbsp;&nbsp;ELSE.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;me-&gt;get_filtrar_em_facturadas(&nbsp;).<br />
+&nbsp;&nbsp;ENDIF.<br />
+   </div>
+   <div class="codeComment">
+*<br />
+*/&nbsp;Obtener&nbsp;imputaciones<br />
+*<br />
+   </div>
+   <div class="code">
+&nbsp;&nbsp;me-&gt;get_imputaciones(&nbsp;).<br />
+   </div>
+   <div class="codeComment">
+*<br />
+*/&nbsp;Obtener&nbsp;documentos&nbsp;contables&nbsp;FI&nbsp;relacionados<br />
+*<br />
+   </div>
+   <div class="code">
+&nbsp;&nbsp;me-&gt;get_documentos_fi(&nbsp;).<br />
+   </div>
+   <div class="codeComment">
+*<br />
+*/&nbsp;Obtener&nbsp;condiciones&nbsp;de&nbsp;precios&nbsp;y&nbsp;descuentos<br />
+*<br />
+   </div>
+   <div class="code">
+&nbsp;&nbsp;me-&gt;get_condiciones(&nbsp;).<br />
+   </div>
+   <div class="codeComment">
+*<br />
+*/&nbsp;Obtener&nbsp;nombre&nbsp;del&nbsp;proveedor<br />
+*<br />
+   </div>
+   <div class="code">
+&nbsp;&nbsp;me-&gt;get_nombre_proveedor(&nbsp;).<br />
+   </div>
+   <div class="codeComment">
+*<br />
+*/&nbsp;Obtener&nbsp;tabla&nbsp;de&nbsp;estados<br />
+*<br />
+   </div>
+   <div class="code">
+&nbsp;&nbsp;me-&gt;get_tabla_estados(&nbsp;).<br />
+   </div>
+   <div class="codeComment">
+*<br />
+*/&nbsp;Obtener&nbsp;facturas&nbsp;de&nbsp;tabla&nbsp;Z<br />
+*<br />
+   </div>
+   <div class="code">
+&nbsp;&nbsp;me-&gt;get_tablaz_facturas(&nbsp;).<br />
+   </div>
+   <div class="codeComment">
+*<br />
+*/&nbsp;Procesar&nbsp;las&nbsp;facturas&nbsp;según&nbsp;el&nbsp;estado&nbsp;de&nbsp;la&nbsp;posición<br />
+*<br />
+   </div>
+   <div class="code">
+&nbsp;&nbsp;me-&gt;set_procesar_facturas_estado(&nbsp;).<br />
+   </div>
+   <div class="codeComment">
+*<br />
+*/&nbsp;Agrupar&nbsp;los&nbsp;datos&nbsp;para&nbsp;la&nbsp;cabecera<br />
+*<br />
+   </div>
+   <div class="code">
+&nbsp;&nbsp;me-&gt;set_agrupar_datos(&nbsp;).<br />
+<br />
+ENDMETHOD.<br />
+            </div>
+          </td>
+        </tr>
+      </table>
+      </td>
+      </tr>
+   <tr>
+<td class="footer">Extracted by Mass Download version 1.5.5 - E.G.Mellodew. 1998-2025. Sap Release 701</td>
+   </tr>
+</table>
+</body>
+</html>

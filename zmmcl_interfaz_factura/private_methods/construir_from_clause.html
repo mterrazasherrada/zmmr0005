@@ -1,0 +1,108 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="application/xhtml+xml; charset=ISO-8859-1" />
+<title>CONSTRUIR_FROM_CLAUSE</title>
+<style type="text/css">
+.code{ font-family:"Courier New", Courier, monospace; color:#000; font-size:14px; background-color:#F2F4F7 }
+  .codeComment {font-family:"Courier New", Courier, monospace; color:#0000F0; font-size:14px; background-color:#F2F4F7 }
+  .normalBold{ font-family:Arial, Helvetica, sans-serif; color:#000; font-size:12px; font-weight:800 }
+  .normalBoldLarge{ font-family:Arial, Helvetica, sans-serif; color:#000; font-size:16px; font-weight:800 }
+</style>
+<style type="text/css">
+  .normal{ font-family:Arial, Helvetica, sans-serif; color:#000; font-size:12px }
+  .footer{ font-family:Arial, Helvetica, sans-serif; color:#000; font-size:12px; text-align: center }
+  h2{ font-family:Arial, Helvetica, sans-serif; color:#000; font-size:16px; font-weight:800 }
+  h3{ font-family:Arial, Helvetica, sans-serif; color:#000; font-size:14px; font-weight:800 }
+  .outerTable{
+   background-color:#E0E7ED;
+   width:100%;
+   border-top-width: thin;
+   border-right-width: thin;
+   border-right-width: thin;
+   border-left-width: thin;
+   border-top-style: solid;
+   border-right-style: solid;
+   border-bottom-style: solid;
+   border-left-style: solid;
+  }
+  .innerTable{
+   background-color:#F2F4F7;
+   width:100%;
+   border-top-width: thin;
+   border-right-width: thin;
+   border-bottom-width: thin;
+   border-left-width: thin;
+   border-top-style: solid;
+   border-right-style: solid;
+   border-bottom-style: solid;
+   border-left-style: solid;
+  }
+</style>
+</head>
+<body>
+<table class="outerTable">
+  <tr class="normalBoldLarge">
+     <td><h2>Code listing for: CONSTRUIR_FROM_CLAUSE</h2>
+<h3> Description: Preparar los FROM</h3></td>
+   </tr>
+  <tr>
+     <td>
+     <table class="innerTable">
+       <tr>
+          <td>
+   <div class="codeComment">
+**************************************************************************<br />
+*&nbsp;&nbsp;&nbsp;Method&nbsp;attributes.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br />
+**************************************************************************<br />
+   </div>
+   <div class="code">
+Instantiation: Private<br />
+   </div>
+   <div class="codeComment">
+**************************************************************************<br />
+<br />
+   </div>
+   <div class="code">
+METHOD construir_from_clause.<br />
+<br />
+&nbsp;&nbsp;"/&nbsp;Validar&nbsp;si&nbsp;tiene&nbsp;datos&nbsp;de&nbsp;imputación,&nbsp;ref.&nbsp;pestaña&nbsp;imputación<br />
+&nbsp;&nbsp;IF&nbsp;it_pep[]&nbsp;IS&nbsp;NOT&nbsp;INITIAL&nbsp;OR&nbsp;it_kostl[]&nbsp;IS&nbsp;NOT&nbsp;INITIAL&nbsp;OR<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;it_aufnr[]&nbsp;IS&nbsp;NOT&nbsp;INITIAL&nbsp;OR&nbsp;it_sakto[]&nbsp;IS&nbsp;NOT&nbsp;INITIAL&nbsp;OR&nbsp;it_prctr[]&nbsp;IS&nbsp;NOT&nbsp;INITIAL<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;OR&nbsp;it_gsber[]&nbsp;IS&nbsp;NOT&nbsp;INITIAL.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;CONCATENATE&nbsp;'ekko&nbsp;AS&nbsp;a&nbsp;JOIN&nbsp;ekbe&nbsp;AS&nbsp;c&nbsp;ON&nbsp;a~ebeln&nbsp;=&nbsp;c~ebeln&nbsp;JOIN&nbsp;ekpo&nbsp;AS&nbsp;d'<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'ON&nbsp;a~ebeln&nbsp;=&nbsp;d~ebeln&nbsp;AND&nbsp;c~ebelp&nbsp;=&nbsp;d~ebelp&nbsp;JOIN&nbsp;ekkn&nbsp;AS&nbsp;e'<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'ON&nbsp;d~ebeln&nbsp;=&nbsp;e~ebeln&nbsp;AND&nbsp;d~ebelp&nbsp;=&nbsp;e~ebelp'<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'AND&nbsp;d~konnr&nbsp;IN&nbsp;it_konnr'<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;INTO&nbsp;ep_from_clause&nbsp;SEPARATED&nbsp;BY&nbsp;space.<br />
+&nbsp;&nbsp;ELSE.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;CONCATENATE&nbsp;'ekko&nbsp;AS&nbsp;a&nbsp;JOIN&nbsp;ekbe&nbsp;AS&nbsp;c&nbsp;ON&nbsp;a~ebeln&nbsp;=&nbsp;c~ebeln&nbsp;JOIN&nbsp;ekpo&nbsp;AS&nbsp;d'<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'ON&nbsp;a~ebeln&nbsp;=&nbsp;d~ebeln&nbsp;AND&nbsp;c~ebelp&nbsp;=&nbsp;d~ebelp'<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;INTO&nbsp;ep_from_clause&nbsp;SEPARATED&nbsp;BY&nbsp;space.<br />
+&nbsp;&nbsp;ENDIF.<br />
+&nbsp;&nbsp;"/&nbsp;Opción&nbsp;2.-&nbsp;Confirmar&nbsp;carga&nbsp;de&nbsp;facturas<br />
+&nbsp;&nbsp;IF&nbsp;gv_etapa&nbsp;=&nbsp;'02'.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;CONCATENATE&nbsp;ep_from_clause&nbsp;'JOIN&nbsp;zmmt_factura_p_c&nbsp;AS&nbsp;f'<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'ON&nbsp;f~ebeln&nbsp;=&nbsp;a~ebeln'<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;INTO&nbsp;ep_from_clause&nbsp;SEPARATED&nbsp;BY&nbsp;space.<br />
+&nbsp;&nbsp;ENDIF.<br />
+&nbsp;&nbsp;"/&nbsp;Opción&nbsp;3.-&nbsp;Reporte&nbsp;de&nbsp;estado&nbsp;de&nbsp;facturas<br />
+&nbsp;&nbsp;IF&nbsp;gv_etapa&nbsp;=&nbsp;'03'&nbsp;AND&nbsp;(&nbsp;me-&gt;it_status[]&nbsp;IS&nbsp;NOT&nbsp;INITIAL&nbsp;OR&nbsp;me-&gt;it_user[]&nbsp;IS&nbsp;NOT&nbsp;INITIAL&nbsp;).<br />
+&nbsp;&nbsp;&nbsp;&nbsp;CONCATENATE&nbsp;ep_from_clause&nbsp;'JOIN&nbsp;zmmt_factura_p_c&nbsp;AS&nbsp;f'<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'ON&nbsp;f~ebeln&nbsp;=&nbsp;a~ebeln'<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;INTO&nbsp;ep_from_clause&nbsp;SEPARATED&nbsp;BY&nbsp;space.<br />
+&nbsp;&nbsp;ENDIF.<br />
+<br />
+ENDMETHOD.<br />
+            </div>
+          </td>
+        </tr>
+      </table>
+      </td>
+      </tr>
+   <tr>
+<td class="footer">Extracted by Mass Download version 1.5.5 - E.G.Mellodew. 1998-2025. Sap Release 701</td>
+   </tr>
+</table>
+</body>
+</html>

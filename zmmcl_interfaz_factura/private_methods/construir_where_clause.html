@@ -1,0 +1,155 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="application/xhtml+xml; charset=ISO-8859-1" />
+<title>CONSTRUIR_WHERE_CLAUSE</title>
+<style type="text/css">
+.code{ font-family:"Courier New", Courier, monospace; color:#000; font-size:14px; background-color:#F2F4F7 }
+  .codeComment {font-family:"Courier New", Courier, monospace; color:#0000F0; font-size:14px; background-color:#F2F4F7 }
+  .normalBold{ font-family:Arial, Helvetica, sans-serif; color:#000; font-size:12px; font-weight:800 }
+  .normalBoldLarge{ font-family:Arial, Helvetica, sans-serif; color:#000; font-size:16px; font-weight:800 }
+</style>
+<style type="text/css">
+  .normal{ font-family:Arial, Helvetica, sans-serif; color:#000; font-size:12px }
+  .footer{ font-family:Arial, Helvetica, sans-serif; color:#000; font-size:12px; text-align: center }
+  h2{ font-family:Arial, Helvetica, sans-serif; color:#000; font-size:16px; font-weight:800 }
+  h3{ font-family:Arial, Helvetica, sans-serif; color:#000; font-size:14px; font-weight:800 }
+  .outerTable{
+   background-color:#E0E7ED;
+   width:100%;
+   border-top-width: thin;
+   border-right-width: thin;
+   border-right-width: thin;
+   border-left-width: thin;
+   border-top-style: solid;
+   border-right-style: solid;
+   border-bottom-style: solid;
+   border-left-style: solid;
+  }
+  .innerTable{
+   background-color:#F2F4F7;
+   width:100%;
+   border-top-width: thin;
+   border-right-width: thin;
+   border-bottom-width: thin;
+   border-left-width: thin;
+   border-top-style: solid;
+   border-right-style: solid;
+   border-bottom-style: solid;
+   border-left-style: solid;
+  }
+</style>
+</head>
+<body>
+<table class="outerTable">
+  <tr class="normalBoldLarge">
+     <td><h2>Code listing for: CONSTRUIR_WHERE_CLAUSE</h2>
+<h3> Description: Preparar clausula Where</h3></td>
+   </tr>
+  <tr>
+     <td>
+     <table class="innerTable">
+       <tr>
+          <td>
+   <div class="codeComment">
+**************************************************************************<br />
+*&nbsp;&nbsp;&nbsp;Method&nbsp;attributes.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br />
+**************************************************************************<br />
+   </div>
+   <div class="code">
+Instantiation: Private<br />
+   </div>
+   <div class="codeComment">
+**************************************************************************<br />
+<br />
+   </div>
+   <div class="code">
+METHOD construir_where_clause.<br />
+<br />
+&nbsp;&nbsp;"/&nbsp;Validar&nbsp;si&nbsp;tiene&nbsp;datos&nbsp;de&nbsp;imputación,&nbsp;ref.&nbsp;pestaña&nbsp;imputación<br />
+&nbsp;&nbsp;IF&nbsp;it_pep[]&nbsp;IS&nbsp;NOT&nbsp;INITIAL&nbsp;OR&nbsp;it_kostl[]&nbsp;IS&nbsp;NOT&nbsp;INITIAL&nbsp;OR<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;it_aufnr[]&nbsp;IS&nbsp;NOT&nbsp;INITIAL&nbsp;OR&nbsp;it_sakto[]&nbsp;IS&nbsp;NOT&nbsp;INITIAL&nbsp;OR&nbsp;it_prctr[]&nbsp;IS&nbsp;NOT&nbsp;INITIAL<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;OR&nbsp;it_gsber[]&nbsp;IS&nbsp;NOT&nbsp;INITIAL.<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;CONCATENATE&nbsp;'c~vgabe&nbsp;IN&nbsp;gr_tipos_fac&nbsp;AND&nbsp;a~bukrs&nbsp;in&nbsp;it_bukrs'<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'AND&nbsp;a~ekorg&nbsp;IN&nbsp;it_ekorg&nbsp;AND&nbsp;a~ekgrp&nbsp;IN&nbsp;it_ekgrp&nbsp;AND&nbsp;a~lifnr'<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'IN&nbsp;it_lifnr&nbsp;AND&nbsp;a~bedat&nbsp;IN&nbsp;it_bedat&nbsp;AND&nbsp;a~ebeln&nbsp;IN&nbsp;it_ebeln'<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'AND&nbsp;d~loekz&nbsp;NE&nbsp;''L''&nbsp;AND&nbsp;(&nbsp;e~zekkn&nbsp;=&nbsp;c~zekkn&nbsp;or&nbsp;c~zekkn&nbsp;=&nbsp;space&nbsp;)'<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'AND&nbsp;d~konnr&nbsp;IN&nbsp;it_konnr'<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'AND&nbsp;(&nbsp;a~frgrl&nbsp;=&nbsp;''&nbsp;)'&nbsp;"solo&nbsp;documentos&nbsp;liberados<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'AND&nbsp;(&nbsp;a~loekz&nbsp;=&nbsp;''&nbsp;)'&nbsp;"solo&nbsp;documentos&nbsp;no&nbsp;eliminados'<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;INTO&nbsp;ep_where_clause&nbsp;SEPARATED&nbsp;BY&nbsp;space.<br />
+<br />
+&nbsp;&nbsp;ELSE.<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;CONCATENATE&nbsp;'c~vgabe&nbsp;IN&nbsp;gr_tipos_fac&nbsp;AND&nbsp;a~bukrs&nbsp;IN&nbsp;it_bukrs'<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'AND&nbsp;a~ekorg&nbsp;IN&nbsp;it_ekorg&nbsp;AND&nbsp;a~ekgrp&nbsp;IN&nbsp;it_ekgrp&nbsp;AND&nbsp;a~lifnr'<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'IN&nbsp;it_lifnr&nbsp;AND&nbsp;a~bedat&nbsp;IN&nbsp;it_bedat&nbsp;AND&nbsp;a~ebeln&nbsp;IN&nbsp;it_ebeln'<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'AND&nbsp;d~loekz&nbsp;NE&nbsp;''L'''&nbsp;'AND&nbsp;d~konnr&nbsp;IN&nbsp;it_konnr'<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'AND&nbsp;(&nbsp;a~frgrl&nbsp;=&nbsp;''&nbsp;)'&nbsp;"solo&nbsp;documentos&nbsp;liberados<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'AND&nbsp;(&nbsp;a~loekz&nbsp;=&nbsp;''&nbsp;)'&nbsp;"solo&nbsp;documentos&nbsp;no&nbsp;eliminados'<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;INTO&nbsp;ep_where_clause&nbsp;SEPARATED&nbsp;BY&nbsp;space.<br />
+<br />
+&nbsp;&nbsp;ENDIF.<br />
+<br />
+&nbsp;&nbsp;IF&nbsp;it_pep[]&nbsp;IS&nbsp;NOT&nbsp;INITIAL.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;CONCATENATE&nbsp;ep_where_clause&nbsp;'AND&nbsp;e~ps_psp_pnr&nbsp;IN&nbsp;it_pep'<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;INTO&nbsp;ep_where_clause&nbsp;SEPARATED&nbsp;BY&nbsp;space.<br />
+&nbsp;&nbsp;ENDIF.<br />
+<br />
+&nbsp;&nbsp;IF&nbsp;it_kostl[]&nbsp;IS&nbsp;NOT&nbsp;INITIAL.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;CONCATENATE&nbsp;ep_where_clause&nbsp;'AND&nbsp;e~kostl&nbsp;IN&nbsp;it_kostl'<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;INTO&nbsp;ep_where_clause&nbsp;SEPARATED&nbsp;BY&nbsp;space.<br />
+&nbsp;&nbsp;ENDIF.<br />
+<br />
+&nbsp;&nbsp;IF&nbsp;it_aufnr[]&nbsp;IS&nbsp;NOT&nbsp;INITIAL.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;CONCATENATE&nbsp;ep_where_clause&nbsp;'AND&nbsp;e~aufnr&nbsp;IN&nbsp;it_aufnr'<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;INTO&nbsp;ep_where_clause&nbsp;SEPARATED&nbsp;BY&nbsp;space.<br />
+&nbsp;&nbsp;ENDIF.<br />
+<br />
+&nbsp;&nbsp;IF&nbsp;it_sakto[]&nbsp;IS&nbsp;NOT&nbsp;INITIAL.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;CONCATENATE&nbsp;ep_where_clause&nbsp;'AND&nbsp;e~sakto&nbsp;IN&nbsp;it_sakto'<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;INTO&nbsp;ep_where_clause&nbsp;SEPARATED&nbsp;BY&nbsp;space.<br />
+&nbsp;&nbsp;ENDIF.<br />
+<br />
+&nbsp;&nbsp;IF&nbsp;it_prctr[]&nbsp;IS&nbsp;NOT&nbsp;INITIAL.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;CONCATENATE&nbsp;ep_where_clause&nbsp;'AND&nbsp;e~prctr&nbsp;IN&nbsp;it_prctr'<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;INTO&nbsp;ep_where_clause&nbsp;SEPARATED&nbsp;BY&nbsp;space.<br />
+&nbsp;&nbsp;ENDIF.<br />
+<br />
+&nbsp;&nbsp;IF&nbsp;it_gsber[]&nbsp;IS&nbsp;NOT&nbsp;INITIAL.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;CONCATENATE&nbsp;ep_where_clause&nbsp;'AND&nbsp;e~gsber&nbsp;IN&nbsp;it_gsber'<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;INTO&nbsp;ep_where_clause&nbsp;SEPARATED&nbsp;BY&nbsp;space.<br />
+&nbsp;&nbsp;ENDIF.<br />
+<br />
+&nbsp;&nbsp;"/&nbsp;Opción&nbsp;2.-&nbsp;Confirmar&nbsp;carga&nbsp;de&nbsp;facturas<br />
+&nbsp;&nbsp;IF&nbsp;GV_ETAPA&nbsp;=&nbsp;'02'&nbsp;AND&nbsp;me-&gt;it_user[]&nbsp;IS&nbsp;NOT&nbsp;INITIAL.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;CONCATENATE&nbsp;ep_where_clause&nbsp;'AND&nbsp;f~usuario&nbsp;IN&nbsp;it_user'<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;INTO&nbsp;ep_where_clause&nbsp;SEPARATED&nbsp;BY&nbsp;space.<br />
+&nbsp;&nbsp;ENDIF.<br />
+<br />
+&nbsp;&nbsp;"/&nbsp;Opción&nbsp;3.-&nbsp;Reporte&nbsp;de&nbsp;estado&nbsp;de&nbsp;facturas<br />
+&nbsp;&nbsp;IF&nbsp;GV_ETAPA&nbsp;=&nbsp;'03'&nbsp;AND&nbsp;(&nbsp;me-&gt;it_status[]&nbsp;IS&nbsp;NOT&nbsp;INITIAL&nbsp;OR&nbsp;me-&gt;it_user[]&nbsp;IS&nbsp;NOT&nbsp;INITIAL&nbsp;).<br />
+&nbsp;&nbsp;&nbsp;&nbsp;IF&nbsp;me-&gt;it_status[]&nbsp;IS&nbsp;NOT&nbsp;INITIAL.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CONCATENATE&nbsp;ep_where_clause&nbsp;'AND&nbsp;f~estado&nbsp;IN&nbsp;it_status'<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;INTO&nbsp;ep_where_clause&nbsp;SEPARATED&nbsp;BY&nbsp;space.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;ENDIF.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;IF&nbsp;me-&gt;it_user[]&nbsp;IS&nbsp;NOT&nbsp;INITIAL.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CONCATENATE&nbsp;ep_where_clause&nbsp;'AND&nbsp;f~usuario&nbsp;IN&nbsp;it_user'<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;INTO&nbsp;ep_where_clause&nbsp;SEPARATED&nbsp;BY&nbsp;space.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;ENDIF.<br />
+&nbsp;&nbsp;ENDIF.<br />
+<br />
+ENDMETHOD.<br />
+            </div>
+          </td>
+        </tr>
+      </table>
+      </td>
+      </tr>
+   <tr>
+<td class="footer">Extracted by Mass Download version 1.5.5 - E.G.Mellodew. 1998-2025. Sap Release 701</td>
+   </tr>
+</table>
+</body>
+</html>

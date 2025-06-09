@@ -1,0 +1,114 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="application/xhtml+xml; charset=ISO-8859-1" />
+<title>LZMMGF_INTERFAZ_FACTURATOP</title>
+<style type="text/css">
+.code{ font-family:"Courier New", Courier, monospace; color:#000; font-size:14px; background-color:#F2F4F7 }
+  .codeComment {font-family:"Courier New", Courier, monospace; color:#0000F0; font-size:14px; background-color:#F2F4F7 }
+  .normalBold{ font-family:Arial, Helvetica, sans-serif; color:#000; font-size:12px; font-weight:800 }
+  .normalBoldLarge{ font-family:Arial, Helvetica, sans-serif; color:#000; font-size:16px; font-weight:800 }
+</style>
+<style type="text/css">
+  .normal{ font-family:Arial, Helvetica, sans-serif; color:#000; font-size:12px }
+  .footer{ font-family:Arial, Helvetica, sans-serif; color:#000; font-size:12px; text-align: center }
+  h2{ font-family:Arial, Helvetica, sans-serif; color:#000; font-size:16px; font-weight:800 }
+  h3{ font-family:Arial, Helvetica, sans-serif; color:#000; font-size:14px; font-weight:800 }
+  .outerTable{
+   background-color:#E0E7ED;
+   width:100%;
+   border-top-width: thin;
+   border-right-width: thin;
+   border-right-width: thin;
+   border-left-width: thin;
+   border-top-style: solid;
+   border-right-style: solid;
+   border-bottom-style: solid;
+   border-left-style: solid;
+  }
+  .innerTable{
+   background-color:#F2F4F7;
+   width:100%;
+   border-top-width: thin;
+   border-right-width: thin;
+   border-bottom-width: thin;
+   border-left-width: thin;
+   border-top-style: solid;
+   border-right-style: solid;
+   border-bottom-style: solid;
+   border-left-style: solid;
+  }
+</style>
+</head>
+<body>
+<table class="outerTable">
+  <tr class="normalBoldLarge">
+     <td><h2>Code listing for: LZMMGF_INTERFAZ_FACTURATOP</h2>
+<h3> Description: FM for Entering a Single Text (Max. Length 255 Characters)</h3></td>
+   </tr>
+  <tr>
+     <td>
+     <table class="innerTable">
+       <tr>
+          <td>
+   <div class="code">
+FUNCTION-POOL zmmgf_interfaz_factura.       "MESSAGE-ID ..<br />
+<br />
+DATA: ok_code TYPE sy-ucomm.<br />
+<br />
+DATA: zmms_facturas_screen TYPE zmms_facturas_screen.<br />
+<br />
+   </div>
+   <div class="codeComment">
+*/Wizard&nbsp;table<br />
+   </div>
+   <div class="code">
+TYPES: gty_t_items TYPE TABLE OF zmms_facturas_item_screen.<br />
+DATA: gwa_items TYPE zmms_facturas_item_screen.<br />
+DATA: it_items TYPE TABLE OF zmms_facturas_item_screen WITH HEADER LINE.<br />
+DATA: gt_items TYPE gty_t_items.<br />
+DATA: gs_items TYPE zmms_facturas_item_screen.<br />
+<br />
+DATA: gv_title_text TYPE string.<br />
+DATA: gs_factura_proveedor TYPE zmms_factura_proveedor.<br />
+DATA: gt_posiciones TYPE ZMMTT_FACTURA_PROVEEDOR.<br />
+<br />
+   </div>
+   <div class="codeComment">
+*DATA:&nbsp;sav_okcode(4)&nbsp;&nbsp;&nbsp;&nbsp;TYPE&nbsp;c.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"&nbsp;Sicherung&nbsp;des&nbsp;Ok-code<br />
+*DATA:&nbsp;ok-code&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TYPE&nbsp;sy-ucomm.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"&nbsp;Ok-code<br />
+<br />
+*&SPWIZARD:&nbsp;DECLARATION&nbsp;OF&nbsp;TABLECONTROL&nbsp;'TC_ITEMS'&nbsp;ITSELF<br />
+   </div>
+   <div class="code">
+CONTROLS: tc_items TYPE TABLEVIEW USING SCREEN 0100.<br />
+<br />
+   </div>
+   <div class="codeComment">
+*&SPWIZARD:&nbsp;LINES&nbsp;OF&nbsp;TABLECONTROL&nbsp;'TC_ITEMS'<br />
+   </div>
+   <div class="code">
+DATA:     g_tc_items_lines  LIKE sy-loopc.<br />
+<br />
+   </div>
+   <div class="codeComment">
+*/&nbsp;Datos&nbsp;para&nbsp;popup&nbsp;motivo&nbsp;de&nbsp;rechazo<br />
+   </div>
+   <div class="code">
+DATA  gv_titel      TYPE trm060-text."Titulo<br />
+DATA: gv_sourcetext TYPE trm080-text."Descripcion<br />
+DATA: gv_targettext TYPE char250."Input usuaruio<br />
+<br />
+DATA: gw_motivo_anul TYPE zmms_factura_motivo_anulacion.<br />
+            </div>
+          </td>
+        </tr>
+      </table>
+      </td>
+      </tr>
+   <tr>
+<td class="footer">Extracted by Mass Download version 1.5.5 - E.G.Mellodew. 1998-2025. Sap Release 701</td>
+   </tr>
+</table>
+</body>
+</html>

@@ -1,0 +1,201 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="application/xhtml+xml; charset=ISO-8859-1" />
+<title>SET_PROCESAR_TXT</title>
+<style type="text/css">
+.code{ font-family:"Courier New", Courier, monospace; color:#000; font-size:14px; background-color:#F2F4F7 }
+  .codeComment {font-family:"Courier New", Courier, monospace; color:#0000F0; font-size:14px; background-color:#F2F4F7 }
+  .normalBold{ font-family:Arial, Helvetica, sans-serif; color:#000; font-size:12px; font-weight:800 }
+  .normalBoldLarge{ font-family:Arial, Helvetica, sans-serif; color:#000; font-size:16px; font-weight:800 }
+</style>
+<style type="text/css">
+  .normal{ font-family:Arial, Helvetica, sans-serif; color:#000; font-size:12px }
+  .footer{ font-family:Arial, Helvetica, sans-serif; color:#000; font-size:12px; text-align: center }
+  h2{ font-family:Arial, Helvetica, sans-serif; color:#000; font-size:16px; font-weight:800 }
+  h3{ font-family:Arial, Helvetica, sans-serif; color:#000; font-size:14px; font-weight:800 }
+  .outerTable{
+   background-color:#E0E7ED;
+   width:100%;
+   border-top-width: thin;
+   border-right-width: thin;
+   border-right-width: thin;
+   border-left-width: thin;
+   border-top-style: solid;
+   border-right-style: solid;
+   border-bottom-style: solid;
+   border-left-style: solid;
+  }
+  .innerTable{
+   background-color:#F2F4F7;
+   width:100%;
+   border-top-width: thin;
+   border-right-width: thin;
+   border-bottom-width: thin;
+   border-left-width: thin;
+   border-top-style: solid;
+   border-right-style: solid;
+   border-bottom-style: solid;
+   border-left-style: solid;
+  }
+</style>
+</head>
+<body>
+<table class="outerTable">
+  <tr class="normalBoldLarge">
+     <td><h2>Code listing for: SET_PROCESAR_TXT</h2>
+<h3> Description: Procesar TXT</h3></td>
+   </tr>
+  <tr>
+     <td>
+     <table class="innerTable">
+       <tr>
+          <td>
+   <div class="codeComment">
+**************************************************************************<br />
+*&nbsp;&nbsp;&nbsp;Method&nbsp;attributes.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br />
+**************************************************************************<br />
+   </div>
+   <div class="code">
+Instantiation: Public<br />
+   </div>
+   <div class="codeComment">
+**************************************************************************<br />
+<br />
+   </div>
+   <div class="code">
+METHOD set_procesar_txt.<br />
+&nbsp;&nbsp;"&nbsp;Estructura&nbsp;basada&nbsp;en&nbsp;la&nbsp;tabla&nbsp;ZMMT_FACTURA_P_C<br />
+&nbsp;&nbsp;DATA:&nbsp;lwa_factura&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TYPE&nbsp;zmmt_factura_p_c,&nbsp;&nbsp;&nbsp;&nbsp;"&nbsp;Estructura&nbsp;local<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lt_txt_lines&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TYPE&nbsp;TABLE&nbsp;OF&nbsp;string,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"&nbsp;Tabla&nbsp;interna&nbsp;para&nbsp;almacenar&nbsp;las&nbsp;líneas&nbsp;del&nbsp;TXT<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lwa_txt_line&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TYPE&nbsp;string,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"&nbsp;Estructura&nbsp;para&nbsp;cada&nbsp;línea&nbsp;del&nbsp;TXT<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lt_fields&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TYPE&nbsp;TABLE&nbsp;OF&nbsp;string,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"&nbsp;Tabla&nbsp;interna&nbsp;para&nbsp;almacenar&nbsp;los&nbsp;campos&nbsp;de&nbsp;cada&nbsp;línea<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lwa_field&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TYPE&nbsp;string,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"&nbsp;Estructura&nbsp;para&nbsp;cada&nbsp;campo<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lv_txt_contenido&nbsp;&nbsp;&nbsp;TYPE&nbsp;string.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"&nbsp;Variable&nbsp;para&nbsp;el&nbsp;contenido&nbsp;convertido&nbsp;de&nbsp;XSTRING&nbsp;a&nbsp;STRING<br />
+<br />
+&nbsp;&nbsp;"&nbsp;Conversión&nbsp;de&nbsp;XSTRING&nbsp;a&nbsp;STRING<br />
+   </div>
+   <div class="codeComment">
+*&nbsp;&nbsp;CALL&nbsp;FUNCTION&nbsp;'SCMS_XSTRING_TO_STRING'<br />
+*&nbsp;&nbsp;&nbsp;&nbsp;EXPORTING<br />
+*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;buffer&nbsp;=&nbsp;ip_contenido<br />
+*&nbsp;&nbsp;&nbsp;&nbsp;IMPORTING<br />
+*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;text&nbsp;&nbsp;&nbsp;=&nbsp;lv_txt_contenido.<br />
+   </div>
+   <div class="code">
+&nbsp;&nbsp;CALL&nbsp;FUNCTION&nbsp;'ECATT_CONV_XSTRING_TO_STRING'<br />
+&nbsp;&nbsp;&nbsp;&nbsp;EXPORTING<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;im_xstring&nbsp;&nbsp;=&nbsp;ip_contenido<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;im_encoding&nbsp;=&nbsp;'UTF-8'<br />
+&nbsp;&nbsp;&nbsp;&nbsp;IMPORTING<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ex_string&nbsp;&nbsp;&nbsp;=&nbsp;lv_txt_contenido.<br />
+<br />
+&nbsp;&nbsp;"&nbsp;Separar&nbsp;las&nbsp;líneas&nbsp;del&nbsp;contenido&nbsp;TXT&nbsp;en&nbsp;la&nbsp;tabla&nbsp;interna&nbsp;lt_txt_lines<br />
+&nbsp;&nbsp;SPLIT&nbsp;lv_txt_contenido&nbsp;AT&nbsp;cl_abap_char_utilities=&gt;cr_lf&nbsp;INTO&nbsp;TABLE&nbsp;lt_txt_lines.<br />
+<br />
+&nbsp;&nbsp;LOOP&nbsp;AT&nbsp;lt_txt_lines&nbsp;INTO&nbsp;lwa_txt_line.<br />
+   </div>
+   <div class="codeComment">
+*---&nbsp;Instance&nbsp;Log&nbsp;Object&nbsp;---------------------------------------------<br />
+   </div>
+   <div class="code">
+&nbsp;&nbsp;&nbsp;&nbsp;me-&gt;instance_log(&nbsp;iw_monitor-ebeln&nbsp;)&nbsp;.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;lwa_factura-ebeln&nbsp;=&nbsp;iw_monitor-ebeln.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;lwa_factura-estado&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;'01'.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"&nbsp;Estado&nbsp;de&nbsp;la&nbsp;factura&nbsp;(Cargada&nbsp;existosamente)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;iw_monitor-status&nbsp;=&nbsp;'@08@'."Green<br />
+&nbsp;&nbsp;&nbsp;&nbsp;"&nbsp;Separar&nbsp;los&nbsp;campos&nbsp;de&nbsp;la&nbsp;línea&nbsp;actual&nbsp;usando&nbsp;el&nbsp;carácter&nbsp;'|'<br />
+&nbsp;&nbsp;&nbsp;&nbsp;CLEAR&nbsp;lt_fields.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;SPLIT&nbsp;lwa_txt_line&nbsp;AT&nbsp;'|'&nbsp;INTO&nbsp;TABLE&nbsp;lt_fields.<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;"&nbsp;Asignar&nbsp;los&nbsp;campos&nbsp;del&nbsp;TXT&nbsp;a&nbsp;los&nbsp;componentes&nbsp;de&nbsp;la&nbsp;estructura&nbsp;lwa_factura<br />
+&nbsp;&nbsp;&nbsp;&nbsp;READ&nbsp;TABLE&nbsp;lt_fields&nbsp;INTO&nbsp;lwa_field&nbsp;INDEX&nbsp;1.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;IF&nbsp;sy-subrc&nbsp;=&nbsp;0.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lwa_factura-nit_emisor&nbsp;=&nbsp;lwa_field."OK<br />
+&nbsp;&nbsp;&nbsp;&nbsp;ENDIF.<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;READ&nbsp;TABLE&nbsp;lt_fields&nbsp;INTO&nbsp;lwa_field&nbsp;INDEX&nbsp;2.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;IF&nbsp;sy-subrc&nbsp;=&nbsp;0.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lwa_factura-numero_factura&nbsp;=&nbsp;lwa_field."OK<br />
+&nbsp;&nbsp;&nbsp;&nbsp;ENDIF.<br />
+<br />
+   </div>
+   <div class="codeComment">
+*&nbsp;&nbsp;&nbsp;&nbsp;READ&nbsp;TABLE&nbsp;lt_fields&nbsp;INTO&nbsp;lwa_field&nbsp;INDEX&nbsp;3.<br />
+*&nbsp;&nbsp;&nbsp;&nbsp;IF&nbsp;sy-subrc&nbsp;=&nbsp;0.<br />
+*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lwa_factura-ebeln&nbsp;=&nbsp;lwa_field.&nbsp;"&nbsp;Número&nbsp;de&nbsp;autorización&nbsp;(podrías&nbsp;asignarlo&nbsp;según&nbsp;corresponda)<br />
+*&nbsp;&nbsp;&nbsp;&nbsp;ENDIF.<br />
+<br />
+   </div>
+   <div class="code">
+&nbsp;&nbsp;&nbsp;&nbsp;READ&nbsp;TABLE&nbsp;lt_fields&nbsp;INTO&nbsp;lwa_field&nbsp;INDEX&nbsp;4.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;IF&nbsp;sy-subrc&nbsp;=&nbsp;0.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lwa_factura-fecha_emision&nbsp;=&nbsp;lwa_field.&nbsp;"&nbsp;La&nbsp;fecha&nbsp;la&nbsp;puedes&nbsp;formatear&nbsp;si&nbsp;es&nbsp;necesario<br />
+&nbsp;&nbsp;&nbsp;&nbsp;ENDIF.<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;READ&nbsp;TABLE&nbsp;lt_fields&nbsp;INTO&nbsp;lwa_field&nbsp;INDEX&nbsp;5.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;IF&nbsp;sy-subrc&nbsp;=&nbsp;0.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lwa_factura-monto_total&nbsp;=&nbsp;lwa_field.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;ENDIF.<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;READ&nbsp;TABLE&nbsp;lt_fields&nbsp;INTO&nbsp;lwa_field&nbsp;INDEX&nbsp;6.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;IF&nbsp;sy-subrc&nbsp;=&nbsp;0.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lwa_factura-monto_sujeto_iva&nbsp;=&nbsp;lwa_field.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;ENDIF.<br />
+<br />
+   </div>
+   <div class="codeComment">
+*&nbsp;&nbsp;&nbsp;&nbsp;READ&nbsp;TABLE&nbsp;lt_fields&nbsp;INTO&nbsp;lwa_field&nbsp;INDEX&nbsp;9.<br />
+*&nbsp;&nbsp;&nbsp;&nbsp;IF&nbsp;sy-subrc&nbsp;=&nbsp;0.<br />
+*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lwa_factura-monto_deduccion_iehd&nbsp;=&nbsp;lwa_field.<br />
+*&nbsp;&nbsp;&nbsp;&nbsp;ENDIF.<br />
+<br />
+   </div>
+   <div class="code">
+&nbsp;&nbsp;&nbsp;&nbsp;"&nbsp;Asignar&nbsp;el&nbsp;contenido&nbsp;del&nbsp;archivo&nbsp;y&nbsp;otros&nbsp;campos&nbsp;relevantes<br />
+&nbsp;&nbsp;&nbsp;&nbsp;lwa_factura-archivo_contenido&nbsp;=&nbsp;ip_contenido.&nbsp;&nbsp;&nbsp;&nbsp;"&nbsp;Contenido&nbsp;del&nbsp;archivo&nbsp;completo&nbsp;TXT<br />
+&nbsp;&nbsp;&nbsp;&nbsp;lwa_factura-tipo_archivo&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;'02'.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"&nbsp;Tipo&nbsp;de&nbsp;archivo&nbsp;TXT<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;lwa_factura-usuario&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;sy-uname.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"&nbsp;Usuario&nbsp;que&nbsp;procesó<br />
+&nbsp;&nbsp;&nbsp;&nbsp;lwa_factura-fecha_upd&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;sy-datum.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"&nbsp;Fecha&nbsp;de&nbsp;Actualización<br />
+&nbsp;&nbsp;&nbsp;&nbsp;lwa_factura-hora_upd&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;sy-uzeit.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"&nbsp;Hora&nbsp;de&nbsp;Actualización<br />
+&nbsp;&nbsp;&nbsp;&nbsp;lwa_factura-tcode&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;sy-tcode.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"&nbsp;Código&nbsp;de&nbsp;transacción&nbsp;actual<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;"&nbsp;Verificaciones&nbsp;de&nbsp;validación<br />
+&nbsp;&nbsp;&nbsp;&nbsp;IF&nbsp;lwa_factura-razon_social&nbsp;&lt;&gt;&nbsp;iw_monitor-name.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lwa_factura-estado&nbsp;=&nbsp;'02'.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;iw_monitor-status&nbsp;=&nbsp;'@0A@'.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;ENDIF.<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;IF&nbsp;lwa_factura-monto_total&nbsp;&lt;&gt;&nbsp;iw_monitor-e_netwr.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lwa_factura-estado&nbsp;=&nbsp;'02'.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;iw_monitor-status&nbsp;=&nbsp;'@0A@'.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;ENDIF.<br />
+<br />
+   </div>
+   <div class="codeComment">
+*---&nbsp;Save&nbsp;Log&nbsp;Object&nbsp;---------------------------------------------<br />
+   </div>
+   <div class="code">
+&nbsp;&nbsp;&nbsp;&nbsp;me-&gt;save_log(&nbsp;IMPORTING&nbsp;ep_log_number&nbsp;=&nbsp;iw_monitor-lognm&nbsp;)&nbsp;.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;lwa_factura-lognm&nbsp;=&nbsp;iw_monitor-lognm.<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;"&nbsp;Insertar&nbsp;o&nbsp;modificar&nbsp;los&nbsp;datos&nbsp;en&nbsp;la&nbsp;tabla&nbsp;ZMMT_FACTURA_P_C<br />
+&nbsp;&nbsp;&nbsp;&nbsp;MODIFY&nbsp;zmmt_factura_p_c&nbsp;FROM&nbsp;lwa_factura.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;IF&nbsp;sy-subrc&nbsp;=&nbsp;0.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ep_factura&nbsp;=&nbsp;lwa_factura.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;COMMIT&nbsp;WORK.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;ENDIF.<br />
+&nbsp;&nbsp;ENDLOOP.<br />
+ENDMETHOD.<br />
+            </div>
+          </td>
+        </tr>
+      </table>
+      </td>
+      </tr>
+   <tr>
+<td class="footer">Extracted by Mass Download version 1.5.5 - E.G.Mellodew. 1998-2025. Sap Release 701</td>
+   </tr>
+</table>
+</body>
+</html>

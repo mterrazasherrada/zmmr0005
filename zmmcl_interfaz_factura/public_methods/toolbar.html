@@ -1,0 +1,125 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="application/xhtml+xml; charset=ISO-8859-1" />
+<title>TOOLBAR</title>
+<style type="text/css">
+.code{ font-family:"Courier New", Courier, monospace; color:#000; font-size:14px; background-color:#F2F4F7 }
+  .codeComment {font-family:"Courier New", Courier, monospace; color:#0000F0; font-size:14px; background-color:#F2F4F7 }
+  .normalBold{ font-family:Arial, Helvetica, sans-serif; color:#000; font-size:12px; font-weight:800 }
+  .normalBoldLarge{ font-family:Arial, Helvetica, sans-serif; color:#000; font-size:16px; font-weight:800 }
+</style>
+<style type="text/css">
+  .normal{ font-family:Arial, Helvetica, sans-serif; color:#000; font-size:12px }
+  .footer{ font-family:Arial, Helvetica, sans-serif; color:#000; font-size:12px; text-align: center }
+  h2{ font-family:Arial, Helvetica, sans-serif; color:#000; font-size:16px; font-weight:800 }
+  h3{ font-family:Arial, Helvetica, sans-serif; color:#000; font-size:14px; font-weight:800 }
+  .outerTable{
+   background-color:#E0E7ED;
+   width:100%;
+   border-top-width: thin;
+   border-right-width: thin;
+   border-right-width: thin;
+   border-left-width: thin;
+   border-top-style: solid;
+   border-right-style: solid;
+   border-bottom-style: solid;
+   border-left-style: solid;
+  }
+  .innerTable{
+   background-color:#F2F4F7;
+   width:100%;
+   border-top-width: thin;
+   border-right-width: thin;
+   border-bottom-width: thin;
+   border-left-width: thin;
+   border-top-style: solid;
+   border-right-style: solid;
+   border-bottom-style: solid;
+   border-left-style: solid;
+  }
+</style>
+</head>
+<body>
+<table class="outerTable">
+  <tr class="normalBoldLarge">
+     <td><h2>Code listing for: TOOLBAR</h2>
+<h3> Description: Barra de herramientas</h3></td>
+   </tr>
+  <tr>
+     <td>
+     <table class="innerTable">
+       <tr>
+          <td>
+   <div class="codeComment">
+**************************************************************************<br />
+*&nbsp;&nbsp;&nbsp;Method&nbsp;attributes.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br />
+**************************************************************************<br />
+   </div>
+   <div class="code">
+Instantiation: Public<br />
+   </div>
+   <div class="codeComment">
+**************************************************************************<br />
+<br />
+   </div>
+   <div class="code">
+METHOD toolbar.<br />
+<br />
+&nbsp;&nbsp;DATA:&nbsp;ls_toolbar&nbsp;LIKE&nbsp;LINE&nbsp;OF&nbsp;e_object-&gt;mt_toolbar.<br />
+<br />
+&nbsp;&nbsp;DELETE&nbsp;e_object-&gt;mt_toolbar<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;WHERE&nbsp;function&nbsp;=&nbsp;'&DETAIL'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;OR&nbsp;function&nbsp;=&nbsp;'&MB_VIEW'<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;OR&nbsp;function&nbsp;=&nbsp;'&PRINT_BACK'<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;OR&nbsp;function&nbsp;=&nbsp;'&GRAPH'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;OR&nbsp;function&nbsp;=&nbsp;'&INFO'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;OR&nbsp;function&nbsp;=&nbsp;'&REFRESH'<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;OR&nbsp;function&nbsp;=&nbsp;'&LOCAL&CUT'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;OR&nbsp;function&nbsp;=&nbsp;'&LOCAL&COPY'&nbsp;&nbsp;&nbsp;OR&nbsp;function&nbsp;=&nbsp;'&LOCAL&PASTE'<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;OR&nbsp;function&nbsp;=&nbsp;'&LOCAL&UNDO'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;OR&nbsp;function&nbsp;=&nbsp;'&LOCAL&APPEND'&nbsp;OR&nbsp;function&nbsp;=&nbsp;'&LOCAL&INSERT_ROW'<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;OR&nbsp;function&nbsp;=&nbsp;'&LOCAL&DELETE_ROW'&nbsp;OR&nbsp;function&nbsp;=&nbsp;'&LOCAL&COPY_ROW'&nbsp;.<br />
+<br />
+   </div>
+   <div class="codeComment">
+*&nbsp;&nbsp;"/&nbsp;Seleccionar&nbsp;disposición...<br />
+*&nbsp;&nbsp;ls_toolbar-function&nbsp;&nbsp;=&nbsp;'&OAD'.<br />
+*&nbsp;&nbsp;ls_toolbar-butn_type&nbsp;=&nbsp;0.<br />
+*&nbsp;&nbsp;ls_toolbar-icon&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;icon_alv_variant_choose.<br />
+*&nbsp;&nbsp;APPEND&nbsp;ls_toolbar&nbsp;TO&nbsp;e_object-&gt;mt_toolbar.<br />
+*<br />
+*&nbsp;&nbsp;"/&nbsp;Grabar&nbsp;disposición...<br />
+*&nbsp;&nbsp;ls_toolbar-function&nbsp;&nbsp;=&nbsp;'&AVE'.<br />
+*&nbsp;&nbsp;ls_toolbar-butn_type&nbsp;=&nbsp;0.<br />
+*&nbsp;&nbsp;ls_toolbar-icon&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;icon_alv_variant_save.<br />
+*&nbsp;&nbsp;APPEND&nbsp;ls_toolbar&nbsp;TO&nbsp;e_object-&gt;mt_toolbar.<br />
+<br />
+   </div>
+   <div class="code">
+&nbsp;&nbsp;"/&nbsp;Seleccionar&nbsp;todo<br />
+&nbsp;&nbsp;ls_toolbar-function&nbsp;&nbsp;=&nbsp;'ALL'.<br />
+&nbsp;&nbsp;ls_toolbar-butn_type&nbsp;=&nbsp;0.<br />
+&nbsp;&nbsp;ls_toolbar-icon&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;icon_select_all.<br />
+&nbsp;&nbsp;APPEND&nbsp;ls_toolbar&nbsp;TO&nbsp;e_object-&gt;mt_toolbar.<br />
+<br />
+&nbsp;&nbsp;"/&nbsp;Deseleccionar&nbsp;todo<br />
+&nbsp;&nbsp;ls_toolbar-function&nbsp;&nbsp;=&nbsp;'NONE'.<br />
+&nbsp;&nbsp;ls_toolbar-butn_type&nbsp;=&nbsp;0.<br />
+&nbsp;&nbsp;ls_toolbar-icon&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;icon_deselect_all.<br />
+&nbsp;&nbsp;APPEND&nbsp;ls_toolbar&nbsp;TO&nbsp;e_object-&gt;mt_toolbar.<br />
+<br />
+&nbsp;&nbsp;"/&nbsp;Refrescar<br />
+&nbsp;&nbsp;ls_toolbar-function&nbsp;&nbsp;=&nbsp;'REFRESCAR'.<br />
+&nbsp;&nbsp;ls_toolbar-butn_type&nbsp;=&nbsp;0.<br />
+&nbsp;&nbsp;ls_toolbar-icon&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;icon_refresh.<br />
+&nbsp;&nbsp;APPEND&nbsp;ls_toolbar&nbsp;TO&nbsp;e_object-&gt;mt_toolbar.<br />
+<br />
+ENDMETHOD.<br />
+            </div>
+          </td>
+        </tr>
+      </table>
+      </td>
+      </tr>
+   <tr>
+<td class="footer">Extracted by Mass Download version 1.5.5 - E.G.Mellodew. 1998-2025. Sap Release 701</td>
+   </tr>
+</table>
+</body>
+</html>

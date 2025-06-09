@@ -1,0 +1,163 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="application/xhtml+xml; charset=ISO-8859-1" />
+<title>GET_FILTRAR_EM_FACTURADAS</title>
+<style type="text/css">
+.code{ font-family:"Courier New", Courier, monospace; color:#000; font-size:14px; background-color:#F2F4F7 }
+  .codeComment {font-family:"Courier New", Courier, monospace; color:#0000F0; font-size:14px; background-color:#F2F4F7 }
+  .normalBold{ font-family:Arial, Helvetica, sans-serif; color:#000; font-size:12px; font-weight:800 }
+  .normalBoldLarge{ font-family:Arial, Helvetica, sans-serif; color:#000; font-size:16px; font-weight:800 }
+</style>
+<style type="text/css">
+  .normal{ font-family:Arial, Helvetica, sans-serif; color:#000; font-size:12px }
+  .footer{ font-family:Arial, Helvetica, sans-serif; color:#000; font-size:12px; text-align: center }
+  h2{ font-family:Arial, Helvetica, sans-serif; color:#000; font-size:16px; font-weight:800 }
+  h3{ font-family:Arial, Helvetica, sans-serif; color:#000; font-size:14px; font-weight:800 }
+  .outerTable{
+   background-color:#E0E7ED;
+   width:100%;
+   border-top-width: thin;
+   border-right-width: thin;
+   border-right-width: thin;
+   border-left-width: thin;
+   border-top-style: solid;
+   border-right-style: solid;
+   border-bottom-style: solid;
+   border-left-style: solid;
+  }
+  .innerTable{
+   background-color:#F2F4F7;
+   width:100%;
+   border-top-width: thin;
+   border-right-width: thin;
+   border-bottom-width: thin;
+   border-left-width: thin;
+   border-top-style: solid;
+   border-right-style: solid;
+   border-bottom-style: solid;
+   border-left-style: solid;
+  }
+</style>
+</head>
+<body>
+<table class="outerTable">
+  <tr class="normalBoldLarge">
+     <td><h2>Code listing for: GET_FILTRAR_EM_FACTURADAS</h2>
+<h3> Description: ##2. Filtrar EM Pendientes y Facturadas</h3></td>
+   </tr>
+  <tr>
+     <td>
+     <table class="innerTable">
+       <tr>
+          <td>
+   <div class="codeComment">
+**************************************************************************<br />
+*&nbsp;&nbsp;&nbsp;Method&nbsp;attributes.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br />
+**************************************************************************<br />
+   </div>
+   <div class="code">
+Instantiation: Public<br />
+   </div>
+   <div class="codeComment">
+**************************************************************************<br />
+<br />
+   </div>
+   <div class="code">
+METHOD get_filtrar_em_facturadas.<br />
+&nbsp;&nbsp;DATA:&nbsp;lt_em&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TYPE&nbsp;TABLE&nbsp;OF&nbsp;ty_itab.<br />
+&nbsp;&nbsp;DATA:&nbsp;lwa_em&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TYPE&nbsp;ty_itab.<br />
+&nbsp;&nbsp;DATA:&nbsp;lv_dif_menge&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TYPE&nbsp;ekbe-menge.<br />
+&nbsp;&nbsp;DATA:&nbsp;lt_ekbes&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TYPE&nbsp;STANDARD&nbsp;TABLE&nbsp;OF&nbsp;ekbes.<br />
+&nbsp;&nbsp;DATA:&nbsp;lwa_ekbes&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TYPE&nbsp;ekbes.<br />
+&nbsp;&nbsp;DATA:&nbsp;lwa_pendiente&nbsp;&nbsp;&nbsp;&nbsp;TYPE&nbsp;ty_itab.<br />
+&nbsp;&nbsp;DATA:&nbsp;lwa_itabx&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TYPE&nbsp;ty_itab."DEL<br />
+<br />
+&nbsp;&nbsp;CHECK&nbsp;et_itab[]&nbsp;IS&nbsp;NOT&nbsp;INITIAL.<br />
+<br />
+&nbsp;&nbsp;SORT&nbsp;et_itab&nbsp;BY&nbsp;ebeln&nbsp;ebelp&nbsp;belnr&nbsp;buzei&nbsp;lfbnr&nbsp;lfpos&nbsp;vgabe.<br />
+&nbsp;&nbsp;DELETE&nbsp;ADJACENT&nbsp;DUPLICATES&nbsp;FROM&nbsp;et_itab&nbsp;COMPARING&nbsp;ALL&nbsp;FIELDS."INSERT&nbsp;@0099<br />
+<br />
+&nbsp;&nbsp;"/&nbsp;Trabajar&nbsp;desde&nbsp;la&nbsp;EM<br />
+&nbsp;&nbsp;lt_em[]&nbsp;=&nbsp;et_itab[].<br />
+&nbsp;&nbsp;DELETE&nbsp;lt_em&nbsp;WHERE&nbsp;vgabe&nbsp;NE&nbsp;1.<br />
+&nbsp;&nbsp;DATA:&nbsp;lv_ebeln&nbsp;TYPE&nbsp;char15."INSERT&nbsp;@00XX<br />
+&nbsp;&nbsp;DATA:&nbsp;lv_ebeln_aux&nbsp;TYPE&nbsp;char15.<br />
+&nbsp;&nbsp;"/&nbsp;Identificar&nbsp;las&nbsp;EM&nbsp;pendientes<br />
+&nbsp;&nbsp;LOOP&nbsp;AT&nbsp;lt_em&nbsp;INTO&nbsp;lwa_em.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;"/&nbsp;Waiting...<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;me-&gt;spi_setzen_ekpo(&nbsp;EXPORTING&nbsp;anz_bearb&nbsp;=&nbsp;gv_anz_ekko_bearb&nbsp;anz_max&nbsp;=&nbsp;gv_anz_ekko&nbsp;).<br />
+&nbsp;&nbsp;&nbsp;&nbsp;ADD&nbsp;2&nbsp;TO&nbsp;gv_anz_ekko_bearb.<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;FREE&nbsp;lt_ekbes.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;CALL&nbsp;FUNCTION&nbsp;'ME_READ_HISTORY'<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;EXPORTING<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ebeln&nbsp;&nbsp;=&nbsp;lwa_em-ebeln<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ebelp&nbsp;&nbsp;=&nbsp;lwa_em-ebelp<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;webre&nbsp;&nbsp;=&nbsp;lwa_em-webre<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TABLES<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;xekbes&nbsp;=&nbsp;lt_ekbes.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;CONCATENATE&nbsp;lwa_em-ebeln&nbsp;lwa_em-ebelp&nbsp;INTO&nbsp;lv_ebeln_aux.&nbsp;"INSERT&nbsp;@00XX<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;IF&nbsp;lv_ebeln_aux&nbsp;&lt;&gt;&nbsp;lv_ebeln.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CLEAR&nbsp;gwa_ekbes.&nbsp;"&nbsp;Limpia&nbsp;la&nbsp;estructura&nbsp;de&nbsp;trabajo<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;gwa_ekbes-ebeln&nbsp;=&nbsp;lwa_em-ebeln.&nbsp;"&nbsp;Asigna&nbsp;el&nbsp;número&nbsp;de&nbsp;pedido<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;gwa_ekbes-ekbes&nbsp;=&nbsp;lt_ekbes.&nbsp;&nbsp;&nbsp;&nbsp;"&nbsp;Copia&nbsp;los&nbsp;datos&nbsp;de&nbsp;lt_ekbes&nbsp;en&nbsp;la&nbsp;estructura<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;APPEND&nbsp;gwa_ekbes&nbsp;TO&nbsp;gt_ekbes.&nbsp;&nbsp;"&nbsp;Agrega&nbsp;la&nbsp;estructura&nbsp;a&nbsp;la&nbsp;tabla&nbsp;interna<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CONCATENATE&nbsp;lwa_em-ebeln&nbsp;lwa_em-ebelp&nbsp;INTO&nbsp;lv_ebeln.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;ENDIF.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;READ&nbsp;TABLE&nbsp;lt_ekbes&nbsp;INTO&nbsp;lwa_ekbes&nbsp;WITH&nbsp;KEY&nbsp;zekkn&nbsp;=&nbsp;'00'.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;IF&nbsp;sy-subrc&nbsp;=&nbsp;0.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lv_dif_menge&nbsp;=&nbsp;ABS(&nbsp;lwa_ekbes-wemng&nbsp;)&nbsp;-&nbsp;ABS(&nbsp;lwa_ekbes-remng&nbsp;).<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IF&nbsp;lv_dif_menge&nbsp;&lt;=&nbsp;0.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lv_dif_menge&nbsp;=&nbsp;0.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ENDIF.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CONCATENATE&nbsp;lwa_em-belnr&nbsp;lwa_em-gjahr&nbsp;INTO&nbsp;lwa_em-awkey.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IF&nbsp;lv_dif_menge&nbsp;&lt;&gt;&nbsp;0&nbsp;.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lwa_em-marca&nbsp;=&nbsp;'E'.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CONCATENATE&nbsp;lwa_em-belnr&nbsp;lwa_em-gjahr&nbsp;INTO&nbsp;lwa_em-awkey.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;READ&nbsp;TABLE&nbsp;gt_em_pendiente&nbsp;&nbsp;INTO&nbsp;lwa_pendiente&nbsp;WITH&nbsp;KEY&nbsp;ebeln&nbsp;&nbsp;=&nbsp;lwa_em-ebeln<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ebelp&nbsp;&nbsp;=&nbsp;lwa_em-ebelp.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IF&nbsp;sy-subrc&nbsp;&lt;&gt;&nbsp;0.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;APPEND&nbsp;lwa_em&nbsp;TO&nbsp;gt_em_pendiente&nbsp;.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ELSE.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MODIFY&nbsp;gt_em_pendiente&nbsp;FROM&nbsp;lwa_em&nbsp;INDEX&nbsp;sy-tabix.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ENDIF.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ELSE.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;LOOP&nbsp;AT&nbsp;et_itab&nbsp;INTO&nbsp;lwa_itabx&nbsp;WHERE&nbsp;ebeln&nbsp;EQ&nbsp;lwa_em-ebeln<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;AND&nbsp;ebelp&nbsp;EQ&nbsp;lwa_em-ebelp<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;AND&nbsp;vgabe&nbsp;EQ&nbsp;'2'<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;AND&nbsp;marca&nbsp;NE&nbsp;'F'.<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lwa_itabx-marca&nbsp;=&nbsp;'F'.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MODIFY&nbsp;et_itab&nbsp;FROM&nbsp;lwa_itabx&nbsp;INDEX&nbsp;sy-tabix.<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CONCATENATE&nbsp;lwa_itabx-belnr&nbsp;lwa_itabx-gjahr&nbsp;INTO&nbsp;lwa_itabx-awkey.&nbsp;"Ref.&nbsp;Documento&nbsp;en&nbsp;FI&nbsp;-&nbsp;Factura<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;APPEND&nbsp;lwa_itabx&nbsp;TO&nbsp;gt_em_facturadas.<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ENDLOOP.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ENDIF.<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;ENDIF.<br />
+<br />
+&nbsp;&nbsp;ENDLOOP.<br />
+<br />
+&nbsp;&nbsp;"/&nbsp;Union&nbsp;de&nbsp;pendientes&nbsp;y&nbsp;facturadas&nbsp;para&nbsp;consultas&nbsp;en&nbsp;FI<br />
+&nbsp;&nbsp;FREE&nbsp;et_itab.<br />
+&nbsp;&nbsp;APPEND&nbsp;LINES&nbsp;OF&nbsp;gt_em_pendiente&nbsp;TO&nbsp;et_itab.<br />
+&nbsp;&nbsp;APPEND&nbsp;LINES&nbsp;OF&nbsp;gt_em_facturadas&nbsp;TO&nbsp;et_itab.<br />
+<br />
+ENDMETHOD.<br />
+            </div>
+          </td>
+        </tr>
+      </table>
+      </td>
+      </tr>
+   <tr>
+<td class="footer">Extracted by Mass Download version 1.5.5 - E.G.Mellodew. 1998-2025. Sap Release 701</td>
+   </tr>
+</table>
+</body>
+</html>
